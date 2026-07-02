@@ -48,7 +48,8 @@ my-curriculum/
 │  └─ master_data.i18n.json# generated EN+FR+DE, schema-validated (API loads THIS)
 ├─ scripts/
 │  ├─ ingest/              # (optional) PDF/CSV → master_data.fr.json helpers
-│  └─ generate-translations.ts  # Anthropic SDK, OFFLINE, fills missing DE
+│  ├─ generate-translations.ts  # Anthropic SDK, OFFLINE, fills missing DE
+│  └─ career-advisor.ts    # PRIVATE owner CLI → docs/career_insights.md (git-ignored)
 ├─ infra/
 │  └─ docker-compose.yml   # Bun API container + Traefik labels + Let's Encrypt
 └─ docs/superpowers/specs/ # this design
@@ -142,6 +143,22 @@ Model: `claude-opus-4-8` (or a cheaper alias chosen at build time).
 - **Uptime:** read from a config/status value (deploy-provided), not a live
   external monitor, to avoid an extra dependency and secret.
 
+## 7bis. Private Owner Tooling (`scripts/career-advisor.ts`)
+
+A **private, owner-only** Bun CLI — never exposed by the API, never deployed.
+
+- **Input:** `data/master_data.fr.json` (canonical profile).
+- **Engine:** `@anthropic-ai/sdk`. Uses tool use / MCP where it adds value
+  (e.g. web-search tool or an MCP job-board connector to surface *current*
+  matching listings); degrades gracefully to model-only analysis if no
+  tool/connector is configured.
+- **Output:** `docs/career_insights.md`, containing: (a) current job openings
+  matched to the profile, (b) skill gaps to close, (c) positioning/"how to sell
+  the profile better" strategies, (d) CV/UX improvement ideas.
+- **Privacy:** the generated report is personal career strategy → **git-ignored**
+  (same policy as `_archives/`). The script itself is committed; its output is not.
+- **Secrets:** `ANTHROPIC_API_KEY` via env, documented in README.
+
 ## 8. Deployment Topology
 
 - **web** → static Astro build on an Edge CDN at `fdiene.com`.
@@ -206,9 +223,14 @@ the full stack in a Staff-Engineer / Anthropic-level technical interview.
   LangGraph vs classic LangChain…) · ⚠️ "senior" subtleties / under-the-hood
   gotchas (how Eden's type inference really works, how LangGraph handles cyclic
   state…) · 🔗 synergy with the rest of the architecture · 📚 2 "gold" official
-  docs links + relevant certifications/reference courses.
-- **Final section:** 3 hard Anthropic-style interview questions on the overall
-  architecture, each with expected answer elements.
+  docs links + relevant certifications/reference courses · 🎤 **interview
+  simulation**: 2 very pointed questions (System Design / Security / Performance)
+  an Anthropic engineer could ask *about this specific technology*, each with the
+  traps to avoid and the keywords/concepts of the expected "perfect answer".
+- **Final section:** 1 highly complex **global-architecture** question requiring
+  the candidate to link ≥3 of these technologies together (e.g. "how do you
+  secure a data flow from the Elysia API through Traefik down to the LangGraph
+  RAG?"), with Staff-Engineer-level answer elements.
 - **Deliverable:** `docs/pitch-deck/stack-crash-course.md`.
 
 ## 12. Out of Scope (YAGNI)
