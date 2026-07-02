@@ -188,7 +188,30 @@ To be authored during implementation, tagged and marked `DRAFT` for owner review
   via Zod/Pydantic on the Excel→Directus ETL.
   Tags: `iot`, `edge`, `ai_safety`, `mcp`, `dx_tooling`.
 
-## 11. Out of Scope (YAGNI)
+## 11. Post-Launch Backlog (Phase 2 — after site is live)
+
+Deferred; **not** part of the initial build. Triggered once `fdiene.com` +
+`api.fdiene.com` are up and running.
+
+### P2-1 — "Crash Course Pitch Deck" (interview mastery)
+Owner-requested learning deliverable: a Markdown pitch deck to master and defend
+the full stack in a Staff-Engineer / Anthropic-level technical interview.
+
+- **Scope of stack to cover:**
+  - JS/TS: Bun, ElysiaJS, Eden (end-to-end type safety), Zod, Astro, Turborepo.
+  - AI/Backend: FastAPI, LangGraph, MCP, RAG (Qdrant).
+  - Infra/SecOps: Docker Compose, Traefik, GitHub Actions CI/CD, Evals (LLM-as-a-judge).
+- **Per-technology structure (exact):** 🎯 elevator pitch (1 sentence) · 🧠 why
+  this choice / the trade-off vs the alternative (Bun vs Node, Elysia vs Express,
+  LangGraph vs classic LangChain…) · ⚠️ "senior" subtleties / under-the-hood
+  gotchas (how Eden's type inference really works, how LangGraph handles cyclic
+  state…) · 🔗 synergy with the rest of the architecture · 📚 2 "gold" official
+  docs links + relevant certifications/reference courses.
+- **Final section:** 3 hard Anthropic-style interview questions on the overall
+  architecture, each with expected answer elements.
+- **Deliverable:** `docs/pitch-deck/stack-crash-course.md`.
+
+## 12. Out of Scope (YAGNI)
 
 - No runtime LLM translation or generation.
 - No live external uptime monitor.
