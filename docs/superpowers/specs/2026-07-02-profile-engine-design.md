@@ -28,7 +28,7 @@ summary to match the reader's context.
 |---|---|---|
 | Runtime/stack | **Bun + Elysia (TypeScript)** | Fills "alternative runtime" gap in the Anthropic backlog; end-to-end type safety via Eden; auto-Swagger satisfies the "API-First" concept. |
 | i18n | **Curated static, DE pre-translated offline** | Tier-1 data: no runtime LLM (determinism/safety), sub-ms latency. AI used shift-left in the build pipeline. |
-| Project data | **Draft SEOmnix + ops-tools from context; Omnis-Agri = DRAFT stub** | Never invent; Omnis-Agri brief to be supplied by owner. |
+| Project data | **Draft SEOmnix + ops-tools + Omnis-Agri from context** (all marked DRAFT for review) | Omnis-Agri brief supplied 2026-07-02; entries reviewable before publish. |
 | Metrics | **Hybrid** | Live self-latency + live GitHub commits (cached) + config uptime. |
 | Deployment | **Split**: web on Edge CDN (`fdiene.com`), API on VPS (`api.fdiene.com`) behind **Traefik** + Let's Encrypt via Docker Compose | Matches existing SEOMNIX infra; showcases CORS/web-security fundamentals. |
 
@@ -72,8 +72,8 @@ safety with zero contract duplication.
 - **`LocalizedString = z.object({ en, fr, de }).strict()`** — all human-readable
   fields. No optionals: a missing DE value **fails validation at build**, not at
   runtime. This enforces the determinism requirement.
-- **`Tag`** enum: `ai_safety`, `dx_tooling`, `devsecops`, `iot`, `edge`, `plm`,
-  `cloud`, `security`, `api_design`, `mlops`, `aerospace` (extensible).
+- **`Tag`** enum: `ai_safety`, `dx_tooling`, `devsecops`, `iot`, `edge`, `mcp`,
+  `plm`, `cloud`, `security`, `api_design`, `mlops`, `aerospace` (extensible).
 - **`TargetRole`** enum: `anthropic_dx`, `iot`, `plm_architect`, `default`.
 - **`ExperienceSchema`**: `id, role(Localized), org, location, period{start, end|null}, summary(Localized), highlights(Localized[]), tags[], domain`.
 - **`ProjectSchema`**: `id, name, tagline(Localized), description(Localized), stack[], tags[], links{repo?, demo?}, metrics?, status("live"|"draft"), featured_for(TargetRole[])`.
@@ -95,8 +95,8 @@ header → `'en'`. A `localize(node, lang)` walker recursively collapses every
 **tag-weight vector**, e.g.:
 
 ```
-anthropic_dx → { ai_safety: 10, dx_tooling: 9, devsecops: 6, api_design: 5 }
-iot          → { iot: 10, edge: 9, ai_safety: 5, devsecops: 4 }
+anthropic_dx → { ai_safety: 10, dx_tooling: 9, mcp: 7, devsecops: 6, api_design: 5 }
+iot          → { iot: 10, edge: 9, mcp: 6, ai_safety: 5, devsecops: 4 }
 plm_architect→ { plm: 10, cloud: 7, security: 6, aerospace: 5 }
 ```
 
@@ -165,13 +165,28 @@ Model: `claude-opus-4-8` (or a cheaper alias chosen at build time).
 ## 10. Master Data — Project Entries (drafts)
 
 To be authored during implementation, tagged and marked `DRAFT` for owner review:
-- **SEOmnix / SEOMNIX Evals** — LangGraph, FastAPI, AI-safety routing,
-  LLM-as-a-judge Evals. Tags: `ai_safety`, `mlops`, `dx_tooling`.
-- **ops-tools** — Developer Experience, Bun, TypeScript, local telemetry.
+
+- **SEOmnix / SEOMNIX Empire (SEOMNIX Evals)** — LangGraph-orchestrated content
+  pipeline (FastAPI backend, Directus, n8n). Flagship artifact: an
+  **LLM-as-a-Judge `eval_node`** (Claude Haiku judge, Pydantic structured
+  output, conditional Keep/Correct/Reject routing, eval metrics persisted to
+  Directus) enforcing anti-hallucination + safety before publish. Deterministic
+  Evals CI. Tags: `ai_safety`, `mlops`, `dx_tooling`.
+- **ops-tools** — TypeScript CLI (commander/yargs) distributed via npm
+  (`@fdiene/ops-tools`): `ops run|repo|setup|doctor|dev`, integrated help,
+  **local telemetry** (command-duration tracing), Vitest, gitleaks pre-commit,
+  green CI. The "developer-experience first" onboarding layer for the ecosystem.
   Tags: `dx_tooling`, `devsecops`.
-- **Omnis-Agri** — **DRAFT STUB pending owner brief.** Emphases to apply once
-  provided: Edge computing, deterministic safety loops, IoT (ESP32/MQTT), MCP
-  protocol. Tags: `iot`, `edge`, `ai_safety`.
+- **Omnis-Agri ("Agri-OS")** — trusted-IoT agricultural OS on VPS/Docker:
+  FastAPI ingestion, Directus CMS, n8n automations, LangGraph agents, Astro
+  frontend. Test bed = domestic greenhouse (humidity/temperature/light sensors;
+  water-pump + fan actuators). **Anthropic-first** properties:
+  (a) a **Judge Agent** that validates every *physical* action
+  (irrigation/ventilation) before execution — deterministic safety loop;
+  (b) **MCP** integration so greenhouse state is queryable from Claude Desktop;
+  (c) DX CLI `ops status --greenhouse` for system health. Strict data integrity
+  via Zod/Pydantic on the Excel→Directus ETL.
+  Tags: `iot`, `edge`, `ai_safety`, `mcp`, `dx_tooling`.
 
 ## 11. Out of Scope (YAGNI)
 
