@@ -9,7 +9,7 @@
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
-    "api:dev": "bun --cwd apps/api run dev",
+    "api:dev": "bun --cwd=apps/api run dev",
     "translate": "bun scripts/generate-translations.ts",
     "advise": "bun scripts/career-advisor.ts"
   },

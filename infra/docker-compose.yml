@@ -1,0 +1,25 @@
+services:
+  profile-api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    container_name: profile-api
+    restart: unless-stopped
+    environment:
+      - PORT=3000
+      - WEB_ORIGIN=https://fdiene.com
+      - GITHUB_REPO=${GITHUB_REPO}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - UPTIME_PCT=${UPTIME_PCT:-99.9}
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.profile-api.rule=Host(`api.fdiene.com`)"
+      - "traefik.http.routers.profile-api.entrypoints=websecure"
+      - "traefik.http.routers.profile-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.profile-api.loadbalancer.server.port=3000"
+
+networks:
+  traefik:
+    external: true
