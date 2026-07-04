@@ -14,23 +14,11 @@ const roleOf = (v?: string) =>
 
 const ALLOWED_ORIGIN = process.env.WEB_ORIGIN ?? "https://fdiene.com";
 
-// The installed Elysia version (1.4.x) does not expose `.trace`; track request
-// start times keyed by the Request object instead and record latency in
-// onAfterHandle, an equivalent onRequest/onAfterHandle timestamp pair.
-const requestStarts = new WeakMap<Request, number>();
-
 export const app = new Elysia()
   .use(cors({ origin: [ALLOWED_ORIGIN, /^http:\/\/localhost:\d+$/], methods: ["GET"] }))
   .use(swagger({ path: "/swagger", documentation: { info: { title: "Profile Engine API", version: "1.0.0" } } }))
-  .onRequest(({ request }) => {
-    requestStarts.set(request, performance.now());
-  })
-  .onAfterHandle(({ request }) => {
-    const start = requestStarts.get(request);
-    if (start !== undefined) {
-      recordLatency(performance.now() - start);
-      requestStarts.delete(request);
-    }
+  .trace(async ({ onHandle }) => {
+    onHandle(({ begin, onStop }) => onStop(({ end }) => recordLatency(end - begin)));
   })
   .get("/health", () => ({ status: "ok" }))
   .get("/v1/profile/build", ({ query, headers }) => {
