@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { ResumeSchema, ResumeInputSchema } from "./index";
+import { ResumeSchema, ResumeInputSchema, ProjectSchema } from "./index";
 
 const minimalFinal = {
   person: { name: "Fadel Diène", title: { en: "Architect", fr: "Architecte", de: "Architekt" },
@@ -32,5 +32,27 @@ describe("ResumeInputSchema (source)", () => {
     src.person.title = { en: "Architect", fr: "Architecte" };
     delete src.executiveSummaries.anthropic_dx.de;
     expect(ResumeInputSchema.parse(src).person.title.fr).toBe("Architecte");
+  });
+});
+
+describe("Named entity schemas (final)", () => {
+  it("ProjectSchema parses a valid final project object", () => {
+    const validProject = {
+      id: "proj-1",
+      name: "My Project",
+      tagline: { en: "A tagline", fr: "Un tagline", de: "Ein Tagline" },
+      description: { en: "desc", fr: "desc", de: "desc" },
+      stack: ["TypeScript", "React"],
+      tags: [],
+      links: { repo: "https://github.com/example" },
+      status: "live" as const,
+      featured_for: [],
+    };
+    const parsed = ProjectSchema.parse(validProject);
+    expect(parsed.name).toBe("My Project");
+  });
+
+  it("ProjectSchema is identical to ResumeSchema.shape.projects.element", () => {
+    expect(ProjectSchema).toBe(ResumeSchema.shape.projects.element);
   });
 });
