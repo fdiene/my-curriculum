@@ -2,6 +2,7 @@
   "name": "my-curriculum",
   "private": true,
   "type": "module",
+  "packageManager": "bun@1.3.14",
   "workspaces": ["packages/*", "apps/*", "scripts"],
   "scripts": {
     "build": "turbo run build",
