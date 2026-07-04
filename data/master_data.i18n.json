@@ -4,7 +4,7 @@
     "title": {
       "en": "Information Systems Architect",
       "fr": "Architecte de Systèmes d'Information",
-      "de": "Architekt für Informationssysteme"
+      "de": "Informationssystemarchitekt"
     },
     "location": "Toulouse, France",
     "links": {
@@ -17,22 +17,22 @@
     "anthropic_dx": {
       "en": "Systems architect turned developer-experience builder: I ship typed, tested tooling (Bun/TypeScript CLIs, monorepos) and safety-first AI pipelines (LLM-as-a-judge Evals, MCP). 7 years hardening critical aerospace infrastructure now aimed at making other engineers faster and safer.",
       "fr": "Architecte système devenu bâtisseur d'expérience développeur : je livre du tooling typé et testé (CLI Bun/TypeScript, monorepos) et des pipelines IA orientés sûreté (Evals LLM-as-a-judge, MCP). 7 ans à fiabiliser des infrastructures aéronautiques critiques, désormais au service de la vélocité et de la sûreté des équipes.",
-      "de": "Systemarchitekt, der zum Entwickler von Developer-Experience-Tooling wurde: Ich liefere typisierte, getestete Werkzeuge (Bun/TypeScript-CLIs, Monorepos) und Safety-First-KI-Pipelines (LLM-as-a-judge-Evals, MCP). 7 Jahre Härtung kritischer Luftfahrt-Infrastrukturen — heute mit dem Ziel, andere Ingenieure schneller und sicherer zu machen."
+      "de": "Vom Systemarchitekten zum Entwickler-Experience-Builder: Ich liefere typisierte, getestete Tools (Bun/TypeScript-CLIs, Monorepos) und sicherheitsorientierte KI-Pipelines (LLM-as-a-judge Evals, MCP). 7 Jahre Härtung kritischer Luft- und Raumfahrtinfrastruktur, jetzt darauf ausgerichtet, andere Ingenieure schneller und sicherer zu machen."
     },
     "iot": {
       "en": "Architect building trusted IoT: edge devices (ESP32/MQTT) governed by deterministic safety loops and an AI 'judge' agent that validates every physical action, queryable from Claude Desktop via MCP.",
       "fr": "Architecte de l'IoT de confiance : capteurs edge (ESP32/MQTT) pilotés par des boucles de sûreté déterministes et un agent IA « juge » validant chaque action physique, interrogeable depuis Claude Desktop via MCP.",
-      "de": "Architekt für vertrauenswürdiges IoT: Edge-Geräte (ESP32/MQTT), gesteuert durch deterministische Sicherheitsschleifen und einen KI-„Judge“-Agenten, der jede physische Aktion validiert — abfragbar aus Claude Desktop via MCP."
+      "de": "Architekt für vertrauenswürdiges IoT: Edge-Geräte (ESP32/MQTT), gesteuert durch deterministische Safety-Loops und einen KI-„Judge“-Agenten, der jede physische Aktion validiert, abfragbar aus Claude Desktop über MCP."
     },
     "plm_architect": {
       "en": "PLM & IT architect with 7 years across Bombardier, Dassault Falcon Jet, Airbus and Safran: hybrid cloud/on-prem deployments, IAM/SSO, middleware & API management for critical, secure aerospace systems.",
       "fr": "Architecte PLM & SI avec 7 ans chez Bombardier, Dassault Falcon Jet, Airbus et Safran : déploiements hybrides cloud/on-premise, IAM/SSO, middleware & API management pour des systèmes aéronautiques critiques et sécurisés.",
-      "de": "PLM- und IT-Architekt mit 7 Jahren Erfahrung bei Bombardier, Dassault Falcon Jet, Airbus und Safran: hybride Cloud-/On-Premise-Deployments, IAM/SSO, Middleware- und API-Management für kritische, sichere Luftfahrtsysteme."
+      "de": "PLM- & IT-Architekt mit 7 Jahren Erfahrung bei Bombardier, Dassault Falcon Jet, Airbus und Safran: hybride Cloud-/On-Premises-Bereitstellungen, IAM/SSO, Middleware & API-Management für kritische, sichere Luft- und Raumfahrtsysteme."
     },
     "default": {
       "en": "Information Systems Architect with 7 years in aerospace (Bombardier, Dassault Falcon Jet, Airbus, Safran), specialized in PLM, cloud and secure critical infrastructures, now building developer tooling and safety-first AI systems.",
       "fr": "Architecte de Systèmes d'Information avec 7 ans dans l'aéronautique (Bombardier, Dassault Falcon Jet, Airbus, Safran), spécialisé en PLM, cloud et infrastructures critiques sécurisées, désormais tourné vers le tooling développeur et les systèmes IA orientés sûreté.",
-      "de": "Architekt für Informationssysteme mit 7 Jahren Erfahrung in der Luftfahrt (Bombardier, Dassault Falcon Jet, Airbus, Safran), spezialisiert auf PLM, Cloud und sichere kritische Infrastrukturen — heute mit Fokus auf Developer-Tooling und Safety-First-KI-Systeme."
+      "de": "Informationssystemarchitekt mit 7 Jahren Erfahrung in der Luft- und Raumfahrt (Bombardier, Dassault Falcon Jet, Airbus, Safran), spezialisiert auf PLM, Cloud und sichere kritische Infrastrukturen, der nun Entwickler-Tooling und Safety-First-KI-Systeme entwickelt."
     }
   },
   "experiences": [
@@ -41,7 +41,7 @@
       "role": {
         "en": "Technical Architect — Strategic PLM Engineering 4.0 Program",
         "fr": "Architecte Technique — Programme stratégique PLM Engineering 4.0",
-        "de": "Technischer Architekt — Strategisches Programm PLM Engineering 4.0"
+        "de": "Technical Architect — Strategisches PLM Engineering 4.0 Programm"
       },
       "org": "Safran Aircraft Engines",
       "location": "Paris, France",
@@ -52,28 +52,28 @@
       "summary": {
         "en": "Led hybrid (cloud & on-premise) deployment architecture for the strategic PLM.",
         "fr": "Responsable de l'architecture de déploiement hybride (cloud & on-premise) du PLM stratégique.",
-        "de": "Verantwortlich für die hybride Deployment-Architektur (Cloud & On-Premise) des strategischen PLM."
+        "de": "Leitung der hybriden (Cloud & On-Premise) Deployment-Architektur für das strategische PLM."
       },
       "highlights": [
         {
           "en": "Defined and validated architectures using network fundamentals (TCP/IP, IPsec/SSL VPN) for interconnection design and diagnostics.",
           "fr": "Définition et validation d'architectures en s'appuyant sur les fondamentaux réseau (TCP/IP, VPN IPsec/SSL) pour la conception et le diagnostic des interconnexions.",
-          "de": "Definition und Validierung von Architekturen auf Basis von Netzwerk-Grundlagen (TCP/IP, IPsec/SSL-VPN) für Design und Diagnose der Interkonnektivität."
+          "de": "Definition und Validierung von Architekturen unter Verwendung von Netzwerkgrundlagen (TCP/IP, IPsec/SSL VPN) für Verbindungsdesign und Diagnostik."
         },
         {
           "en": "Implemented secure authentication and identity (SSO, LDAP, Kerberos, OpenID Connect, OAuth2) aligned with Group standards.",
           "fr": "Mise en œuvre de solutions sécurisées d'authentification et d'identité (SSO, LDAP, Kerberos, OpenID Connect, OAuth2) alignées avec les standards Groupe.",
-          "de": "Implementierung sicherer Authentifizierungs- und Identitätslösungen (SSO, LDAP, Kerberos, OpenID Connect, OAuth2) gemäß Konzernstandards."
+          "de": "Sichere Authentifizierung und Identität (SSO, LDAP, Kerberos, OpenID Connect, OAuth2) gemäß den Konzernstandards implementiert."
         },
         {
           "en": "Produced application and technical maps ensuring traceability between business needs, IT solutions and operations (ArchiMate/TOGAF).",
           "fr": "Élaboration de cartographies applicatives et techniques garantissant la traçabilité entre besoins métiers, solutions IT et exploitation (ArchiMate/TOGAF).",
-          "de": "Erstellung von Anwendungs- und Technik-Landkarten zur Sicherstellung der Nachvollziehbarkeit zwischen Fachanforderungen, IT-Lösungen und Betrieb (ArchiMate/TOGAF)."
+          "de": "Erstellung von Anwendungs- und technischen Landkarten zur Sicherstellung der Nachverfolgbarkeit zwischen Geschäftsanforderungen, IT-Lösungen und Betrieb (ArchiMate/TOGAF)."
         },
         {
           "en": "Optimized interoperability through middleware and API management standards (REST/SOAP/GraphQL) with Mulesoft and RabbitMQ, high availability and redundancy.",
           "fr": "Optimisation de l'interopérabilité via une architecture middleware et des standards API Management (REST/SOAP/GraphQL) avec Mulesoft et RabbitMQ, haute disponibilité et redondance.",
-          "de": "Optimierung der Interoperabilität durch Middleware- und API-Management-Standards (REST/SOAP/GraphQL) mit Mulesoft und RabbitMQ, inklusive Hochverfügbarkeit und Redundanz."
+          "de": "Optimierung der Interoperabilität durch Middleware- und API-Management-Standards (REST/SOAP/GraphQL) mit Mulesoft und RabbitMQ, Hochverfügbarkeit und Redundanz."
         }
       ],
       "tags": [
@@ -90,7 +90,7 @@
       "role": {
         "en": "Software Architect — H175, NH90, AS332 Puma Programs",
         "fr": "Architecte logiciel — Programmes H175, NH90, AS332 Puma",
-        "de": "Softwarearchitekt — Programme H175, NH90 und AS332 Puma"
+        "de": "Softwarearchitekt — H175, NH90, AS332 Puma Programme"
       },
       "org": "Airbus Helicopters",
       "location": "Marignane, France",
@@ -101,23 +101,23 @@
       "summary": {
         "en": "Administered and integrated PLM Enovia VPM V4; introduced DevOps practices.",
         "fr": "Administration et intégration du PLM Enovia VPM V4 ; mise en place de pratiques DevOps.",
-        "de": "Administration und Integration des PLM Enovia VPM V4; Einführung von DevOps-Praktiken."
+        "de": "Administration und Integration von PLM Enovia VPM V4; Einführung von DevOps-Praktiken."
       },
       "highlights": [
         {
           "en": "Managed environments, access rights, licenses and C++ customization of Enovia VPM V4.",
           "fr": "Gestion des environnements, droits d'accès, licences et customisation C++ d'Enovia VPM V4.",
-          "de": "Verwaltung von Umgebungen, Zugriffsrechten, Lizenzen und C++-Customizing von Enovia VPM V4."
+          "de": "Verwaltung von Umgebungen, Zugriffsrechten, Lizenzen und C++-Anpassungen von Enovia VPM V4."
         },
         {
           "en": "Built DevOps pipelines: Gradle/Maven, Jenkins, JFrog Artifactory, Ansible deployment automation.",
           "fr": "Pipelines DevOps : Gradle/Maven, Jenkins, JFrog Artifactory, automatisation des déploiements avec Ansible.",
-          "de": "Aufbau von DevOps-Pipelines: Gradle/Maven, Jenkins, JFrog Artifactory, Deployment-Automatisierung mit Ansible."
+          "de": "DevOps-Pipelines aufgebaut: Gradle/Maven, Jenkins, JFrog Artifactory, Ansible-Deployment-Automatisierung."
         },
         {
           "en": "Reduced incidents and improved software quality via SonarQube, JUnit, Ranorex, EggPlant, XRay.",
           "fr": "Réduction des incidents et amélioration de la qualité logicielle via SonarQube, JUnit, Ranorex, EggPlant, XRay.",
-          "de": "Reduzierung von Incidents und Verbesserung der Softwarequalität mit SonarQube, JUnit, Ranorex, EggPlant, XRay."
+          "de": "Reduzierung von Vorfällen und Verbesserung der Softwarequalität durch SonarQube, JUnit, Ranorex, EggPlant, XRay."
         }
       ],
       "tags": [
@@ -133,7 +133,7 @@
       "role": {
         "en": "PLM Engineer — Falcon 10X, 900LX, Multi Programs",
         "fr": "Ingénieur PLM — Falcon 10X, 900LX, Multi",
-        "de": "PLM-Ingenieur — Programme Falcon 10X, 900LX, Multi"
+        "de": "PLM Engineer — Falcon 10X, 900LX, Multi Programs"
       },
       "org": "Dassault Falcon Jet",
       "location": "Little Rock, AR, USA",
@@ -144,7 +144,7 @@
       "summary": {
         "en": "Delivered the PLM platform migration to AIX 7.2 with critical environment management.",
         "fr": "Migration de la plateforme PLM sous AIX 7.2 avec gestion d'environnements critiques.",
-        "de": "Durchführung der Migration der PLM-Plattform auf AIX 7.2 mit Verwaltung kritischer Umgebungen."
+        "de": "Durchführung der PLM-Plattform-Migration auf AIX 7.2 mit kritischem Umgebungsmanagement."
       },
       "highlights": [
         {
@@ -155,7 +155,7 @@
         {
           "en": "Supervised data flows and performed post-migration validation to ensure business continuity.",
           "fr": "Supervision des flux et validation post-migration pour garantir la continuité des opérations.",
-          "de": "Überwachung der Datenflüsse und Validierung nach der Migration zur Sicherstellung der Geschäftskontinuität."
+          "de": "Überwachung von Datenflüssen und Durchführung der Validierung nach der Migration zur Sicherstellung der Geschäftskontinuität."
         }
       ],
       "tags": [
@@ -170,7 +170,7 @@
       "role": {
         "en": "Developer — PLM Neo A32X & A35X Programs",
         "fr": "Développeur — Programmes PLM Neo A32X & A35X",
-        "de": "Entwickler — Programme PLM Neo A32X & A35X"
+        "de": "Entwickler — PLM Neo A32X & A35X Programme"
       },
       "org": "Airbus Defence and Space",
       "location": "Toulouse, France",
@@ -181,18 +181,18 @@
       "summary": {
         "en": "Developed web services, widgets and JPOs on the Dassault 3DEXPERIENCE platform.",
         "fr": "Développement de webservices, widgets et JPOs sur la plateforme 3DEXPERIENCE de Dassault Systèmes.",
-        "de": "Entwicklung von Webservices, Widgets und JPOs auf der Dassault-Plattform 3DEXPERIENCE."
+        "de": "Entwicklung von Webservices, Widgets und JPOs auf der Dassault 3DEXPERIENCE-Plattform."
       },
       "highlights": [
         {
           "en": "Designed and integrated a data model tailored to client business cases.",
           "fr": "Conception et intégration d'un modèle de données adapté aux cas d'affaires du client.",
-          "de": "Entwurf und Integration eines auf die Business-Cases des Kunden zugeschnittenen Datenmodells."
+          "de": "Entwurf und Integration eines Datenmodells, das auf die Geschäftsanforderungen des Kunden zugeschnitten ist."
         },
         {
           "en": "Trained and coached offshore (India) and internal teams on development best practices.",
           "fr": "Formation et coaching des équipes offshore (Inde) et internes aux bonnes pratiques de développement.",
-          "de": "Schulung und Coaching von Offshore-Teams (Indien) und internen Teams zu Best Practices der Entwicklung."
+          "de": "Schulung und Coaching von Offshore- (Indien) und internen Teams zu Best Practices in der Entwicklung."
         }
       ],
       "tags": [
@@ -207,7 +207,7 @@
       "role": {
         "en": "Aerospace Structures Engineer — CSeries (A220) Program",
         "fr": "Ingénieur structures aérospatiales — Programme CSeries (A220)",
-        "de": "Ingenieur für Luft- und Raumfahrtstrukturen — Programm CSeries (A220)"
+        "de": "Luft- und Raumfahrt-Strukturingenieur — CSeries (A220) Programm"
       },
       "org": "Bombardier Aerospace",
       "location": "Montréal, Canada",
@@ -218,18 +218,18 @@
       "summary": {
         "en": "Performed stress calculations on composite structures and built supporting tooling.",
         "fr": "Calculs de contraintes sur structures composites et développement d'outils support.",
-        "de": "Durchführung von Spannungsberechnungen an Verbundstrukturen und Entwicklung unterstützender Werkzeuge."
+        "de": "Durchführung von Spannungsberechnungen an Verbundstrukturen und Entwicklung unterstützender Tools."
       },
       "highlights": [
         {
           "en": "Designed a new SQL database for composite materials.",
           "fr": "Conception d'une nouvelle base de données SQL pour les matériaux composites.",
-          "de": "Entwurf einer neuen SQL-Datenbank für Verbundwerkstoffe."
+          "de": "Entwarf eine neue SQL-Datenbank für Verbundwerkstoffe."
         },
         {
           "en": "Built a stress-calculation tool in VB.NET and optimized fatigue-test computations.",
           "fr": "Développement d'un outil de calcul de contraintes en VB.NET et optimisation des calculs de fatigue.",
-          "de": "Entwicklung eines Spannungsberechnungswerkzeugs in VB.NET und Optimierung der Ermüdungstest-Berechnungen."
+          "de": "Entwicklung eines Werkzeugs zur Spannungsberechnung in VB.NET und Optimierung von Berechnungen für Ermüdungsversuche."
         }
       ],
       "tags": [
@@ -250,7 +250,7 @@
       "description": {
         "en": "[DRAFT] TypeScript CLI (commander/yargs) published to npm as @fdiene/ops-tools: `ops run | repo | setup | doctor | dev`, integrated help, local telemetry (command-duration tracing), Vitest suite, gitleaks pre-commit hooks and green CI. The developer-experience layer that onboards and operates every repo.",
         "fr": "[DRAFT] CLI TypeScript (commander/yargs) publié sur npm en @fdiene/ops-tools : `ops run | repo | setup | doctor | dev`, aide intégrée, télémétrie locale (tracing de durée des commandes), suite Vitest, hooks pre-commit gitleaks et CI verte. La couche d'expérience développeur qui onboarde et exploite chaque dépôt.",
-        "de": "[DRAFT] TypeScript-CLI (commander/yargs), veröffentlicht auf npm als @fdiene/ops-tools: `ops run | repo | setup | doctor | dev`, integrierte Hilfe, lokale Telemetrie (Tracing der Befehlsdauer), Vitest-Suite, gitleaks-Pre-Commit-Hooks und grüne CI. Die Developer-Experience-Schicht, die jedes Repository onboardet und betreibt."
+        "de": "[ENTWURF] TypeScript-CLI (commander/yargs), veröffentlicht auf npm als @fdiene/ops-tools: `ops run | repo | setup | doctor | dev`, integrierte Hilfe, lokale Telemetrie (Command-Duration-Tracing), Vitest-Suite, gitleaks-Pre-Commit-Hooks und grüne CI. Die Developer-Experience-Schicht, die jedes Repo onboardet und betreibt."
       },
       "stack": [
         "Bun",
@@ -277,12 +277,12 @@
       "tagline": {
         "en": "A safety-gated, LangGraph-orchestrated content engine.",
         "fr": "Un moteur de contenu orchestré par LangGraph et filtré par la sûreté.",
-        "de": "Eine safety-gesicherte, LangGraph-orchestrierte Content-Engine."
+        "de": "Eine sicherheitsgesteuerte, mit LangGraph orchestrierte Content-Engine."
       },
       "description": {
         "en": "[DRAFT] LangGraph + FastAPI pipeline (Directus, n8n) whose flagship is an LLM-as-a-Judge `eval_node`: a Claude Haiku judge with Pydantic structured output scores factuality/formatting/safety, then conditionally routes Keep / Correct / Reject before media generation and publish. Eval metrics persist to Directus for observability; deterministic Evals run in CI.",
         "fr": "[DRAFT] Pipeline LangGraph + FastAPI (Directus, n8n) dont la pièce maîtresse est un `eval_node` LLM-as-a-Judge : un juge Claude Haiku à sortie structurée Pydantic note factualité/mise en forme/sûreté puis route conditionnellement Garder / Corriger / Rejeter avant génération des médias et publication. Les métriques d'évaluation sont persistées dans Directus pour l'observabilité ; des Evals déterministes tournent en CI.",
-        "de": "[DRAFT] LangGraph + FastAPI-Pipeline (Directus, n8n), deren Herzstück ein LLM-as-a-Judge-`eval_node` ist: Ein Claude-Haiku-Judge mit strukturierter Pydantic-Ausgabe bewertet Faktentreue/Formatierung/Sicherheit und routet dann konditional Keep / Correct / Reject vor Mediengenerierung und Veröffentlichung. Eval-Metriken werden zur Observability in Directus persistiert; deterministische Evals laufen in der CI."
+        "de": "[ENTWURF] LangGraph + FastAPI-Pipeline (Directus, n8n), deren Herzstück ein LLM-as-a-Judge `eval_node` ist: Ein Claude-Haiku-Judge mit strukturierter Pydantic-Ausgabe bewertet Factuality/Formatting/Safety und leitet dann bedingt Keep / Correct / Reject weiter, bevor Medien generiert und veröffentlicht werden. Eval-Metriken werden für die Observability in Directus persistiert; deterministische Evals laufen in der CI."
       },
       "stack": [
         "Python",
@@ -315,7 +315,7 @@
       "description": {
         "en": "[DRAFT] Agricultural OS on VPS/Docker (FastAPI ingestion, Directus, n8n, LangGraph, Astro) test-bedded on a domestic greenhouse (humidity/temperature/light sensors; water-pump + fan actuators). A Judge Agent validates every physical action (irrigation/ventilation) before execution — a deterministic safety loop; greenhouse state is queryable from Claude Desktop via MCP; `ops status --greenhouse` gives system health. Strict Zod/Pydantic validation on the Excel→Directus ETL.",
         "fr": "[DRAFT] OS agricole sur VPS/Docker (ingestion FastAPI, Directus, n8n, LangGraph, Astro) éprouvé sur une serre domestique (capteurs humidité/température/luminosité ; actionneurs pompe à eau + ventilateur). Un Agent Juge valide chaque action physique (arrosage/ventilation) avant exécution — boucle de sûreté déterministe ; l'état de la serre est interrogeable depuis Claude Desktop via MCP ; `ops status --greenhouse` donne l'état de santé. Validation Zod/Pydantic stricte sur l'ETL Excel→Directus.",
-        "de": "[DRAFT] Landwirtschaftliches Betriebssystem auf VPS/Docker (FastAPI-Ingestion, Directus, n8n, LangGraph, Astro), erprobt an einem heimischen Gewächshaus (Sensoren für Feuchtigkeit/Temperatur/Licht; Aktoren: Wasserpumpe + Ventilator). Ein Judge-Agent validiert jede physische Aktion (Bewässerung/Belüftung) vor der Ausführung — eine deterministische Sicherheitsschleife; der Zustand des Gewächshauses ist aus Claude Desktop via MCP abfragbar; `ops status --greenhouse` liefert den Systemzustand. Strikte Zod/Pydantic-Validierung der Excel→Directus-ETL."
+        "de": "[ENTWURF] Agricultural OS auf VPS/Docker (FastAPI-Ingestion, Directus, n8n, LangGraph, Astro), getestet an einem privaten Gewächshaus (Feuchtigkeits-/Temperatur-/Lichtsensoren; Wasserpumpen- und Ventilator-Aktoren). Ein Judge Agent validiert jede physische Aktion (Bewässerung/Belüftung) vor der Ausführung — eine deterministische Sicherheitsschleife; der Gewächshauszustand ist über MCP von Claude Desktop aus abfragbar; `ops status --greenhouse` liefert den Systemzustand. Strikte Zod/Pydantic-Validierung im Excel→Directus-ETL."
       },
       "stack": [
         "FastAPI",
@@ -443,7 +443,7 @@
       "title": {
         "en": "ISTQB Software Testing",
         "fr": "ISTQB Tests Logiciels",
-        "de": "ISTQB Softwaretests"
+        "de": "ISTQB Software Testing"
       },
       "org": "ORSYS",
       "location": "Paris, France",
@@ -459,7 +459,7 @@
       "title": {
         "en": "Master's in Information Systems Management",
         "fr": "Master Gestion des systèmes d'information",
-        "de": "Master in Informationssystem-Management"
+        "de": "Master in Information Systems Management"
       },
       "org": "Université Paris-Dauphine",
       "location": "Paris, France",
@@ -480,7 +480,7 @@
       "title": {
         "en": "Mechanical Engineering Degree",
         "fr": "Diplôme d'ingénieur mécanique",
-        "de": "Diplom-Ingenieur Maschinenbau"
+        "de": "Studium des Maschinenbaus"
       },
       "org": "Polytechnique Montréal",
       "location": "Montréal, Canada",
@@ -492,7 +492,7 @@
         {
           "en": "Materials, space mechanics, industrial organization, information-systems technologies, decision theory.",
           "fr": "Matériaux, mécanique spatiale, organisation industrielle, technologies des systèmes d'information, théorie de la décision.",
-          "de": "Werkstoffe, Raumfahrtmechanik, Industrieorganisation, Informationssystem-Technologien, Entscheidungstheorie."
+          "de": "Werkstoffe, Weltraummechanik, Betriebsorganisation, Informationssystemtechnologien, Entscheidungstheorie."
         }
       ]
     }
@@ -505,7 +505,7 @@
       "text": {
         "en": "An exceptional professional and an extraordinary human being. His technical prowess, coupled with a flair for creativity, consistently surpasses expectations, and he consistently fosters collaboration and collective success. I wholeheartedly recommend him.",
         "fr": "Un professionnel exceptionnel et un être humain extraordinaire. Sa maîtrise technique, alliée à un sens de la créativité, dépasse constamment les attentes, et il favorise sans cesse la collaboration et la réussite collective. Je le recommande sans réserve.",
-        "de": "Ein außergewöhnlicher Profi und ein außergewöhnlicher Mensch. Sein technisches Können, gepaart mit einem Gespür für Kreativität, übertrifft stets die Erwartungen, und er fördert beständig Zusammenarbeit und gemeinsamen Erfolg. Ich empfehle ihn uneingeschränkt."
+        "de": "Ein außergewöhnlicher Fachmann und ein außergewöhnlicher Mensch. Seine technische Kompetenz, gepaart mit einem Gespür für Kreativität, übertrifft stets alle Erwartungen, und er fördert kontinuierlich die Zusammenarbeit und den gemeinsamen Erfolg. Ich empfehle ihn von ganzem Herzen."
       },
       "date": "2024-04-10"
     }
