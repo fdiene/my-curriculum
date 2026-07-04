@@ -8,7 +8,7 @@ export const Localized = z.object({
   en: z.string(),
   fr: z.string(),
   de: z.string(),
-});
+}).strict();
 export type Localized = z.infer<typeof Localized>;
 
 /** Canonical source value: de may be filled later by the translation pipeline. */
@@ -16,5 +16,5 @@ export const LocalizedInput = z.object({
   en: z.string(),
   fr: z.string(),
   de: z.string().optional(),
-});
+}).strict();
 export type LocalizedInput = z.infer<typeof LocalizedInput>;

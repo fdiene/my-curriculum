@@ -14,8 +14,14 @@ const roleOf = (v?: string) =>
 
 const ALLOWED_ORIGIN = process.env.WEB_ORIGIN ?? "https://fdiene.com";
 
+// Localhost is only useful for local dev/testing; never allow it as a CORS origin in production.
+const CORS_ORIGINS: (string | RegExp)[] =
+  process.env.NODE_ENV !== "production"
+    ? [ALLOWED_ORIGIN, /^http:\/\/localhost:\d+$/]
+    : [ALLOWED_ORIGIN];
+
 export const app = new Elysia()
-  .use(cors({ origin: [ALLOWED_ORIGIN, /^http:\/\/localhost:\d+$/], methods: ["GET"] }))
+  .use(cors({ origin: CORS_ORIGINS, methods: ["GET"], credentials: false }))
   .use(swagger({ path: "/swagger", documentation: { info: { title: "Profile Engine API", version: "1.0.0" } } }))
   .trace(async ({ onHandle }) => {
     onHandle(({ begin, onStop }) => onStop(({ end }) => recordLatency(end - begin)));

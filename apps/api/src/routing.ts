@@ -12,6 +12,7 @@ export function scoreItem(tags: Tag[], role: TargetRole): number {
   return tags.reduce((sum, t) => sum + (w[t] ?? 0), 0);
 }
 
+// Editorial override: featured_for pins curated items above any achievable tag score (max ≈ 37).
 const FEATURED_BOOST = 100;
 
 export function orderByRole<T extends { tags: Tag[]; featured_for?: TargetRole[] }>(

@@ -8,6 +8,9 @@ describe("Localized", () => {
   it("rejects a missing language (final schema is strict)", () => {
     expect(() => Localized.parse({ en: "a", fr: "b" })).toThrow();
   });
+  it("rejects an unknown key", () => {
+    expect(() => Localized.parse({ en: "a", fr: "b", de: "c", xx: "d" })).toThrow();
+  });
 });
 
 describe("LocalizedInput", () => {
