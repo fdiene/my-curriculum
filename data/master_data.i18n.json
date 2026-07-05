@@ -41,7 +41,7 @@
       "role": {
         "en": "Technical Architect — Strategic PLM Engineering 4.0 Program",
         "fr": "Architecte Technique — Programme stratégique PLM Engineering 4.0",
-        "de": "Technical Architect — Strategisches PLM Engineering 4.0 Programm"
+        "de": "Technischer Architekt — Strategisches Programm PLM Engineering 4.0"
       },
       "org": "Safran Aircraft Engines",
       "location": "Paris, France",
@@ -133,7 +133,7 @@
       "role": {
         "en": "PLM Engineer — Falcon 10X, 900LX, Multi Programs",
         "fr": "Ingénieur PLM — Falcon 10X, 900LX, Multi",
-        "de": "PLM Engineer — Falcon 10X, 900LX, Multi Programs"
+        "de": "PLM-Ingenieur — Programme Falcon 10X, 900LX, Multi"
       },
       "org": "Dassault Falcon Jet",
       "location": "Little Rock, AR, USA",
@@ -224,7 +224,7 @@
         {
           "en": "Designed a new SQL database for composite materials.",
           "fr": "Conception d'une nouvelle base de données SQL pour les matériaux composites.",
-          "de": "Entwarf eine neue SQL-Datenbank für Verbundwerkstoffe."
+          "de": "Entwurf einer neuen SQL-Datenbank für Verbundwerkstoffe."
         },
         {
           "en": "Built a stress-calculation tool in VB.NET and optimized fatigue-test computations.",
@@ -250,7 +250,7 @@
       "description": {
         "en": "[DRAFT] TypeScript CLI (commander/yargs) published to npm as @fdiene/ops-tools: `ops run | repo | setup | doctor | dev`, integrated help, local telemetry (command-duration tracing), Vitest suite, gitleaks pre-commit hooks and green CI. The developer-experience layer that onboards and operates every repo.",
         "fr": "[DRAFT] CLI TypeScript (commander/yargs) publié sur npm en @fdiene/ops-tools : `ops run | repo | setup | doctor | dev`, aide intégrée, télémétrie locale (tracing de durée des commandes), suite Vitest, hooks pre-commit gitleaks et CI verte. La couche d'expérience développeur qui onboarde et exploite chaque dépôt.",
-        "de": "[ENTWURF] TypeScript-CLI (commander/yargs), veröffentlicht auf npm als @fdiene/ops-tools: `ops run | repo | setup | doctor | dev`, integrierte Hilfe, lokale Telemetrie (Command-Duration-Tracing), Vitest-Suite, gitleaks-Pre-Commit-Hooks und grüne CI. Die Developer-Experience-Schicht, die jedes Repo onboardet und betreibt."
+        "de": "[DRAFT] TypeScript-CLI (commander/yargs), veröffentlicht auf npm als @fdiene/ops-tools: `ops run | repo | setup | doctor | dev`, integrierte Hilfe, lokale Telemetrie (Command-Duration-Tracing), Vitest-Suite, gitleaks-Pre-Commit-Hooks und grüne CI. Die Developer-Experience-Schicht, die jedes Repo onboardet und betreibt."
       },
       "stack": [
         "Bun",
@@ -282,7 +282,7 @@
       "description": {
         "en": "[DRAFT] LangGraph + FastAPI pipeline (Directus, n8n) whose flagship is an LLM-as-a-Judge `eval_node`: a Claude Haiku judge with Pydantic structured output scores factuality/formatting/safety, then conditionally routes Keep / Correct / Reject before media generation and publish. Eval metrics persist to Directus for observability; deterministic Evals run in CI.",
         "fr": "[DRAFT] Pipeline LangGraph + FastAPI (Directus, n8n) dont la pièce maîtresse est un `eval_node` LLM-as-a-Judge : un juge Claude Haiku à sortie structurée Pydantic note factualité/mise en forme/sûreté puis route conditionnellement Garder / Corriger / Rejeter avant génération des médias et publication. Les métriques d'évaluation sont persistées dans Directus pour l'observabilité ; des Evals déterministes tournent en CI.",
-        "de": "[ENTWURF] LangGraph + FastAPI-Pipeline (Directus, n8n), deren Herzstück ein LLM-as-a-Judge `eval_node` ist: Ein Claude-Haiku-Judge mit strukturierter Pydantic-Ausgabe bewertet Factuality/Formatting/Safety und leitet dann bedingt Keep / Correct / Reject weiter, bevor Medien generiert und veröffentlicht werden. Eval-Metriken werden für die Observability in Directus persistiert; deterministische Evals laufen in der CI."
+        "de": "[DRAFT] LangGraph + FastAPI-Pipeline (Directus, n8n), deren Herzstück ein LLM-as-a-Judge `eval_node` ist: Ein Claude-Haiku-Judge mit strukturierter Pydantic-Ausgabe bewertet Factuality/Formatting/Safety und leitet dann bedingt Keep / Correct / Reject weiter, bevor Medien generiert und veröffentlicht werden. Eval-Metriken werden für die Observability in Directus persistiert; deterministische Evals laufen in der CI."
       },
       "stack": [
         "Python",
@@ -315,7 +315,7 @@
       "description": {
         "en": "[DRAFT] Agricultural OS on VPS/Docker (FastAPI ingestion, Directus, n8n, LangGraph, Astro) test-bedded on a domestic greenhouse (humidity/temperature/light sensors; water-pump + fan actuators). A Judge Agent validates every physical action (irrigation/ventilation) before execution — a deterministic safety loop; greenhouse state is queryable from Claude Desktop via MCP; `ops status --greenhouse` gives system health. Strict Zod/Pydantic validation on the Excel→Directus ETL.",
         "fr": "[DRAFT] OS agricole sur VPS/Docker (ingestion FastAPI, Directus, n8n, LangGraph, Astro) éprouvé sur une serre domestique (capteurs humidité/température/luminosité ; actionneurs pompe à eau + ventilateur). Un Agent Juge valide chaque action physique (arrosage/ventilation) avant exécution — boucle de sûreté déterministe ; l'état de la serre est interrogeable depuis Claude Desktop via MCP ; `ops status --greenhouse` donne l'état de santé. Validation Zod/Pydantic stricte sur l'ETL Excel→Directus.",
-        "de": "[ENTWURF] Agricultural OS auf VPS/Docker (FastAPI-Ingestion, Directus, n8n, LangGraph, Astro), getestet an einem privaten Gewächshaus (Feuchtigkeits-/Temperatur-/Lichtsensoren; Wasserpumpen- und Ventilator-Aktoren). Ein Judge Agent validiert jede physische Aktion (Bewässerung/Belüftung) vor der Ausführung — eine deterministische Sicherheitsschleife; der Gewächshauszustand ist über MCP von Claude Desktop aus abfragbar; `ops status --greenhouse` liefert den Systemzustand. Strikte Zod/Pydantic-Validierung im Excel→Directus-ETL."
+        "de": "[DRAFT] Agricultural OS auf VPS/Docker (FastAPI-Ingestion, Directus, n8n, LangGraph, Astro), getestet an einem privaten Gewächshaus (Feuchtigkeits-/Temperatur-/Lichtsensoren; Wasserpumpen- und Ventilator-Aktoren). Ein Judge Agent validiert jede physische Aktion (Bewässerung/Belüftung) vor der Ausführung — eine deterministische Sicherheitsschleife; der Gewächshauszustand ist über MCP von Claude Desktop aus abfragbar; `ops status --greenhouse` liefert den Systemzustand. Strikte Zod/Pydantic-Validierung im Excel→Directus-ETL."
       },
       "stack": [
         "FastAPI",
@@ -480,7 +480,7 @@
       "title": {
         "en": "Mechanical Engineering Degree",
         "fr": "Diplôme d'ingénieur mécanique",
-        "de": "Studium des Maschinenbaus"
+        "de": "Diplom-Ingenieur Maschinenbau"
       },
       "org": "Polytechnique Montréal",
       "location": "Montréal, Canada",
