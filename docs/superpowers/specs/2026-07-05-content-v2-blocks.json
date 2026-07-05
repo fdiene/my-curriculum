@@ -1,0 +1,154 @@
+{
+  "_comment": "Contenu validé par le owner le 2026-07-05 (conversation contenu v2). Source d'intégration pour data/master_data.fr.json. DE absent : régénéré par bun run translate.",
+  "executiveSummaries": {
+    "anthropic_dx": {
+      "en": "I spent 7 years securing critical infrastructure in the aerospace sector (Safran, Airbus). Today, I apply that same deterministic rigor to Developer Experience: I build the tooling (Bun CLIs, TS monorepos) and AI pipelines (LLM-as-a-judge Evals, MCP) that empower engineers to iterate and experiment faster, because velocity must never come at the expense of safety.",
+      "fr": "J'ai passé 7 ans à fiabiliser des infrastructures critiques dans l'aérospatial (Safran, Airbus). Aujourd'hui, j'applique cette rigueur déterministe à la Developer Experience : je construis les outils (CLI Bun, monorepos TS) et les pipelines IA (Evals, MCP) qui permettent aux ingénieurs d'itérer et d'expérimenter plus vite, car la vélocité ne doit jamais se faire au détriment de la sécurité."
+    },
+    "iot": {
+      "en": "In aerospace, no actuator fires without a validated command chain. I bring that discipline to connected systems: edge devices (ESP32/MQTT) where every physical action passes a deterministic AI-judge validation loop before execution, and where system state is observable in plain language from Claude Desktop via MCP.",
+      "fr": "Dans l'aéronautique, aucun actionneur ne s'active sans chaîne de commande validée. J'apporte cette discipline aux systèmes connectés : des équipements edge (ESP32/MQTT) où chaque action physique passe par une boucle de validation déterministe (agent IA juge) avant exécution, et où l'état du système s'observe en langage naturel depuis Claude Desktop via MCP."
+    },
+    "plm_architect": {
+      "en": "I architected hybrid cloud/on-premise PLM deployments for four aerospace manufacturers (Safran, Airbus, Dassault, Bombardier): unified identity (IAM/SSO) aligned with group standards, high-availability middleware flows, and ArchiMate maps guaranteeing traceability from business need to operations. My job: making critical industrial systems reliable, secure and auditable.",
+      "fr": "J'ai architecturé des déploiements PLM hybrides cloud/on-premise pour quatre avionneurs (Safran, Airbus, Dassault, Bombardier) : identité unifiée (IAM/SSO) alignée sur les standards groupe, flux middleware à haute disponibilité, cartographies ArchiMate garantissant la traçabilité du besoin métier jusqu'à l'exploitation. Mon métier : rendre les systèmes industriels critiques fiables, sécurisés et auditables."
+    },
+    "default": {
+      "en": "Information systems architect forged by 7 years in aerospace (Bombardier, Dassault Falcon Jet, Airbus, Safran). My conviction: critical-systems rigor and modern development velocity are not opposites, they reinforce each other. Today I build the developer tooling and AI systems that prove it.",
+      "fr": "Architecte de systèmes d'information forgé par 7 ans d'aéronautique (Bombardier, Dassault Falcon Jet, Airbus, Safran). Ma conviction : la rigueur des systèmes critiques et la vélocité du développement moderne ne s'opposent pas, elles se renforcent. Je construis aujourd'hui le tooling développeur et les systèmes IA qui le prouvent."
+    }
+  },
+  "projects": [
+    {
+      "id": "profile-engine",
+      "name": "Profile Engine (fdiene.com)",
+      "tagline": {
+        "en": "The resume you are reading is served by an API: this site is the project.",
+        "fr": "Le CV que vous lisez est servi par une API : ce site est le projet."
+      },
+      "description": {
+        "en": "API-first profile engine in a Bun + Turborepo monorepo: Zod schemas as the single source of truth, an Elysia API with end-to-end Eden typing, and a context-aware Astro/Vue front (?role=&lang=) that reorders the whole resume for its reader. EN/FR/DE i18n is generated offline by a schema-validated Claude pipeline: zero LLM calls at runtime, sub-millisecond responses. 44 tests, GitHub Actions CI, Docker image behind Traefik. The DX demonstration is the product itself.",
+        "fr": "Moteur de profil API-first en monorepo Bun + Turborepo : schémas Zod comme source de vérité unique, API Elysia au typage Eden de bout en bout, et vue Astro/Vue contextuelle (?role=&lang=) qui réordonne tout le CV selon son lecteur. L'i18n EN/FR/DE est générée hors ligne par un pipeline Claude validé par schéma : zéro appel LLM au runtime, réponses sous la milliseconde. 44 tests, CI GitHub Actions, image Docker derrière Traefik. La démonstration DX, c'est le produit lui-même."
+      },
+      "stack": ["Bun", "Elysia", "Eden", "Zod", "Astro", "Vue", "Turborepo", "Docker", "Traefik", "Claude (offline)"],
+      "tags": ["dx_tooling", "api_design", "devsecops"],
+      "links": {},
+      "status": "live",
+      "featured_for": ["anthropic_dx"]
+    },
+    {
+      "id": "harness",
+      "name": "Harness",
+      "tagline": {
+        "en": "An MCP server that governs my AI agents: routing, guardrails, and token economics.",
+        "fr": "Un serveur MCP qui gouverne mes agents IA : routage, guardrails et économie de tokens."
+      },
+      "description": {
+        "en": "Cross-project orchestration layer built on the official MCP SDK (TypeScript, Zod): a supervisor exposes at most 3 tools per intent to keep agent context lean, an LLM router sends each task to the cheapest capable model, and guardrails enforce token budgets and require explicit confirmation before any destructive action. Per-project tool registries (JSON manifests) plug n8n automations and git sync into Claude Code and Cursor. My daily driver for agent operations, private and evolving.",
+        "fr": "Couche d'orchestration cross-projets construite sur le SDK MCP officiel (TypeScript, Zod) : un superviseur expose au maximum 3 outils par intention pour garder le contexte des agents frugal, un routeur LLM envoie chaque tâche vers le modèle le moins cher capable de la traiter, et des guardrails imposent un budget de tokens et exigent une confirmation explicite avant toute action destructive. Des registres d'outils par projet (manifestes JSON) branchent les automatisations n8n et la synchro git dans Claude Code et Cursor. Mon outil quotidien d'exploitation d'agents, privé et en évolution."
+      },
+      "stack": ["TypeScript", "MCP SDK", "Zod", "n8n", "Node.js"],
+      "tags": ["mcp", "ai_safety", "dx_tooling"],
+      "links": {},
+      "status": "live",
+      "featured_for": ["anthropic_dx"]
+    },
+    {
+      "id": "seomnix",
+      "name": "SEOMNIX Empire",
+      "tagline": {
+        "en": "A content engine in production, where nothing publishes without passing judgment.",
+        "fr": "Un moteur de contenu en production, où rien ne se publie sans passer devant le juge."
+      },
+      "description": {
+        "en": "LangGraph + FastAPI content pipeline in production (Directus, n8n): research, writing, media and publishing orchestrated as a graph. Its centerpiece, now being implemented: an LLM-as-a-judge eval_node (Claude Haiku judge, Pydantic structured output) that refuses hallucinations by confronting every article with its research sources, then deterministically routes Keep / Correct / Reject before anything ships. Eval metrics persisted to Directus for observability, deterministic Evals in CI: generated content never escapes scrutiny.",
+        "fr": "Pipeline de contenu LangGraph + FastAPI en production (Directus, n8n) : recherche, rédaction, médias et publication orchestrés en graphe. Sa pièce maîtresse, en cours d'implémentation : un eval_node LLM-as-a-judge (juge Claude Haiku, sortie structurée Pydantic) qui refuse les hallucinations en confrontant chaque article à ses sources, puis route de façon déterministe Garder / Corriger / Rejeter avant toute mise en ligne. Métriques d'éval persistées dans Directus pour l'observabilité, Evals déterministes en CI : le contenu généré n'échappe jamais au contrôle."
+      },
+      "stack": ["Python", "FastAPI", "LangGraph", "Pydantic", "Directus", "n8n", "Claude"],
+      "tags": ["ai_safety", "mlops", "dx_tooling"],
+      "links": {},
+      "status": "live",
+      "featured_for": ["anthropic_dx"]
+    },
+    {
+      "id": "ops-tools",
+      "name": "ops-tools",
+      "tagline": {
+        "en": "The CLI that onboards, operates and secures my entire repo ecosystem.",
+        "fr": "Le CLI qui onboarde, opère et sécurise tout mon écosystème de dépôts."
+      },
+      "description": {
+        "en": "Internal TypeScript CLI (ops maintenance, brief generation, repo scanning) designed for developer adoption: integrated help, local telemetry tracing every command's duration, and shift-left security with gitleaks pre-commit hooks that block any key leak before it reaches git. Currently being hardened (cleanup, Vitest suite) for an open-source npm release as @fdiene/ops-tools.",
+        "fr": "CLI TypeScript interne (maintenance ops, génération de briefs, scan de dépôts) conçu pour l'adoption développeur : aide intégrée, télémétrie locale traçant la durée de chaque commande, et sécurité shift-left avec des hooks pre-commit gitleaks qui bloquent toute fuite de clé avant d'atteindre git. En cours de durcissement (nettoyage, suite Vitest) pour une publication open-source sur npm en @fdiene/ops-tools."
+      },
+      "stack": ["Bun", "TypeScript", "commander.js", "Vitest", "gitleaks"],
+      "tags": ["dx_tooling", "devsecops"],
+      "links": {},
+      "status": "building",
+      "featured_for": ["anthropic_dx"]
+    },
+    {
+      "id": "artmap",
+      "name": "ArtMap",
+      "tagline": {
+        "en": "A guided painting app for a client: color science, AI vision, and shipping discipline.",
+        "fr": "Une app de peinture guidée pour un client : science de la couleur, vision IA et discipline de livraison."
+      },
+      "description": {
+        "en": "Mobile app (Expo/React Native) with a Next.js backend, designed and built end-to-end for a client: a photo becomes a numbered painting guide. Custom color engine (HEX/RGB/XYZ/LAB conversions, Delta E matching, physical paint-mixing ratios), AI image analysis with strictly parsed structured output, and privacy by design (GDPR utilities, explicit AI-training opt-in in the schema). Shipped through disciplined client QA cycles: versioned builds, acceptance scripts, ticketed regressions. Currently in client acceptance testing.",
+        "fr": "Application mobile (Expo/React Native) avec backend Next.js, conçue et développée de bout en bout pour un client : une photo devient un guide de peinture numéroté. Moteur couleur maison (conversions HEX/RGB/XYZ/LAB, matching Delta E, ratios de mélange physiques), analyse d'images par IA à sortie structurée strictement parsée, et privacy by design (utilitaires RGPD, opt-in explicite d'entraînement IA dans le schéma). Livrée via des cycles QA client disciplinés : builds versionnés, cahiers de recette, régressions ticketées. Actuellement en recette client."
+      },
+      "stack": ["TypeScript", "React Native", "Expo", "Next.js", "PostgreSQL (Neon)", "TanStack Query", "Vitest", "Gemini"],
+      "tags": ["product", "api_design", "ai_safety"],
+      "links": {},
+      "status": "building",
+      "featured_for": ["default"]
+    },
+    {
+      "id": "omnis-agri",
+      "name": "Omnis-Agri (Agri-OS)",
+      "tagline": {
+        "en": "Safety-critical edge architecture for connected agriculture, designed like an aircraft system.",
+        "fr": "Architecture edge safety-critical pour l'agriculture connectée, conçue comme un système avionique."
+      },
+      "description": {
+        "en": "Design-stage edge architecture for an instrumented greenhouse (humidity/temperature/light sensors, pump and fan actuators) with one non-negotiable rule: no physical action executes without validation by a Judge Agent, a deterministic loop inspired by aerospace command chains. Conversational observability via MCP: greenhouse state queryable from Claude Desktop. Currently in design, from hardware selection to the Directus data model.",
+        "fr": "Architecture edge en phase de design pour une serre instrumentée (capteurs humidité/température/luminosité, actionneurs pompe et ventilation) avec une règle non négociable : aucune action physique ne s'exécute sans validation par un Agent Juge, une boucle déterministe inspirée des chaînes de commande aéronautiques. Observabilité conversationnelle via MCP : l'état de la serre s'interroge depuis Claude Desktop. En cours de design, du choix du matériel au modèle de données Directus."
+      },
+      "stack": ["FastAPI", "LangGraph", "MCP", "Directus", "n8n", "ESP32", "MQTT", "Docker"],
+      "tags": ["iot", "edge", "ai_safety", "mcp"],
+      "links": {},
+      "status": "concept",
+      "featured_for": ["iot"]
+    }
+  ],
+  "experience_example_safran": {
+    "id": "safran",
+    "role": {
+      "en": "Technical Architect - Strategic PLM Engineering 4.0 Program",
+      "fr": "Architecte Technique - Programme stratégique PLM Engineering 4.0"
+    },
+    "summary": {
+      "en": "Owned the hybrid (cloud & on-premise) deployment architecture of the group's strategic PLM.",
+      "fr": "Responsable de l'architecture de déploiement hybride (cloud & on-premise) du PLM stratégique du groupe."
+    },
+    "highlights": [
+      {
+        "en": "Secured multi-site interconnections (TCP/IP, IPsec/SSL VPN), enabling reliable diagnostics on production-critical flows.",
+        "fr": "Sécurisation des interconnexions multi-sites (TCP/IP, VPN IPsec/SSL), garantissant des diagnostics fiables sur des flux critiques de production."
+      },
+      {
+        "en": "Unified identity and access (SSO, LDAP, Kerberos, OpenID Connect, OAuth2) to group standards, shrinking the attack surface of privileged access.",
+        "fr": "Unification de l'authentification et des identités (SSO, LDAP, Kerberos, OpenID Connect, OAuth2) selon les standards groupe, réduisant la surface d'attaque des accès privilégiés."
+      },
+      {
+        "en": "Guaranteed end-to-end traceability from business need to operations through ArchiMate/TOGAF maps, accelerating architecture-board decisions.",
+        "fr": "Garantie de la traçabilité de bout en bout du besoin métier jusqu'à l'exploitation via les cartographies ArchiMate/TOGAF, accélérant les arbitrages en comité d'architecture."
+      },
+      {
+        "en": "Industrialized inter-system exchanges (REST/SOAP/GraphQL over Mulesoft, RabbitMQ) with high availability and redundancy, hardening production data flows.",
+        "fr": "Industrialisation des échanges inter-systèmes (REST/SOAP/GraphQL sur Mulesoft, RabbitMQ) avec haute disponibilité et redondance, fiabilisant les flux de données de production."
+      }
+    ]
+  }
+}
