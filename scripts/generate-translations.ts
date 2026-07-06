@@ -12,6 +12,9 @@ function anthropicTranslator(client: Anthropic): Translator {
       system:
         `You are a professional translator for a technical résumé. Translate the user's text into ${LANG_NAME[target]}. ` +
         `Preserve technical terms, product names, and proper nouns verbatim (e.g. Bun, LangGraph, Enovia, MCP). ` +
+        `Translate job titles and degree names into idiomatic ${LANG_NAME[target]} conventions; never leave them in English. ` +
+        `Use a consistent nominal style for CV bullet points. ` +
+        `Never use the em dash character "—"; use ":" or "-" instead. ` +
         `Return ONLY the translated text, no quotes, no preamble.`,
       messages: [{ role: "user", content: text }],
     });

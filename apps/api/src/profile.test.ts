@@ -11,8 +11,13 @@ describe("buildProfile", () => {
     expect(typeof out.executiveSummary).toBe("string");
     expect((out.person as any).title).toBe((data.person.title as any).fr);
   });
-  it("orders projects for the role (ops-tools/seomnix before omnis-agri for anthropic_dx)", () => {
+  it("orders anthropic_dx projects per spec (featured first, artmap last)", () => {
     const ids = (buildProfile("anthropic_dx", "en", data).projects as any).map((p: any) => p.id);
-    expect(ids.indexOf("omnis-agri")).toBe(ids.length - 1);
+    expect(ids.slice(0, 4)).toEqual(["harness", "profile-engine", "seomnix", "ops-tools"]);
+    expect(ids[ids.length - 1]).toBe("artmap");
+  });
+
+  it("features artmap first for the default role", () => {
+    expect((buildProfile("default", "en", data).projects as any)[0].id).toBe("artmap");
   });
 });
