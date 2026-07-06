@@ -22,7 +22,7 @@
     "iot": {
       "en": "In aerospace, no actuator fires without a validated command chain. I bring that discipline to connected systems: edge devices (ESP32/MQTT) where every physical action passes a deterministic AI-judge validation loop before execution, and where system state is observable in plain language from Claude Desktop via MCP.",
       "fr": "Dans l'aéronautique, aucun actionneur ne s'active sans chaîne de commande validée. J'apporte cette discipline aux systèmes connectés : des équipements edge (ESP32/MQTT) où chaque action physique passe par une boucle de validation déterministe (agent IA juge) avant exécution, et où l'état du système s'observe en langage naturel depuis Claude Desktop via MCP.",
-      "de": "In der Luft- und Raumfahrt löst kein Aktor ohne validierte Befehlskette aus. Diese Disziplin bringe ich in vernetzte Systeme ein: Edge-Geräte (ESP32/MQTT), bei denen jede physische Aktion vor der Ausführung eine deterministische KI-Prüfschleife durchläuft und bei denen der Systemzustand über MCP in natürlicher Sprache aus Claude Desktop beobachtbar ist."
+      "de": "In der Luft- und Raumfahrt löst kein Aktor ohne validierte Befehlskette aus. Diese Disziplin bringe ich in vernetzte Systeme ein: Edge-Geräte (ESP32/MQTT), bei denen jede physische Aktion vor der Ausführung eine deterministische Validierungsschleife (KI-Judge-Agent) durchläuft und bei denen der Systemzustand über MCP in natürlicher Sprache aus Claude Desktop beobachtbar ist."
     },
     "plm_architect": {
       "en": "I architected hybrid cloud/on-premise PLM deployments for four aerospace manufacturers (Safran, Airbus, Dassault, Bombardier): unified identity (IAM/SSO) aligned with group standards, high-availability middleware flows, and ArchiMate maps guaranteeing traceability from business need to operations. My job: making critical industrial systems reliable, secure and auditable.",
@@ -239,7 +239,7 @@
         {
           "en": "Built a VB.NET stress-calculation tool and optimized fatigue-test computations, accelerating test campaigns on metallic structures.",
           "fr": "Développement d'un outil de calcul de contraintes en VB.NET et optimisation des calculs de fatigue, accélérant les campagnes d'essais des structures métalliques.",
-          "de": "Entwicklung eines VB.NET-Werkzeugs zur Spannungsberechnung und Optimierung von Berechnungen für Ermüdungstests, wodurch Testkampagnen an metallischen Strukturen beschleunigt wurden."
+          "de": "Entwicklung eines VB.NET-Werkzeugs zur Spannungsberechnung und Optimierung von Berechnungen für Ermüdungstests zur Beschleunigung der Testkampagnen an metallischen Strukturen."
         }
       ],
       "tags": [
@@ -260,7 +260,7 @@
       "description": {
         "en": "API-first profile engine in a Bun + Turborepo monorepo: Zod schemas as the single source of truth, an Elysia API with end-to-end Eden typing, and a context-aware Astro/Vue front (?role=&lang=) that reorders the whole resume for its reader. EN/FR/DE i18n is generated offline by a schema-validated Claude pipeline: zero LLM calls at runtime, sub-millisecond responses. 44 tests, GitHub Actions CI, Docker image behind Traefik. The DX demonstration is the product itself.",
         "fr": "Moteur de profil API-first en monorepo Bun + Turborepo : schémas Zod comme source de vérité unique, API Elysia au typage Eden de bout en bout, et vue Astro/Vue contextuelle (?role=&lang=) qui réordonne tout le CV selon son lecteur. L'i18n EN/FR/DE est générée hors ligne par un pipeline Claude validé par schéma : zéro appel LLM au runtime, réponses sous la milliseconde. 44 tests, CI GitHub Actions, image Docker derrière Traefik. La démonstration DX, c'est le produit lui-même.",
-        "de": "API-first Profile-Engine in einem Bun- und Turborepo-Monorepo: Zod-Schemas als Single Source of Truth, eine Elysia-API mit durchgängiger Eden-Typisierung und ein kontextsensitives Astro/Vue-Frontend (?role=&lang=), das den gesamten Lebenslauf für seinen Leser neu anordnet. Die EN/FR/DE-Internationalisierung wird offline von einer schemavalidierten Claude-Pipeline generiert: keine LLM-Aufrufe zur Laufzeit, Antwortzeiten im Submillisekundenbereich. 44 Tests, GitHub Actions CI, Docker-Image hinter Traefik. Die DX-Demonstration ist das Produkt selbst."
+        "de": "API-first Profile-Engine in einem Bun- und Turborepo-Monorepo: Zod-Schemas als einzige Quelle der Wahrheit, eine Elysia-API mit durchgängiger Eden-Typisierung und ein kontextsensitives Astro/Vue-Frontend (?role=&lang=), das den gesamten Lebenslauf für seinen Leser neu anordnet. Die EN/FR/DE-Internationalisierung wird offline von einer schemavalidierten Claude-Pipeline generiert: keine LLM-Aufrufe zur Laufzeit, Antwortzeiten im Submillisekundenbereich. 44 Tests, GitHub Actions CI, Docker-Image hinter Traefik. Die DX-Demonstration ist das Produkt selbst."
       },
       "stack": [
         "Bun",
@@ -390,7 +390,7 @@
       "description": {
         "en": "Mobile app (Expo/React Native) with a Next.js backend, designed and built end-to-end for a client: a photo becomes a numbered painting guide. Custom color engine (HEX/RGB/XYZ/LAB conversions, Delta E matching, physical paint-mixing ratios), AI image analysis with strictly parsed structured output, and privacy by design (GDPR utilities, explicit AI-training opt-in in the schema). Shipped through disciplined client QA cycles: versioned builds, acceptance scripts, ticketed regressions. Currently in client acceptance testing.",
         "fr": "Application mobile (Expo/React Native) avec backend Next.js, conçue et développée de bout en bout pour un client : une photo devient un guide de peinture numéroté. Moteur couleur maison (conversions HEX/RGB/XYZ/LAB, matching Delta E, ratios de mélange physiques), analyse d'images par IA à sortie structurée strictement parsée, et privacy by design (utilitaires RGPD, opt-in explicite d'entraînement IA dans le schéma). Livrée via des cycles QA client disciplinés : builds versionnés, cahiers de recette, régressions ticketées. Actuellement en recette client.",
-        "de": "Mobile App (Expo/React Native) mit Next.js-Backend, für einen Kunden durchgängig konzipiert und umgesetzt: Ein Foto wird zu einer nummerierten Malanleitung. Eigene Color Engine (HEX/RGB/XYZ/LAB-Konvertierungen, Delta-E-Abgleich, physikalische Farbmischverhältnisse), KI-Bildanalyse mit streng geparster strukturierter Ausgabe sowie Privacy by Design (DSGVO-Werkzeuge, explizites Opt-in für KI-Training im Schema). Auslieferung durch disziplinierte Kunden-QA-Zyklen: versionierte Builds, Abnahmeskripte, ticketbasierte Regressionen. Derzeit in der Kundenabnahme."
+        "de": "Mobile App (Expo/React Native) mit Next.js-Backend, für einen Kunden durchgängig konzipiert und umgesetzt: Ein Foto wird zu einer nummerierten Malanleitung. Eigene Farb-Engine (HEX/RGB/XYZ/LAB-Konvertierungen, Delta-E-Abgleich, physikalische Farbmischverhältnisse), KI-Bildanalyse mit streng geparster strukturierter Ausgabe sowie Privacy by Design (DSGVO-Werkzeuge, explizites Opt-in für KI-Training im Schema). Auslieferung durch disziplinierte Kunden-QA-Zyklen: versionierte Builds, Abnahmeskripte, ticketbasierte Regressionen. Derzeit in der Kundenabnahme."
       },
       "stack": [
         "TypeScript",
@@ -424,7 +424,7 @@
       "description": {
         "en": "Design-stage edge architecture for an instrumented greenhouse (humidity/temperature/light sensors, pump and fan actuators) with one non-negotiable rule: no physical action executes without validation by a Judge Agent, a deterministic loop inspired by aerospace command chains. Conversational observability via MCP: greenhouse state queryable from Claude Desktop. Currently in design, from hardware selection to the Directus data model.",
         "fr": "Architecture edge en phase de design pour une serre instrumentée (capteurs humidité/température/luminosité, actionneurs pompe et ventilation) avec une règle non négociable : aucune action physique ne s'exécute sans validation par un Agent Juge, une boucle déterministe inspirée des chaînes de commande aéronautiques. Observabilité conversationnelle via MCP : l'état de la serre s'interroge depuis Claude Desktop. En cours de design, du choix du matériel au modèle de données Directus.",
-        "de": "Entwurfsphasen-Edge-Architektur für ein instrumentiertes Gewächshaus (Feuchtigkeits-/Temperatur-/Lichtsensoren, Pumpen- und Ventilatoraktoren) mit einer nicht verhandelbaren Regel: keine physische Aktion wird ohne Validierung durch einen Judge Agent ausgeführt, eine deterministische Schleife nach dem Vorbild von Kommandoketten aus der Luft- und Raumfahrt. Konversationelle Observability über MCP: Gewächshauszustand abfragbar aus Claude Desktop. Derzeit in der Entwurfsphase, von der Hardwareauswahl bis zum Directus-Datenmodell."
+        "de": "Entwurfsphasen-Edge-Architektur für ein instrumentiertes Gewächshaus (Feuchtigkeits-/Temperatur-/Lichtsensoren, Pumpen- und Ventilatoraktoren) mit einer nicht verhandelbaren Regel: keine physische Aktion wird ohne Validierung durch einen Judge-Agent ausgeführt, eine deterministische Schleife nach dem Vorbild von Kommandoketten aus der Luft- und Raumfahrt. Konversationelle Observability über MCP: Gewächshauszustand abfragbar aus Claude Desktop. Derzeit in der Entwurfsphase, von der Hardwareauswahl bis zum Directus-Datenmodell."
       },
       "stack": [
         "FastAPI",
@@ -550,7 +550,7 @@
       "title": {
         "en": "ISTQB Software Testing",
         "fr": "ISTQB Tests Logiciels",
-        "de": "ISTQB Software Testing"
+        "de": "ISTQB Softwaretests"
       },
       "org": "ORSYS",
       "location": "Paris, France",
