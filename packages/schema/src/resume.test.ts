@@ -69,6 +69,10 @@ describe("status enum v2", () => {
     expect(ProjectSchema.parse({ ...validProject, status: "building" }).status).toBe("building");
     expect(ProjectSchema.parse({ ...validProject, status: "concept" }).status).toBe("concept");
   });
+
+  it("rejects the retired draft status", () => {
+    expect(() => ProjectSchema.parse({ ...validProject, status: "draft" })).toThrow();
+  });
 });
 
 describe("product tag", () => {
