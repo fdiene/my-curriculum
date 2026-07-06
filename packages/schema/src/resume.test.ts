@@ -56,3 +56,23 @@ describe("Named entity schemas (final)", () => {
     expect(ProjectSchema).toBe(ResumeSchema.shape.projects.element);
   });
 });
+
+const validProject = {
+  id: "x", name: "X",
+  tagline: { en: "t", fr: "t", de: "t" },
+  description: { en: "d", fr: "d", de: "d" },
+  stack: [], tags: [], links: {}, status: "live", featured_for: [],
+};
+
+describe("status enum v2", () => {
+  it("accepts building and concept", () => {
+    expect(ProjectSchema.parse({ ...validProject, status: "building" }).status).toBe("building");
+    expect(ProjectSchema.parse({ ...validProject, status: "concept" }).status).toBe("concept");
+  });
+});
+
+describe("product tag", () => {
+  it("accepts product", () => {
+    expect(ProjectSchema.parse({ ...validProject, tags: ["product"] }).tags).toEqual(["product"]);
+  });
+});

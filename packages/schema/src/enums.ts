@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const Tag = z.enum([
   "ai_safety", "dx_tooling", "devsecops", "iot", "edge", "mcp",
-  "plm", "cloud", "security", "api_design", "mlops", "aerospace",
+  "plm", "cloud", "security", "api_design", "mlops", "aerospace", "product",
 ]);
 export type Tag = z.infer<typeof Tag>;
 
