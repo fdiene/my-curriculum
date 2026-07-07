@@ -12,7 +12,7 @@ const emit = defineEmits<{ toggle: [] }>();
       <span aria-hidden="true">{{ state === "open" ? "⌄" : "⌃" }}</span> Console
       <span v-if="state === 'closed' && lastRequest" class="teaser">GET {{ lastRequest }}</span>
     </button>
-    <div v-if="state === 'open'" class="body mono" role="log">
+    <div v-if="state === 'open'" class="body mono" role="log" tabindex="0">
       <div v-for="(e, i) in entries" :key="i" class="entry">
         <span v-if="e.kind === 'system'" class="sys">[SYSTEM]</span>
         <span v-else class="req">GET</span> {{ e.text }}

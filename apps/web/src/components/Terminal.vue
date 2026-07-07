@@ -3,10 +3,10 @@ import { computed, nextTick, onMounted, ref, watchEffect } from "vue";
 import { useProfile } from "../lib/useProfile";
 import { useConsole } from "../lib/useConsole";
 import { parseViewParams } from "../lib/params";
-import { curlFor } from "../lib/curl";
 import TelemetryBar from "./TelemetryBar.vue";
 import RoleSwitcher from "./RoleSwitcher.vue";
 import LangSwitcher from "./LangSwitcher.vue";
+import ThemeToggle from "./ThemeToggle.vue";
 import ProjectCard from "./ProjectCard.vue";
 import SectionBlock from "./SectionBlock.vue";
 import ConsolePane from "./ConsolePane.vue";
@@ -65,11 +65,12 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
 
 <template>
   <div class="app">
-    <TelemetryBar :degraded="p.status.value === 'degraded'" />
+    <TelemetryBar :degraded="p.status.value === 'degraded'" @retry="p.retry()" />
     <main>
       <nav class="controls no-print">
         <RoleSwitcher :modelValue="p.role.value" @update:modelValue="onRole" />
         <LangSwitcher :modelValue="p.lang.value" @update:modelValue="onLang" />
+        <ThemeToggle />
       </nav>
 
       <template v-if="p.status.value === 'loading'">
@@ -79,11 +80,11 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
       <template v-else-if="prof">
         <h1>{{ (prof.person as any).name }}</h1>
         <p class="title mono">{{ (prof.person as any).title }}</p>
-        <p class="summary">{{ prof.executiveSummary }}</p>
+        <p class="summary" :key="p.role.value + p.lang.value">{{ prof.executiveSummary }}</p>
 
         <SectionBlock title="Projects" :curlPath="`/v1/projects?role=${p.role.value}&lang=${p.lang.value}`" @copycurl="onCopyCurl">
           <div ref="cardsEl" class="cards">
-            <ProjectCard v-for="pr in prof.projects" :key="pr.id" :project="pr" @copycurl="onCopyCurl" />
+            <ProjectCard v-for="pr in prof.projects" :key="pr.id" :project="pr" :role="p.role.value" :lang="p.lang.value" @copycurl="onCopyCurl" />
           </div>
         </SectionBlock>
 
@@ -114,7 +115,8 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
 .controls { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1.25rem 0 2rem; flex-wrap: wrap; }
 h1 { font-size: 2.2rem; margin: 0; }
 .title { color: var(--accent-live); margin: 0.2rem 0 1rem; }
-.summary { font-size: 1.05rem; max-width: 46rem; transition: opacity 0.2s; }
+.summary { font-size: 1.05rem; max-width: 46rem; transition: opacity 0.2s; animation: fadeIn 0.2s ease-out; }
+@keyframes fadeIn { from { opacity: 0; } }
 .cards { display: grid; gap: 1rem; }
 .xp { list-style: none; padding: 0; } .xp li { margin-bottom: 1rem; }
 .org { color: var(--text-muted); } .xps { color: var(--text-muted); font-size: 0.9rem; margin: 0.2rem 0 0; }

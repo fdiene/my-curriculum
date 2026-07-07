@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { curlFor } from "../lib/curl";
-const props = defineProps<{ project: any }>();
+const props = defineProps<{ project: any; role: string; lang: string }>();
 const emit = defineEmits<{ copycurl: [string] }>();
 function copy() {
-  const path = `/v1/projects?lang=en`;
+  const path = `/v1/projects?role=${props.role}&lang=${props.lang}`;
   navigator.clipboard?.writeText(curlFor(path));
   emit("copycurl", path);
 }

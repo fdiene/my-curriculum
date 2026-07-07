@@ -4,11 +4,13 @@ import { LANGS, type Lang } from "@profile/schema";
 const props = defineProps<{ modelValue: Lang }>();
 const emit = defineEmits<{ "update:modelValue": [Lang] }>();
 const showBadge = ref(false);
+let badgeTimer: ReturnType<typeof setTimeout> | undefined;
 function pick(l: Lang) {
   if (l === props.modelValue) return;
   emit("update:modelValue", l);
   showBadge.value = true;
-  setTimeout(() => (showBadge.value = false), 2000);
+  clearTimeout(badgeTimer);
+  badgeTimer = setTimeout(() => (showBadge.value = false), 2000);
 }
 </script>
 

@@ -9,7 +9,7 @@ function copy() {
 </script>
 
 <template>
-  <section class="block">
+  <section class="block" :id="title.toLowerCase()">
     <header>
       <h2>{{ title }}</h2>
       <button class="curl mono no-print" title="Copy cURL" @click="copy">curl</button>
