@@ -6,5 +6,5 @@ export const Tag = z.enum([
 ]);
 export type Tag = z.infer<typeof Tag>;
 
-export const TargetRole = z.enum(["anthropic_dx", "iot", "plm_architect", "default"]);
+export const TargetRole = z.enum(["ai_dx", "iot", "plm_architect", "default"]);
 export type TargetRole = z.infer<typeof TargetRole>;

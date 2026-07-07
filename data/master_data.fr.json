@@ -10,7 +10,7 @@
     }
   },
   "executiveSummaries": {
-    "anthropic_dx": {
+    "ai_dx": {
       "en": "I spent 7 years securing critical infrastructure in the aerospace sector (Safran, Airbus). Today, I apply that same deterministic rigor to Developer Experience: I build the tooling (Bun CLIs, TS monorepos) and AI pipelines (LLM-as-a-judge Evals, MCP) that empower engineers to iterate and experiment faster, because velocity must never come at the expense of safety.",
       "fr": "J'ai passé 7 ans à fiabiliser des infrastructures critiques dans l'aérospatial (Safran, Airbus). Aujourd'hui, j'applique cette rigueur déterministe à la Developer Experience : je construis les outils (CLI Bun, monorepos TS) et les pipelines IA (Evals, MCP) qui permettent aux ingénieurs d'itérer et d'expérimenter plus vite, car la vélocité ne doit jamais se faire au détriment de la sécurité."
     },
@@ -133,7 +133,7 @@
       "tags": ["dx_tooling", "api_design", "devsecops"],
       "links": {},
       "status": "live",
-      "featured_for": ["anthropic_dx"]
+      "featured_for": ["ai_dx"]
     },
     {
       "id": "harness",
@@ -150,7 +150,7 @@
       "tags": ["mcp", "ai_safety", "dx_tooling"],
       "links": {},
       "status": "live",
-      "featured_for": ["anthropic_dx"]
+      "featured_for": ["ai_dx"]
     },
     {
       "id": "seomnix",
@@ -167,7 +167,7 @@
       "tags": ["ai_safety", "mlops", "dx_tooling"],
       "links": {},
       "status": "live",
-      "featured_for": ["anthropic_dx"]
+      "featured_for": ["ai_dx"]
     },
     {
       "id": "ops-tools",
@@ -184,7 +184,7 @@
       "tags": ["dx_tooling", "devsecops"],
       "links": {},
       "status": "building",
-      "featured_for": ["anthropic_dx"]
+      "featured_for": ["ai_dx"]
     },
     {
       "id": "artmap",

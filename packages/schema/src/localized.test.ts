@@ -25,6 +25,6 @@ describe("enums", () => {
   });
   it("accepts known tag and role", () => {
     expect(Tag.parse("dx_tooling")).toBe("dx_tooling");
-    expect(TargetRole.parse("anthropic_dx")).toBe("anthropic_dx");
+    expect(TargetRole.parse("ai_dx")).toBe("ai_dx");
   });
 });

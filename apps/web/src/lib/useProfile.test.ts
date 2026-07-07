@@ -14,7 +14,7 @@ describe("useProfile", () => {
   });
 
   it("degrades to static fallback on rejection", async () => {
-    const p = useProfile({ role: "anthropic_dx", lang: "fr" }, { client: boom });
+    const p = useProfile({ role: "ai_dx", lang: "fr" }, { client: boom });
     await p.fetchProfile();
     expect(p.status.value).toBe("degraded");
     expect(typeof (p.profile.value as any).executiveSummary).toBe("string");
@@ -48,7 +48,7 @@ describe("useProfile", () => {
     const deferredClient = () => new Promise<any>((resolve) => { deferreds.push(resolve); });
     const p = useProfile({ role: "default", lang: "en" }, { client: deferredClient as any });
     const first = p.setRole("iot");            // call A, stays in flight
-    const second = p.setRole("anthropic_dx");  // call B, newer
+    const second = p.setRole("ai_dx");  // call B, newer
     deferreds[1]({ executiveSummary: "B" });   // B settles first
     await second;
     expect(p.status.value).toBe("ready");

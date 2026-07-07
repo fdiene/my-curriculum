@@ -4,7 +4,7 @@ const props = defineProps<{ modelValue: TargetRole }>();
 const emit = defineEmits<{ "update:modelValue": [TargetRole] }>();
 const roles: { value: TargetRole; label: string }[] = [
   { value: "default", label: "General" },
-  { value: "anthropic_dx", label: "Anthropic DX Engineer" },
+  { value: "ai_dx", label: "AI Tooling & DX Engineer" },
   { value: "iot", label: "IoT Architect" },
   { value: "plm_architect", label: "PLM Architect" },
 ];

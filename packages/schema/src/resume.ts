@@ -17,7 +17,7 @@ export const RecommendationSchema = finalEntities.Recommendation;
 
 function buildResume(e: ReturnType<typeof buildEntities>, L: ZodType) {
   const summaries = z.object({
-    anthropic_dx: L, iot: L, plm_architect: L, default: L,
+    ai_dx: L, iot: L, plm_architect: L, default: L,
   }) satisfies ZodType;
   return z.object({
     person: e.Person,

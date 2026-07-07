@@ -3,13 +3,13 @@ import { useConsole } from "./useConsole";
 
 describe("useConsole initial state", () => {
   it("opens for a targeted role on desktop", () => {
-    expect(useConsole({ role: "anthropic_dx", isMobile: false }).state.value).toBe("open");
+    expect(useConsole({ role: "ai_dx", isMobile: false }).state.value).toBe("open");
   });
   it("stays closed for default role", () => {
     expect(useConsole({ role: "default", isMobile: false }).state.value).toBe("closed");
   });
   it("stays closed on mobile even for a targeted role", () => {
-    expect(useConsole({ role: "anthropic_dx", isMobile: true }).state.value).toBe("closed");
+    expect(useConsole({ role: "ai_dx", isMobile: true }).state.value).toBe("closed");
   });
 });
 

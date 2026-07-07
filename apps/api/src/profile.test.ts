@@ -7,12 +7,12 @@ const data: Resume = loadResume("data/master_data.i18n.json");
 
 describe("buildProfile", () => {
   it("returns the role-specific summary in the requested language", () => {
-    const out = buildProfile("anthropic_dx", "fr", data);
+    const out = buildProfile("ai_dx", "fr", data);
     expect(typeof out.executiveSummary).toBe("string");
     expect((out.person as any).title).toBe((data.person.title as any).fr);
   });
-  it("orders anthropic_dx projects per spec (featured first, artmap last)", () => {
-    const ids = (buildProfile("anthropic_dx", "en", data).projects as any).map((p: any) => p.id);
+  it("orders ai_dx projects per spec (featured first, artmap last)", () => {
+    const ids = (buildProfile("ai_dx", "en", data).projects as any).map((p: any) => p.id);
     expect(ids.slice(0, 4)).toEqual(["harness", "profile-engine", "seomnix", "ops-tools"]);
     expect(ids[ids.length - 1]).toBe("artmap");
   });

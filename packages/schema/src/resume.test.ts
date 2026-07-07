@@ -5,7 +5,7 @@ const minimalFinal = {
   person: { name: "Fadel Diène", title: { en: "Architect", fr: "Architecte", de: "Architekt" },
             location: "Toulouse", links: { linkedin: "https://linkedin.com/in/fdiene" } },
   executiveSummaries: {
-    anthropic_dx: { en: "a", fr: "a", de: "a" },
+    ai_dx: { en: "a", fr: "a", de: "a" },
     iot: { en: "b", fr: "b", de: "b" },
     plm_architect: { en: "c", fr: "c", de: "c" },
     default: { en: "d", fr: "d", de: "d" },
@@ -30,7 +30,7 @@ describe("ResumeInputSchema (source)", () => {
   it("accepts localized fields without de", () => {
     const src = structuredClone(minimalFinal) as any;
     src.person.title = { en: "Architect", fr: "Architecte" };
-    delete src.executiveSummaries.anthropic_dx.de;
+    delete src.executiveSummaries.ai_dx.de;
     expect(ResumeInputSchema.parse(src).person.title.fr).toBe("Architecte");
   });
 });

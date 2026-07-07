@@ -4,7 +4,7 @@ import { findMissingLocales, applyTranslations } from "./translations.core";
 const resume: any = {
   person: { name: "F", title: { en: "Architect", fr: "Architecte" }, location: "T", links: {} },
   executiveSummaries: {
-    anthropic_dx: { en: "a", fr: "a" }, iot: { en: "b", fr: "b" },
+    ai_dx: { en: "a", fr: "a" }, iot: { en: "b", fr: "b" },
     plm_architect: { en: "c", fr: "c" }, default: { en: "d", fr: "d" },
   },
   experiences: [], projects: [], skills: [], certifications: [], education: [], recommendations: [],

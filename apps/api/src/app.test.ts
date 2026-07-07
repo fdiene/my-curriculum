@@ -12,7 +12,7 @@ describe("routes", () => {
     expect((await get("/health")).body).toEqual({ status: "ok" });
   });
   it("GET /v1/profile/build applies role + lang", async () => {
-    const { status, body } = await get("/v1/profile/build?target_role=anthropic_dx&lang=fr");
+    const { status, body } = await get("/v1/profile/build?target_role=ai_dx&lang=fr");
     expect(status).toBe(200);
     expect(body.projects[body.projects.length - 1].id).toBe("artmap");
     expect(typeof body.executiveSummary).toBe("string");
