@@ -4,8 +4,7 @@ import { swagger } from "@elysiajs/swagger";
 import { TargetRole, type Tag } from "@profile/schema";
 import { resume } from "./data";
 import { resolveLocale } from "./locale";
-import { localize } from "./localize";
-import { orderByRole } from "./routing";
+import { localize, orderByRole } from "@profile/core";
 import { buildProfile } from "./profile";
 import { getMetrics, recordLatency } from "./metrics";
 

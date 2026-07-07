@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@profile/schema": "workspace:*",
+    "@profile/core": "workspace:*",
     "elysia": "^1.1.0",
     "@elysiajs/cors": "^1.1.0",
     "@elysiajs/swagger": "^1.1.0"
