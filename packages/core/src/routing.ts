@@ -13,7 +13,7 @@ export function scoreItem(tags: Tag[], role: TargetRole): number {
 }
 
 // Editorial override: featured_for pins curated items above any achievable tag score (max ≈ 37).
-const FEATURED_BOOST = 100;
+export const FEATURED_BOOST = 100;
 
 export function orderByRole<T extends { tags: Tag[]; featured_for?: TargetRole[] }>(
   items: T[],
