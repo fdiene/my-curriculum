@@ -1,0 +1,25 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource/fira-code";
+@import "./tokens.css";
+
+* { box-sizing: border-box; }
+html { background: var(--bg); color: var(--text); font-family: var(--font-sans); }
+body { margin: 0; line-height: 1.6; }
+.mono { font-family: var(--font-mono); }
+.badge {
+  font-family: var(--font-mono); font-size: 0.72rem; padding: 0.15rem 0.5rem;
+  border-radius: 999px; border: 1px solid currentColor; text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge.live { color: var(--accent-live); }
+.badge.building { color: var(--accent-building); }
+.badge.concept { color: var(--accent-concept); }
+:focus-visible { outline: 2px solid var(--accent-live); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@page { margin: 18mm 15mm; }
+@media print {
+  .no-print { display: none !important; }
+  a { color: #000; text-decoration: none; }
+}
