@@ -42,4 +42,21 @@ describe("useProfile", () => {
     await p.setRole("iot");
     expect(p.lastRequest.value).toBe("/v1/profile/build?target_role=iot&lang=en");
   });
+
+  it("ignores a stale in-flight fetch that settles after a newer one", async () => {
+    const deferreds: Array<(v: any) => void> = [];
+    const deferredClient = () => new Promise<any>((resolve) => { deferreds.push(resolve); });
+    const p = useProfile({ role: "default", lang: "en" }, { client: deferredClient as any });
+    const first = p.setRole("iot");            // call A, stays in flight
+    const second = p.setRole("anthropic_dx");  // call B, newer
+    deferreds[1]({ executiveSummary: "B" });   // B settles first
+    await second;
+    expect(p.status.value).toBe("ready");
+    expect((p.profile.value as any).executiveSummary).toBe("B");
+    deferreds[0]({ executiveSummary: "A" });   // A settles late
+    await first;
+    await Promise.resolve();                   // flush microtasks
+    expect((p.profile.value as any).executiveSummary).toBe("B");
+    expect(p.status.value).toBe("ready");
+  });
 });

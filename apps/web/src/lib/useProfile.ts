@@ -16,10 +16,6 @@ const edenClient: ProfileClient = async (role, lang) => {
   return data as unknown as Profile;
 };
 
-function rejectAfter(ms: number): Promise<never> {
-  return new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), ms));
-}
-
 export function useProfile(
   initial: { role: TargetRole; lang: Lang },
   opts: { client?: ProfileClient; timeoutMs?: number } = {},
@@ -31,16 +27,27 @@ export function useProfile(
   const status = ref<ProfileStatus>("loading");
   const profile = ref<Profile | null>(null);
   const lastRequest = ref("");
+  let generation = 0;
 
   async function fetchProfile(): Promise<void> {
+    const gen = ++generation;
     if (!profile.value) status.value = "loading";
     lastRequest.value = `/v1/profile/build?target_role=${role.value}&lang=${lang.value}`;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => reject(new Error("timeout")), timeoutMs);
+    });
     try {
-      profile.value = await Promise.race([client(role.value, lang.value), rejectAfter(timeoutMs)]);
+      const result = await Promise.race([client(role.value, lang.value), timeout]);
+      if (gen !== generation) return;
+      profile.value = result;
       status.value = "ready";
     } catch {
+      if (gen !== generation) return;
       profile.value = buildProfile(role.value, lang.value, FALLBACK);
       status.value = "degraded";
+    } finally {
+      clearTimeout(timer);
     }
   }
   async function setRole(r: TargetRole) { role.value = r; await fetchProfile(); }
