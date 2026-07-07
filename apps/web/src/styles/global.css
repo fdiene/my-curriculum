@@ -22,4 +22,9 @@ body { margin: 0; line-height: 1.6; }
 @media print {
   .no-print { display: none !important; }
   a { color: #000; text-decoration: none; }
+  .card { border: 1px solid #999; background: #fff !important; backdrop-filter: none !important; }
+  .badge { border-color: #333; color: #000 !important; }
+  .app { padding-bottom: 0 !important; max-width: none; }
+  h1 { font-size: 18pt; }
+  body { font-size: 10.5pt; }
 }
