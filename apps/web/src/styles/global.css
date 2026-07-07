@@ -27,4 +27,9 @@ body { margin: 0; line-height: 1.6; }
   .app { padding-bottom: 0 !important; max-width: none; }
   h1 { font-size: 18pt; }
   body { font-size: 10.5pt; }
+  .card, .xp li, .block header { break-inside: avoid; page-break-inside: avoid; }
+  .block h2 { break-after: avoid; }
+  .cards { display: block !important; }
+  .card { margin-bottom: 10pt; box-shadow: none !important; }
+  .summary { animation: none !important; }
 }

@@ -29,5 +29,9 @@
   --degraded-text: #7f1d1d;  /* 9.6:1 on #fef2f2 */
 }
 @media print {
-  :root { --bg: #ffffff; --surface: #ffffff; --text: #000000; --text-muted: #333333; --border: #999999; }
+  :root, :root[data-theme="dark"], :root[data-theme="light"] {
+    --bg: #ffffff; --surface: #ffffff; --surface-glass: #ffffff;
+    --text: #000000; --text-muted: #333333; --border: #999999;
+    --accent-live: #000000; --accent-building: #000000; --accent-concept: #333333;
+  }
 }
