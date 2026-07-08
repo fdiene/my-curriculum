@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { ResumeSchema, ResumeInputSchema, ProjectSchema } from "./index";
+import { ResumeSchema, ResumeInputSchema, ProjectSchema, PersonSchema } from "./index";
 
 const minimalFinal = {
   person: { name: "Fadel Diène", title: { en: "Architect", fr: "Architecte", de: "Architekt" },
@@ -78,5 +78,16 @@ describe("status enum v2", () => {
 describe("product tag", () => {
   it("accepts product", () => {
     expect(ProjectSchema.parse({ ...validProject, tags: ["product"] }).tags).toEqual(["product"]);
+  });
+});
+
+describe("photo fields", () => {
+  it("accepts optional avatarUrl and imageUrl", () => {
+    expect(ProjectSchema.parse({ ...validProject, imageUrl: "/covers/x.jpg" }).imageUrl).toBe("/covers/x.jpg");
+    const person = {
+      name: "F", title: { en: "a", fr: "a", de: "a" }, location: "T",
+      links: {}, avatarUrl: "/avatar.jpg",
+    };
+    expect(PersonSchema.parse(person).avatarUrl).toBe("/avatar.jpg");
   });
 });

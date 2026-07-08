@@ -136,6 +136,23 @@
       "featured_for": ["ai_dx"]
     },
     {
+      "id": "omnis",
+      "name": "OMNIS",
+      "tagline": {
+        "en": "IT-flow governance from the ops floor: map, reconcile, prove.",
+        "fr": "La gouvernance des flux SI par les opérations : cartographier, rapprocher, prouver."
+      },
+      "description": {
+        "en": "IT-infrastructure flow-governance platform, piloted in an air-gapped aerospace environment: application and dependency mapping (ArchiMate), flow-conformity reconciliation between the declared repository and security rules (four-state model), deterministic rule-conflict detection and signature-based deduplication. Open-Core TypeScript monorepo with a client edition isolated by carve-out: 88 tests, configurable repository imports with anonymization. Product pivot under way toward IT-landscape governance, as an ops-first challenger to enterprise-architecture tools.",
+        "fr": "Plateforme de gouvernance des flux d'infrastructure SI, éprouvée en pilote dans un environnement aéronautique cloisonné : cartographie des applications et de leurs dépendances (ArchiMate), rapprochement de conformité des flux entre référentiel déclaré et règles de sécurité (modèle à quatre états), détection déterministe des conflits de règles et déduplication par signature. Monorepo TypeScript Open-Core avec édition client isolée par carve-out : 88 tests, imports de référentiels configurables avec anonymisation. Pivot produit en cours vers l'urbanisation du SI, en challenger ops-first des outils d'architecture d'entreprise."
+      },
+      "stack": ["TypeScript", "Node.js", "PostgreSQL", "Zod", "pnpm", "Turborepo", "Docker", "ArchiMate"],
+      "tags": ["plm", "cloud", "security", "aerospace"],
+      "links": {},
+      "status": "building",
+      "featured_for": ["plm_architect"]
+    },
+    {
       "id": "harness",
       "name": "Harness",
       "tagline": {

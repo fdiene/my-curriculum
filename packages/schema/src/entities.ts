@@ -10,6 +10,7 @@ export function buildEntities(L: ZodType) {
     title: L,
     location: z.string(),
     photo: z.string().optional(),
+    avatarUrl: z.string().optional(),
     links: z.object({
       linkedin: z.string().optional(),
       email: z.string().optional(),
@@ -38,6 +39,7 @@ export function buildEntities(L: ZodType) {
     stack: z.array(z.string()),
     tags: z.array(Tag),
     links: z.object({ repo: z.string().optional(), demo: z.string().optional() }),
+    imageUrl: z.string().optional(),
     metrics: z.record(z.string(), z.string()).optional(),
     status: z.enum(["live", "building", "concept"]),
     featured_for: z.array(TargetRole),

@@ -9,6 +9,6 @@ describe("master_data.fr.json", () => {
   it("contains the six portfolio projects", () => {
     const r = ResumeInputSchema.parse(raw);
     const ids = r.projects.map((p) => p.id).sort();
-    expect(ids).toEqual(["artmap", "harness", "omnis-agri", "ops-tools", "profile-engine", "seomnix"]);
+    expect(ids).toEqual(["artmap", "harness", "omnis", "omnis-agri", "ops-tools", "profile-engine", "seomnix"]);
   });
 });
