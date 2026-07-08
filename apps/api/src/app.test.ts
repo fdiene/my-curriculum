@@ -14,7 +14,7 @@ describe("routes", () => {
   it("GET /v1/profile/build applies role + lang", async () => {
     const { status, body } = await get("/v1/profile/build?target_role=ai_dx&lang=fr");
     expect(status).toBe(200);
-    expect(body.projects[body.projects.length - 1].id).toBe("artmap");
+    expect(body.projects[body.projects.length - 1].id).toBe("omnis");
     expect(typeof body.executiveSummary).toBe("string");
   });
   it("GET /v1/profile/build uses Accept-Language when no query", async () => {
