@@ -14,6 +14,7 @@ body { margin: 0; line-height: 1.6; }
 .badge.live { color: var(--accent-live); }
 .badge.building { color: var(--accent-building); }
 .badge.concept { color: var(--accent-concept); }
+.summary, .desc, .xps { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
 :focus-visible { outline: 2px solid var(--accent-live); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

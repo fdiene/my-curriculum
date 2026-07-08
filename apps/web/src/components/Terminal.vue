@@ -78,7 +78,10 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
       </template>
 
       <template v-else-if="prof">
-        <h1>{{ (prof.person as any).name }}</h1>
+        <div class="identity">
+          <img v-if="(prof.person as any).avatarUrl" class="avatar" :src="(prof.person as any).avatarUrl" alt="" width="56" height="56" />
+          <h1>{{ (prof.person as any).name }}</h1>
+        </div>
         <p class="title mono">{{ (prof.person as any).title }}</p>
         <p class="summary" :key="p.role.value + p.lang.value">{{ prof.executiveSummary }}</p>
 
@@ -93,6 +96,9 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
             <li v-for="e in prof.experiences" :key="e.id">
               <strong>{{ e.role }}</strong><span class="org">, {{ e.org }}</span>
               <p class="xps">{{ e.summary }}</p>
+              <ul class="hl">
+                <li v-for="(h, i) in e.highlights" :key="i">{{ h }}</li>
+              </ul>
             </li>
           </ul>
         </SectionBlock>
@@ -106,13 +112,15 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
 
       <div v-if="toast" class="toast mono" role="status">{{ toast }}</div>
     </main>
-    <ConsolePane :state="c.state.value" :entries="c.entries.value" :lastRequest="p.lastRequest.value" @toggle="c.toggle()" />
+    <ConsolePane :state="c.state.value" :entries="c.entries.value" :lastRequest="p.lastRequest.value" @toggle="c.toggle()" @clear="c.clear()" />
   </div>
 </template>
 
 <style scoped>
 .app { max-width: 62rem; margin: 0 auto; padding: 0 1.25rem 30vh; }
 .controls { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1.25rem 0 2rem; flex-wrap: wrap; }
+.identity { display: flex; align-items: center; gap: 0.8rem; }
+.avatar { border-radius: 50%; object-fit: cover; }
 h1 { font-size: 2.2rem; margin: 0; }
 .title { color: var(--accent-live); margin: 0.2rem 0 1rem; }
 .summary { font-size: 1.05rem; max-width: 46rem; transition: opacity 0.2s; animation: fadeIn 0.2s ease-out; }
@@ -120,6 +128,7 @@ h1 { font-size: 2.2rem; margin: 0; }
 .cards { display: grid; gap: 1rem; }
 .xp { list-style: none; padding: 0; } .xp li { margin-bottom: 1rem; }
 .org { color: var(--text-muted); } .xps { color: var(--text-muted); font-size: 0.9rem; margin: 0.2rem 0 0; }
+.hl { margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.88rem; } .hl li { margin-bottom: 0.2rem; }
 .skills { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; list-style: none; }
 .skills li { font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; padding: 0.15rem 0.5rem; }
 .toast { position: fixed; bottom: 4rem; right: 1.5rem; background: var(--surface); border: 1px solid var(--accent-live); color: var(--accent-live); padding: 0.4rem 0.8rem; border-radius: 6px; }

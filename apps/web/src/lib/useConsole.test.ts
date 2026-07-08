@@ -21,4 +21,12 @@ describe("log and toggle", () => {
     c.toggle();
     expect(c.state.value).toBe("open");
   });
+
+  it("stamps entries with a time and clears", () => {
+    const c = useConsole({ role: "default", isMobile: false });
+    c.log({ kind: "system", text: "x" });
+    expect(c.entries.value[0].time).toMatch(/^\d{2}:\d{2}:\d{2}$/);
+    c.clear();
+    expect(c.entries.value.length).toBe(0);
+  });
 });

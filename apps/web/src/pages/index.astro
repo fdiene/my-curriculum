@@ -1,16 +1,36 @@
 ---
 import Terminal from "../components/Terminal.vue";
 import "../styles/global.css";
+import resume from "../../../../data/master_data.i18n.json";
+
+const person = resume.person;
+const description = resume.executiveSummaries.default.en;
+const sameAs = [person.links.linkedin, person.links.github].filter(Boolean);
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: person.name,
+  jobTitle: person.title.en,
+  url: "https://fdiene.com",
+  sameAs,
+};
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
-    <title>Fadel Diène : Profile Engine</title>
     <script is:inline>
       const saved = localStorage.getItem("theme");
       const preferred = saved ?? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
       document.documentElement.dataset.theme = preferred;
     </script>
+    <title>{person.name} : {person.title.en}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={`${person.name} : ${person.title.en}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://fdiene.com" />
+    <meta property="og:image" content="/avatar.jpg" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   </head>
   <body><Terminal client:load /></body>
 </html>

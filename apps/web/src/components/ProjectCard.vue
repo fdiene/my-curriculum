@@ -11,6 +11,7 @@ function copy() {
 
 <template>
   <article class="card" :data-project="project.id">
+    <img v-if="project.imageUrl" class="cover" :src="project.imageUrl" alt="" loading="lazy" />
     <header>
       <h3>{{ project.name }}</h3>
       <span class="badge" :class="project.status">{{ project.status }}</span>
@@ -26,6 +27,7 @@ function copy() {
 
 <style scoped>
 .card { background: var(--surface-glass); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; }
+.cover { width: 100%; border-radius: 8px 8px 0 0; max-height: 140px; object-fit: cover; }
 @supports (backdrop-filter: blur(8px)) { .card { backdrop-filter: blur(8px); } }
 @supports not (backdrop-filter: blur(8px)) { .card { background: var(--surface); } }
 header { display: flex; gap: 0.6rem; align-items: center; }
