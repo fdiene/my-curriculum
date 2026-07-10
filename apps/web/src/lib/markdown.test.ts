@@ -19,4 +19,14 @@ describe("renderMarkdown", () => {
     const html = renderMarkdown("[x](javascript:alert(1))");
     expect(html).not.toContain("<a ");
   });
+  it("keeps code spans inert (no emphasis inside code)", () => {
+    const html = renderMarkdown("`**not bold**`");
+    expect(html).toContain("<code>**not bold**</code>");
+    expect(html).not.toContain("<strong>");
+  });
+  it("protects link URLs from emphasis mangling", () => {
+    const html = renderMarkdown("[x](https://a.io/**b**/c)");
+    expect(html).toContain('<a href="https://a.io/**b**/c" rel="noopener noreferrer" target="_blank">x</a>');
+    expect(html).not.toContain("<strong>");
+  });
 });
