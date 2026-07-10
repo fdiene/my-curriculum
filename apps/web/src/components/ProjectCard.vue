@@ -15,11 +15,11 @@ function copy() {
     <header>
       <h3>{{ project.name }}</h3>
       <span class="badge" :class="project.status">{{ project.status }}</span>
-      <button class="curl mono no-print" title="Copy cURL" @click.stop="copy">curl</button>
+      <button class="curl mono no-print" title="Copy cURL" @click.stop="copy" @keydown.stop>curl</button>
     </header>
     <p class="tagline">{{ project.tagline }}</p>
     <p class="desc">{{ project.description }}</p>
-    <button v-if="project.details" class="more mono no-print" @click.stop="emit('open', project)">View details</button>
+    <button v-if="project.details" class="more mono no-print" @click.stop="emit('open', project)" @keydown.stop>View details</button>
     <ul class="stack mono">
       <li v-for="s in project.stack" :key="s">{{ s }}</li>
     </ul>
@@ -41,4 +41,7 @@ h3 { margin: 0; font-size: 1.05rem; flex: 1; }
 .curl:hover, .more:hover { color: var(--text); border-style: solid; }
 .stack { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0; margin: 0.6rem 0 0; list-style: none; }
 .stack li { font-size: 0.7rem; border: 1px solid var(--border); border-radius: 4px; padding: 0.1rem 0.4rem; color: var(--text-muted); }
+@media print {
+  .desc { -webkit-line-clamp: unset; }
+}
 </style>
