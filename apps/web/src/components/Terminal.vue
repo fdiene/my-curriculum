@@ -8,6 +8,7 @@ import RoleSwitcher from "./RoleSwitcher.vue";
 import LangSwitcher from "./LangSwitcher.vue";
 import ThemeToggle from "./ThemeToggle.vue";
 import ProjectCard from "./ProjectCard.vue";
+import ProjectDrawer from "./ProjectDrawer.vue";
 import SectionBlock from "./SectionBlock.vue";
 import ConsolePane from "./ConsolePane.vue";
 
@@ -17,6 +18,7 @@ const p = useProfile(params);
 const c = useConsole({ role: params.role, isMobile });
 const cardsEl = ref<HTMLElement | null>(null);
 const toast = ref("");
+const openProject = ref<any | null>(null);
 const reduced = typeof window !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const prof = computed<any>(() => p.profile.value);
@@ -58,6 +60,11 @@ function onCopyCurl(path: string) {
   if (!isMobile) c.open();
   if (!isMobile || c.state.value === "open") c.log({ kind: "system", text: "cURL command copied to clipboard" });
 }
+function openDetails(project: any) {
+  openProject.value = project;
+  const path = `/v1/projects/${project.id}?lang=${p.lang.value}`;
+  c.log({ kind: "request", text: path, payload: JSON.stringify({ id: project.id, status: project.status, stack: project.stack }, null, 1) });
+}
 
 watchEffect(() => { if (typeof document !== "undefined") document.documentElement.lang = p.lang.value; });
 onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
@@ -88,7 +95,7 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
 
         <SectionBlock title="Projects" :curlPath="`/v1/projects?role=${p.role.value}&lang=${p.lang.value}`" @copycurl="onCopyCurl">
           <div ref="cardsEl" class="cards">
-            <ProjectCard v-for="pr in prof.projects" :key="pr.id" :project="pr" :role="p.role.value" :lang="p.lang.value" @copycurl="onCopyCurl" />
+            <ProjectCard v-for="pr in prof.projects" :key="pr.id" :project="pr" :role="p.role.value" :lang="p.lang.value" @copycurl="onCopyCurl" @open="openDetails" />
           </div>
         </SectionBlock>
 
@@ -114,6 +121,7 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
       <div v-if="toast" class="toast mono" role="status">{{ toast }}</div>
     </main>
     <ConsolePane :state="c.state.value" :entries="c.entries.value" :lastRequest="p.lastRequest.value" @toggle="c.toggle()" @clear="c.clear()" />
+    <ProjectDrawer :project="openProject" :lang="p.lang.value" @close="openProject = null" @copycurl="onCopyCurl" />
   </div>
 </template>
 
@@ -121,7 +129,8 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
 .app { max-width: 62rem; margin: 0 auto; padding: 0 1.25rem 30vh; }
 .controls { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1.25rem 0 2rem; flex-wrap: wrap; }
 .identity { display: flex; align-items: center; gap: 0.8rem; }
-.avatar { border-radius: 50%; object-fit: cover; }
+.avatar { border-radius: 50%; object-fit: cover; border: 1px solid var(--border); filter: grayscale(1); transition: filter 0.25s; }
+.avatar:hover { filter: grayscale(0); }
 h1 { font-size: 2.2rem; margin: 0; }
 .title { color: var(--accent-live); margin: 0.2rem 0 0.2rem; }
 .mobility { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 1rem; }
@@ -130,7 +139,7 @@ h1 { font-size: 2.2rem; margin: 0; }
 .cards { display: grid; gap: 1rem; }
 .xp { list-style: none; padding: 0; } .xp li { margin-bottom: 1rem; }
 .org { color: var(--text-muted); } .xps { color: var(--text-muted); font-size: 0.9rem; margin: 0.2rem 0 0; }
-.hl { margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.88rem; } .hl li { margin-bottom: 0.2rem; }
+.hl { margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.88rem; } .hl li { margin-bottom: 0.5rem; }
 .skills { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; list-style: none; }
 .skills li { font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; padding: 0.15rem 0.5rem; }
 .toast { position: fixed; bottom: 4rem; right: 1.5rem; background: var(--surface); border: 1px solid var(--accent-live); color: var(--accent-live); padding: 0.4rem 0.8rem; border-radius: 6px; }
