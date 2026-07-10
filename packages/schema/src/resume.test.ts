@@ -99,3 +99,15 @@ describe("photo fields", () => {
     expect((PersonSchema.parse(person) as any).mobility.en).toBe("m");
   });
 });
+
+describe("progressive disclosure fields", () => {
+  it("accepts optional localized details and gallery", () => {
+    const p = ProjectSchema.parse({
+      ...validProject,
+      details: { en: "d", fr: "d", de: "d" },
+      gallery: ["/g/a.png", "/g/b.png"],
+    });
+    expect((p as any).details.en).toBe("d");
+    expect((p as any).gallery).toEqual(["/g/a.png", "/g/b.png"]);
+  });
+});

@@ -41,6 +41,8 @@ export function buildEntities(L: ZodType) {
     tags: z.array(Tag),
     links: z.object({ repo: z.string().optional(), demo: z.string().optional() }),
     imageUrl: z.string().optional(),
+    details: L.optional(),
+    gallery: z.array(z.string()).optional(),
     metrics: z.record(z.string(), z.string()).optional(),
     status: z.enum(["live", "building", "concept"]),
     featured_for: z.array(TargetRole),
