@@ -10,7 +10,7 @@ const LANG_NAME: Record<Lang, string> = { en: "English", fr: "French", de: "Germ
 const GLOSSARY: Record<string, Partial<Record<Lang, string>>> = {
   "ISTQB Software Testing": { fr: "ISTQB Tests Logiciels", de: "ISTQB Softwaretests" },
   "Mechanical Engineering Degree": { fr: "Diplôme d'ingénieur mécanique", de: "Diplom-Ingenieur Maschinenbau" },
-  "Master's in Information Systems Management": { fr: "Master Gestion des systèmes d'information", de: "Master in Informationssystemmanagement" },
+  "Master's in Information Systems Management": { fr: "Master Gestion des systèmes d'information", de: "Master in Wirtschaftsinformatik" },
 };
 
 // Substring hints for phrases embedded in longer text: appended to the system

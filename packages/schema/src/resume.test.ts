@@ -90,4 +90,12 @@ describe("photo fields", () => {
     };
     expect(PersonSchema.parse(person).avatarUrl).toBe("/avatar.jpg");
   });
+
+  it("accepts optional localized mobility on Person", () => {
+    const person = {
+      name: "F", title: { en: "a", fr: "a", de: "a" }, location: "T",
+      links: {}, mobility: { en: "m", fr: "m", de: "m" },
+    };
+    expect((PersonSchema.parse(person) as any).mobility.en).toBe("m");
+  });
 });

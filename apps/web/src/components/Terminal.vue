@@ -83,6 +83,7 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
           <h1>{{ (prof.person as any).name }}</h1>
         </div>
         <p class="title mono">{{ (prof.person as any).title }}</p>
+        <p v-if="(prof.person as any).mobility" class="mobility">{{ (prof.person as any).mobility }}</p>
         <p class="summary" :key="p.role.value + p.lang.value">{{ prof.executiveSummary }}</p>
 
         <SectionBlock title="Projects" :curlPath="`/v1/projects?role=${p.role.value}&lang=${p.lang.value}`" @copycurl="onCopyCurl">
@@ -122,7 +123,8 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
 .identity { display: flex; align-items: center; gap: 0.8rem; }
 .avatar { border-radius: 50%; object-fit: cover; }
 h1 { font-size: 2.2rem; margin: 0; }
-.title { color: var(--accent-live); margin: 0.2rem 0 1rem; }
+.title { color: var(--accent-live); margin: 0.2rem 0 0.2rem; }
+.mobility { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 1rem; }
 .summary { font-size: 1.05rem; max-width: 46rem; transition: opacity 0.2s; animation: fadeIn 0.2s ease-out; }
 @keyframes fadeIn { from { opacity: 0; } }
 .cards { display: grid; gap: 1rem; }

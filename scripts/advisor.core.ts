@@ -6,6 +6,7 @@ export function buildAdvisorPrompt(resume: ResumeInput, upskilling?: string): st
   const parts = [
     `You are a senior tech career advisor. Analyze this profile for ${resume.person.name}.`,
     `Current title: ${resume.person.title.en}. Location: ${resume.person.location}.`,
+    ...(resume.person.mobility ? [`Mobility: ${resume.person.mobility.en}`] : []),
     `Skills: ${skills}.`,
     `Projects: ${projects}.`,
     `Produce four clearly separated sections:`,

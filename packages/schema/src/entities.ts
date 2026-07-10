@@ -9,6 +9,7 @@ export function buildEntities(L: ZodType) {
     name: z.string(),
     title: L,
     location: z.string(),
+    mobility: L.optional(),
     photo: z.string().optional(),
     avatarUrl: z.string().optional(),
     links: z.object({
