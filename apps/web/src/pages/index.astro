@@ -29,7 +29,7 @@ const ld = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://fdiene.com" />
-    <meta property="og:image" content="/avatar.jpg" />
+    {(person as { avatarUrl?: string }).avatarUrl && <meta property="og:image" content={(person as { avatarUrl?: string }).avatarUrl} />}
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   </head>
   <body><Terminal client:load /></body>
