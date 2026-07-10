@@ -137,7 +137,11 @@
       "tags": ["dx_tooling", "api_design", "devsecops"],
       "links": {},
       "status": "live",
-      "featured_for": ["ai_dx"]
+      "featured_for": ["ai_dx"],
+      "details": {
+        "en": "## Why this project exists\nThis resume is not a PDF: it is a running system. Every view you see is served by a typed API, and this drawer itself was fetched from `GET /v1/projects/profile-engine`.\n\n## Architecture\n- **Monorepo** Bun + Turborepo: `packages/schema` (Zod source of truth), `packages/core` (pure domain shared by API and web), `apps/api` (Elysia), `apps/web` (Astro + Vue islands).\n- **End-to-end typing**: the web client consumes the API through Eden treaty types exported by the server.\n- **Role-aware ordering**: tag weights plus an editorial `featured_for` boost reorder the whole resume per audience.\n\n## Resilience and safety\n- EN/FR/DE content is generated offline by a schema-validated Claude pipeline: zero LLM calls at runtime.\n- If the API is unreachable, the site rebuilds the exact same view from embedded data and says so: [SYSTEM DEGRADED].\n- The console JSON highlighter is escape-first and adversarially tested.\n\n## Numbers\n- Full test suite green, CI on every push, Docker image behind Traefik.",
+        "fr": "## Pourquoi ce projet existe\nCe CV n'est pas un PDF : c'est un système en fonctionnement. Chaque vue est servie par une API typée, et ce panneau lui-même provient de `GET /v1/projects/profile-engine`.\n\n## Architecture\n- **Monorepo** Bun + Turborepo : `packages/schema` (source de vérité Zod), `packages/core` (domaine pur partagé API/web), `apps/api` (Elysia), `apps/web` (îlots Astro + Vue).\n- **Typage de bout en bout** : le client web consomme l'API via les types Eden exportés par le serveur.\n- **Tri par audience** : poids de tags plus un boost éditorial `featured_for` réordonnent tout le CV selon le lecteur.\n\n## Résilience et sûreté\n- Le contenu EN/FR/DE est généré hors ligne par un pipeline Claude validé par schéma : zéro appel LLM au runtime.\n- Si l'API est injoignable, le site reconstruit la même vue depuis les données embarquées et l'assume : [SYSTEM DEGRADED].\n- Le highlighter JSON de la console échappe d'abord, testé de façon adversariale.\n\n## Chiffres\n- Suite de tests au vert, CI à chaque push, image Docker derrière Traefik."
+      }
     },
     {
       "id": "omnis",
