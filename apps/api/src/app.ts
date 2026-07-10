@@ -39,6 +39,12 @@ export const app = new Elysia()
     const lang = resolveLocale(query.lang, headers["accept-language"]);
     return localize(orderByRole(resume.projects, roleOf(query.role)), lang);
   }, { query: t.Object({ lang: t.Optional(t.String()), role: t.Optional(t.String()) }) })
+  .get("/v1/projects/:id", ({ params, query, headers, set }) => {
+    const lang = resolveLocale(query.lang, headers["accept-language"]);
+    const project = resume.projects.find((p) => p.id === params.id);
+    if (!project) { set.status = 404; return { error: "project_not_found" }; }
+    return localize(project, lang);
+  }, { query: t.Object({ lang: t.Optional(t.String()) }) })
   .get("/v1/metrics", () => getMetrics());
 
 export type App = typeof app;

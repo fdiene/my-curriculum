@@ -41,4 +41,15 @@ describe("routes", () => {
     await get("/health");
     expect(latencySummary().count).toBeGreaterThan(0);
   });
+  it("GET /v1/projects/:id returns the localized project", async () => {
+    const { status, body } = await get("/v1/projects/profile-engine?lang=fr");
+    expect(status).toBe(200);
+    expect(body.id).toBe("profile-engine");
+    expect(typeof body.tagline).toBe("string");
+  });
+  it("GET /v1/projects/:id 404s cleanly on unknown id", async () => {
+    const { status, body } = await get("/v1/projects/nope");
+    expect(status).toBe(404);
+    expect(body.error).toBe("project_not_found");
+  });
 });
