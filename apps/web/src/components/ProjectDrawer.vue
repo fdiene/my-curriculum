@@ -1,17 +1,40 @@
 <script setup lang="ts">
-import { nextTick, ref, watch } from "vue";
+import { nextTick, onUnmounted, ref, watch } from "vue";
 import { renderMarkdown } from "../lib/markdown";
 import { curlFor } from "../lib/curl";
 
 const props = defineProps<{ project: any | null; lang: string }>();
 const emit = defineEmits<{ close: []; copycurl: [string] }>();
 const closeBtn = ref<HTMLButtonElement | null>(null);
+const drawerEl = ref<HTMLElement | null>(null);
 
 watch(() => props.project, async (p) => {
   document.body.style.overflow = p ? "hidden" : "";
-  if (p) { await nextTick(); closeBtn.value?.focus(); }
+  if (p) {
+    window.addEventListener("keydown", onKey);
+    await nextTick();
+    closeBtn.value?.focus();
+  } else {
+    window.removeEventListener("keydown", onKey);
+  }
 });
-function onKey(e: KeyboardEvent) { if (e.key === "Escape") emit("close"); }
+onUnmounted(() => window.removeEventListener("keydown", onKey));
+function onKey(e: KeyboardEvent) {
+  if (e.key === "Escape") { emit("close"); return; }
+  if (e.key === "Tab") {
+    const focusable = drawerEl.value?.querySelectorAll("button");
+    if (!focusable || focusable.length === 0) return;
+    const first = focusable[0] as HTMLElement;
+    const last = focusable[focusable.length - 1] as HTMLElement;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+}
 function copy() {
   const path = `/v1/projects/${props.project.id}?lang=${props.lang}`;
   navigator.clipboard?.writeText(curlFor(path));
@@ -21,9 +44,9 @@ function copy() {
 
 <template>
   <Teleport to="body">
-    <div v-if="project" class="wrap no-print" @keydown="onKey">
+    <div v-if="project" class="wrap no-print">
       <div class="overlay" @click="emit('close')" />
-      <aside class="drawer" role="dialog" aria-modal="true" :aria-label="project.name">
+      <aside ref="drawerEl" class="drawer" role="dialog" aria-modal="true" :aria-label="project.name">
         <header>
           <h2>{{ project.name }}</h2>
           <span class="badge" :class="project.status">{{ project.status }}</span>
