@@ -1,9 +1,9 @@
 import type { ResumeInput } from "@profile/schema";
 
-export function buildAdvisorPrompt(resume: ResumeInput): string {
+export function buildAdvisorPrompt(resume: ResumeInput, upskilling?: string): string {
   const skills = resume.skills.map((s) => s.label).join(", ");
   const projects = resume.projects.map((p) => `${p.name}: ${p.tagline.en}`).join("; ");
-  return [
+  const parts = [
     `You are a senior tech career advisor. Analyze this profile for ${resume.person.name}.`,
     `Current title: ${resume.person.title.en}. Location: ${resume.person.location}.`,
     `Skills: ${skills}.`,
@@ -14,7 +14,17 @@ export function buildAdvisorPrompt(resume: ResumeInput): string {
     `3. Positioning strategies (how to sell the profile better).`,
     `4. CV/UX improvement ideas for an API-first web resume.`,
     `Be specific and actionable. Return Markdown with a "## " heading per section.`,
-  ].join("\n");
+  ];
+  if (upskilling) {
+    parts.push(
+      `The candidate maintains a per-project upskilling plan (below). Align section 2 with it: `,
+      `recommend which unchecked TODO to tackle first, in which project, and for which market gap. `,
+      `Reference plan items explicitly.`,
+      `--- UPSKILLING PLAN BELOW ---`,
+      upskilling
+    );
+  }
+  return parts.join("\n");
 }
 
 export function renderInsights(sections: { title: string; body: string }[]): string {

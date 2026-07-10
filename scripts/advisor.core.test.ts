@@ -10,6 +10,17 @@ describe("buildAdvisorPrompt", () => {
   });
 });
 
+describe("buildAdvisorPrompt with upskilling", () => {
+  it("embeds the upskilling plan and asks to align coaching with it", () => {
+    const p = buildAdvisorPrompt(src as any, "## ops-tools\n- [ ] publier sur npm");
+    expect(p).toContain("publier sur npm");
+    expect(p.toLowerCase()).toContain("upskilling");
+  });
+  it("stays valid without an upskilling plan", () => {
+    expect(buildAdvisorPrompt(src as any)).not.toContain("upskilling plan below");
+  });
+});
+
 describe("renderInsights", () => {
   it("renders titled markdown sections", () => {
     const md = renderInsights([{ title: "Jobs", body: "- one" }]);
