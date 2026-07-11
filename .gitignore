@@ -1,0 +1,8 @@
+node_modules
+dist
+.turbo
+.env
+_archives/
+docs/career_insights.md
+apps/web/.astro
+.superpowers/

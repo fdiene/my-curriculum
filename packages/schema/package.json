@@ -1,0 +1,14 @@
+{
+  "name": "@profile/schema",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --emitDeclarationOnly --outDir dist"
+  },
+  "dependencies": { "zod": "^3.23.8" },
+  "devDependencies": { "typescript": "^5.5.0", "bun-types": "^1.1.0" }
+}

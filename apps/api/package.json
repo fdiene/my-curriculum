@@ -1,0 +1,24 @@
+{
+  "name": "@profile/api",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/app.ts",
+  "exports": { ".": "./src/app.ts" },
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@profile/schema": "workspace:*",
+    "@profile/core": "workspace:*",
+    "elysia": "^1.1.0",
+    "@elysiajs/cors": "^1.1.0",
+    "@elysiajs/swagger": "^1.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "bun-types": "^1.1.0"
+  }
+}

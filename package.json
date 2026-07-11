@@ -1,0 +1,21 @@
+{
+  "name": "my-curriculum",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.3.14",
+  "workspaces": ["packages/*", "apps/*", "scripts"],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "api:dev": "bun --cwd=apps/api run dev",
+    "translate": "bun scripts/generate-translations.ts",
+    "advise": "bun scripts/career-advisor.ts",
+    "lighthouse": "bunx lighthouse http://localhost:4321 --quiet --chrome-flags=--headless --only-categories=performance,accessibility,best-practices,seo"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.5.0"
+  }
+}
