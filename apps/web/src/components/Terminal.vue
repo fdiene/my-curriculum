@@ -91,6 +91,10 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
         </div>
         <p class="title mono">{{ (prof.person as any).title }}</p>
         <p v-if="(prof.person as any).mobility" class="mobility">{{ (prof.person as any).mobility }}</p>
+        <p v-if="(prof.person as any).links?.linkedin || (prof.person as any).links?.email" class="contact mono">
+          <a v-if="(prof.person as any).links.linkedin" :href="(prof.person as any).links.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a v-if="(prof.person as any).links.email" :href="`mailto:${(prof.person as any).links.email}`">Email</a>
+        </p>
         <p class="summary" :key="p.role.value + p.lang.value">{{ prof.executiveSummary }}</p>
 
         <SectionBlock title="Projects" :curlPath="`/v1/projects?role=${p.role.value}&lang=${p.lang.value}`" @copycurl="onCopyCurl">
@@ -133,7 +137,10 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
 .avatar:hover { filter: grayscale(0); }
 h1 { font-size: 2.2rem; margin: 0; }
 .title { color: var(--accent-live); margin: 0.2rem 0 0.2rem; }
-.mobility { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 1rem; }
+.mobility { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 0.4rem; }
+.contact { display: flex; gap: 0.9rem; margin: 0 0 1rem; font-size: 0.8rem; }
+.contact a { color: var(--text-muted); text-decoration: none; border-bottom: 1px dashed var(--border); }
+.contact a:hover { color: var(--text); border-color: var(--text); }
 .summary { font-size: 1.05rem; max-width: 46rem; transition: opacity 0.2s; animation: fadeIn 0.2s ease-out; }
 @keyframes fadeIn { from { opacity: 0; } }
 .cards { display: grid; gap: 1rem; }
