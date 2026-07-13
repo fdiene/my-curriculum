@@ -8,6 +8,15 @@ async function get(path: string, headers?: Record<string, string>) {
 }
 
 describe("routes", () => {
+  it("GET / returns a welcome index with docs link and endpoint list", async () => {
+    const { status, body } = await get("/");
+    expect(status).toBe(200);
+    expect(typeof body.name).toBe("string");
+    expect(body.docs).toBe("/swagger");
+    expect(Array.isArray(body.endpoints)).toBe(true);
+    expect(body.endpoints).toContain("/health");
+    expect(body.endpoints).toContain("/v1/profile/build");
+  });
   it("GET /health", async () => {
     expect((await get("/health")).body).toEqual({ status: "ok" });
   });

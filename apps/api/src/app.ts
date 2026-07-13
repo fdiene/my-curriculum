@@ -25,6 +25,18 @@ export const app = new Elysia()
   .trace(async ({ onHandle }) => {
     onHandle(({ begin, onStop }) => onStop(({ end }) => recordLatency(end - begin)));
   })
+  .get("/", () => ({
+    name: "Fadel Diène : Profile Engine API",
+    docs: "/swagger",
+    endpoints: [
+      "/health",
+      "/v1/profile/build",
+      "/v1/skills",
+      "/v1/projects",
+      "/v1/projects/:id",
+      "/v1/metrics",
+    ],
+  }))
   .get("/health", () => ({ status: "ok" }))
   .get("/v1/profile/build", ({ query, headers }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
