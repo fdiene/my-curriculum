@@ -12,7 +12,7 @@ services:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - UPTIME_PCT=${UPTIME_PCT:-99.9}
     networks:
-      - traefik
+      - seo-prod-network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.profile-api.rule=Host(`api.fdiene.com`)"
@@ -21,5 +21,5 @@ services:
       - "traefik.http.services.profile-api.loadbalancer.server.port=3000"
 
 networks:
-  traefik:
+  seo-prod-network:
     external: true

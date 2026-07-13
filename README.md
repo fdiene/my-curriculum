@@ -53,4 +53,4 @@ None of these are committed to git — populate them via your shell, a local
 ## Deploy
 - **web:** `bun --cwd=apps/web run build` → publish `apps/web/dist` to the CDN (`fdiene.com`), set `PUBLIC_API_URL=https://api.fdiene.com`.
   - **Audit:** run Lighthouse against the preview build: `bun --cwd=apps/web run preview &` then `bun run lighthouse` (targets: performance ≥95, accessibility ≥95, best-practices ≥95, seo ≥95). Non-blocking in v1.
-- **api:** on the VPS, `docker compose -f infra/docker-compose.yml up -d --build` (joins the external `traefik` network; TLS via Let's Encrypt).
+- **api:** on the VPS, `docker compose -f infra/docker-compose.yml up -d --build` (joins the external `seo-prod-network` network; TLS via Let's Encrypt).
