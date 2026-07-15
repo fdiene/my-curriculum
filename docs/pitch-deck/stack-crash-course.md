@@ -19,6 +19,13 @@
 - **Question piège** : « Comment garantissez-vous qu'un agent utilisant MCP ne supprime pas accidentellement une base de données de production en cas d'hallucination ? »
 - **La réponse attendue** : Ne pas parler de « meilleur prompt ». La vraie réponse est systémique (Human-in-the-loop / RBAC). « Dans l'architecture Harness, le serveur MCP applique un principe de moindre privilège. Toute requête classifiée comme "mutative" ou "destructive" par le serveur déclenche un hook de validation (Human-in-the-loop) qui requiert une confirmation explicite via l'UI avant l'exécution du code. »
 
+**🔗 Synergie** : MCP est le système nerveux qui relie Harness (le serveur MCP lui-même, avec son routeur LLM et ses guardrails) à Claude Desktop/Claude Code pour interroger ou piloter les autres systèmes (workflows n8n, ops-tools, et demain l'état de la serre dans Omnis-Agri). C'est la même philosophie de sûreté que le tag `ai_safety`/`mcp` du Profile Engine : aucune action physique ou destructive ne s'exécute sans validation explicite.
+
+**📚 Ressources Gold** :
+- Spécification officielle : [modelcontextprotocol.io](https://modelcontextprotocol.io)
+- SDKs et exemples de référence : [github.com/modelcontextprotocol](https://github.com/modelcontextprotocol)
+- Certification : aucune certification formelle largement reconnue n'existe encore sur ce protocole récent. La preuve de compétence la plus crédible reste un serveur MCP public et testé (Harness) : c'est l'équivalent d'une certification pratique.
+
 ---
 
 ## 2. LLM-as-a-Judge & Evals (SEOMNIX)
@@ -32,6 +39,13 @@
 **🎤 Préparation Entretien** :
 - **Question piège** : « Comment testez-vous la fiabilité de votre propre LLM-as-a-judge dans SEOMNIX ? »
 - **La réponse attendue** : « On évalue l'évaluateur via un Golden Dataset. Je maintiens un jeu de données de 100 exemples (50 articles parfaits, 50 contenant des hallucinations subtiles injectées manuellement). En CI/CD, je fais tourner le juge sur ce dataset. Si sa précision de détection (Recall/F1-Score) chute sous les 98 %, le build CI échoue. Je trace ensuite ces métriques dans Directus. »
+
+**🔗 Synergie** : même logique de garde-fou déterministe que le test-garde typographique du Profile Engine (zéro « — », zéro `[DRAFT]` : un « juge » mécanique très simple, mais avec exactement le même principe : ne jamais laisser passer un contenu non conforme). Et même philosophie de confiance mesurée que les guardrails de Harness : ne jamais faire confiance à une sortie IA sans un contrôle systémique en aval.
+
+**📚 Ressources Gold** :
+- Guide Anthropic sur la construction d'evals : [docs.anthropic.com](https://docs.anthropic.com)
+- Framework open-source de référence pour la méthodologie (grilles, golden datasets) : [github.com/openai/evals](https://github.com/openai/evals)
+- Certification : aucune certification formelle standard sur les Evals à ce jour. La preuve de compétence : le `eval_node` lui-même, en production, avec ses métriques tracées.
 
 ---
 
@@ -47,6 +61,13 @@
 - **Question piège** : « Puisque Zod vérifie déjà les types au runtime sur votre serveur Elysia, pourquoi s'embêter avec TypeScript (Eden) sur le frontend ? Ne fait-on pas le travail deux fois ? »
 - **La réponse attendue** : « Zod protège le serveur contre les données malveillantes au runtime (Security & Validation). Eden protège le développeur contre les fautes de frappe pendant qu'il code (DX & Compile-time). Les deux sont complémentaires. L'objectif de la DX est le "Shift-Left" : découvrir l'erreur d'API dans mon IDE (grâce à Eden) plutôt que dans mes logs serveur en production (grâce à Zod). »
 
+**🔗 Synergie** : Zod est aussi la source de vérité unique du schéma (`packages/schema`), partagée par l'API ET par le fallback statique côté client (`@profile/core`) : c'est ce qui permet au site de reconstruire exactement la même vue si l'API tombe, avec zéro logique métier dupliquée. Tourne nativement sur Bun, dans le même monorepo Turborepo que le reste.
+
+**📚 Ressources Gold** :
+- Documentation officielle Elysia : [elysiajs.com](https://elysiajs.com)
+- Documentation officielle Zod : [zod.dev](https://zod.dev)
+- Certification : aucune certification formelle sur ces outils (trop récents/de niche). La preuve de compétence : l'API en production, typée de bout en bout, avec sa suite de tests.
+
 ---
 
 ## 4. Bun & Turborepo
@@ -61,6 +82,13 @@
 - **Question System Design** : « Dans votre monorepo, vous modifiez l'enum `TargetRole` dans `@profile/schema`. Décrivez l'ordre exact de ce qui se passe dans votre pipeline CI/CD jusqu'à la production. »
 - **La réponse attendue** : « 1. Turborepo détecte le changement dans `schema` grâce au hash des fichiers. 2. Il invalide le cache de `schema`, mais aussi de TOUS les projets qui en dépendent (`api`, `web`, `scripts`). 3. Il lance `bun test` et le typecheck en parallèle sur ces dépendances. 4. Si c'est vert, le pipeline CI déclenche le build de l'image Docker de l'API et la compilation statique d'Astro. 5. L'API est redéployée derrière Traefik avec zéro downtime, et les assets Astro sont poussés sur le CDN. »
 
+**🔗 Synergie** : c'est le socle de tout le reste : les 4 packages du monorepo (`schema`, `core`, `api`, `web`) partagent le même runtime, le même lockfile, et la même pipeline CI/CD. Le déploiement réel (GitHub Actions + Vercel auto-deploy + Docker sur VPS Traefik) repose entièrement sur cette base.
+
+**📚 Ressources Gold** :
+- Documentation officielle Bun : [bun.sh/docs](https://bun.sh/docs)
+- Documentation officielle Turborepo : [turbo.build/repo/docs](https://turbo.build/repo/docs)
+- Certification : aucune certification formelle. La preuve de compétence : le monorepo lui-même, avec sa CI verte et son cache Turborepo fonctionnel.
+
 ---
 
 ## 🏗️ La Question Architecture « Boss Final » (Staff Level)
@@ -73,9 +101,3 @@
 2. **Filtrage (Elysia / Zod)** : « L'API Elysia utilise Zod pour valider strictement la forme des données entrantes. On n'accepte aucun champ non prévu. Si l'input contient des directives d'outrepassage ("ignore previous instructions"), un premier LLM de tri (pas très cher) peut faire office de firewall sémantique. »
 3. **Isolement (LangGraph / MCP)** : « Dans LangGraph, l'agent qui navigue sur le web ou exécute du code via MCP est isolé de l'agent qui génère le texte final. Le modèle qui rédige n'a pas les droits MCP d'exécution. »
 4. **Le Juge Final (Mitigation)** : « C'est la garantie ultime. Le nœud `eval_node` (Claude Haiku) inspecte la sortie finale avec une grille d'évaluation stricte incluant un critère `is_safe`. Si le contenu est flaggé, il est routé vers la file "Reject", l'action de publication n'est pas appelée, et un log de sécurité critique est envoyé. »
-
----
-
-## À compléter (prochaine passe)
-
-Le spec Phase 2 prévoit aussi, pour chaque techno : 🔗 Synergie avec le reste de l'architecture, et 📚 Ressources « Gold » (2 liens doc officielle + certifications). Non couverts par ce premier jet : à ajouter dans une prochaine itération si utile pour la préparation.
