@@ -10,7 +10,7 @@ if (import.meta.main) {
   const client = new Anthropic({ apiKey: key });
   const msg = await client.messages.create({
     model: "claude-opus-4-8",
-    max_tokens: 4096,
+    max_tokens: 8192,
     tools: [{ type: "web_search_20250305", name: "web_search" } as any],
     messages: [{ role: "user", content: buildAdvisorPrompt(resume, upskilling) }],
   });
