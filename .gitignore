@@ -7,3 +7,5 @@ docs/career_insights.md
 docs/admin_dashboard.md
 apps/web/.astro
 .superpowers/
+.vercel
+.env*
