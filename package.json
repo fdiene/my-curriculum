@@ -12,6 +12,7 @@
     "api:dev": "bun --cwd=apps/api run dev",
     "translate": "bun scripts/generate-translations.ts",
     "advise": "bun scripts/career-advisor.ts",
+    "dashboard": "bun scripts/admin-dashboard.ts",
     "lighthouse": "bunx lighthouse http://localhost:4321 --quiet --chrome-flags=--headless --only-categories=performance,accessibility,best-practices,seo"
   },
   "devDependencies": {

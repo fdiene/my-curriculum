@@ -12,6 +12,9 @@
 **Compétences visées : TypeScript avancé (types mappés/conditionnels), release engineering, CDN/Traefik.**
 
 - [ ] Career advisor (`scripts/career-advisor.ts`) : étendre le prompt pour aussi conseiller sur (a) la revalorisation du CV traditionnel PDF/Word (contenu et mise en page), (b) l'optimisation du profil LinkedIn, (c) un pitch généré en fonction d'une offre d'emploi ciblée fournie en entrée. Compétence : prompt engineering appliqué, positionnement carrière.
+  - Spec de contraintes dures (review externe JobsLead/Claudia Baker, 14 juil. 2026, sur le CV PDF actuel 2 pages/88 Ko) : cible 1 page strict, police unique (actuellement plusieurs), 2 couleurs de police max, pas de mise en page en colonnes (parsing ATS), ville+CP sans adresse complète, email+téléphone obligatoires tous les deux, dates mois+année obligatoires sur chaque poste (aucune exception), compétences filtrées 8-15 par offre ciblée (pas un dump statique de `master_data`).
+  - Formulation : reporter en priorité la formulation Profile Engine (plus forte) vers le PDF plutôt que réinventer — ex. bullets DB SQL composites (`master_data.fr.json:118`) et cutover Enovia VPM V4 (`master_data.fr.json:91`).
+  - Gap métriques (confirmé 2026-07-15, aucun chiffre fabriqué) : ni le bullet DB SQL composites ni le bullet cutover Enovia n'ont de métrique chiffrée fiable disponible (owner confirmé aucun chiffre exact connu) — rester qualitatif sur ces deux bullets tant qu'aucune métrique réelle n'est retrouvée.
 - [ ] `LocalizeDeep<T>` : type mappé récursif dans @profile/schema, typer `localize()` et `Profile`, supprimer les `as any` et `ref<any>` (ticket final review). Compétence : type-level programming TS.
 - [ ] Error-state Terminal.vue (gate de lancement) + état vide. Compétence : UX defensive.
 - [ ] Tests metrics manquants : `res.ok`, TTL-hit, header auth, agrégation getMetrics. Compétence : test design HTTP.
