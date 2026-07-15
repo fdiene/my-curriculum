@@ -11,6 +11,7 @@
 
 **Compétences visées : TypeScript avancé (types mappés/conditionnels), release engineering, CDN/Traefik.**
 
+- [ ] Career advisor (`scripts/career-advisor.ts`) : étendre le prompt pour aussi conseiller sur (a) la revalorisation du CV traditionnel PDF/Word (contenu et mise en page), (b) l'optimisation du profil LinkedIn, (c) un pitch généré en fonction d'une offre d'emploi ciblée fournie en entrée. Compétence : prompt engineering appliqué, positionnement carrière.
 - [ ] `LocalizeDeep<T>` : type mappé récursif dans @profile/schema, typer `localize()` et `Profile`, supprimer les `as any` et `ref<any>` (ticket final review). Compétence : type-level programming TS.
 - [ ] Error-state Terminal.vue (gate de lancement) + état vide. Compétence : UX defensive.
 - [ ] Tests metrics manquants : `res.ok`, TTL-hit, header auth, agrégation getMetrics. Compétence : test design HTTP.
