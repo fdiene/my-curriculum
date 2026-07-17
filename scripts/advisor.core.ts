@@ -1,19 +1,39 @@
 import type { ResumeInput } from "@profile/schema";
 
-export function buildAdvisorPrompt(resume: ResumeInput, upskilling?: string): string {
+export function buildAdvisorPrompt(resume: ResumeInput, upskilling?: string, targetJobOffer?: string): string {
   const skills = resume.skills.map((s) => s.label).join(", ");
   const projects = resume.projects.map((p) => `${p.name}: ${p.tagline.en}`).join("; ");
+  const experiences = resume.experiences
+    .map((e) => `${e.role.en} at ${e.org}: ${e.highlights.map((h) => h.en).join(" | ")}`)
+    .join("\n");
+
   const parts = [
     `You are a senior tech career advisor. Analyze this profile for ${resume.person.name}.`,
     `Current title: ${resume.person.title.en}. Location: ${resume.person.location}.`,
     ...(resume.person.mobility ? [`Mobility: ${resume.person.mobility.en}`] : []),
     `Skills: ${skills}.`,
     `Projects: ${projects}.`,
-    `Produce four clearly separated sections:`,
+    `Experience highlights (ground CV/LinkedIn advice in these, never invent stronger wording than what is already here):`,
+    experiences,
+    `Produce seven clearly separated sections:`,
     `1. Matching current job openings (roles + why they fit).`,
     `2. Skill gaps to close (concrete, prioritized).`,
     `3. Positioning strategies (how to sell the profile better).`,
     `4. CV/UX improvement ideas for an API-first web resume.`,
+    `5. Traditional CV (PDF/Word) revalorization. Apply every one of these hard constraints, from a real recruiter review:`,
+    `   - Target 1 page strict (candidate has under 6 years of experience): prioritize information, do not just shrink the font.`,
+    `   - Use a single font across the whole document (currently several fonts are mixed); at most 2 font colors.`,
+    `   - Avoid a multi-column layout: it parses badly in ATS.`,
+    `   - City and postal code only, never a full mailing address.`,
+    `   - Both an email and a phone number must be present.`,
+    `   - Every position needs a month + year start and end date, no exceptions.`,
+    `   - Skills section: filtered and prioritized to 8 to 15 skills for the targeted job offer, never a static dump of the full skills list above.`,
+    `   - For weak bullets, prefer the stronger wording already present in the experience highlights above over inventing new phrasing.`,
+    `   - Never invent a metric (%, duration, volume) that is not already present in the source data; if none exists, say so explicitly and keep the bullet qualitative.`,
+    `6. LinkedIn profile optimization (headline, about section, experience bullets).`,
+    targetJobOffer
+      ? `7. A pitch tailored to this target job offer:\n--- TARGET JOB OFFER BELOW ---\n${targetJobOffer}`
+      : `7. Generic pitch guidance: no target job offer was provided, so give general positioning advice instead of fabricating one.`,
     `Be specific and actionable. Return Markdown with a "## " heading per section.`,
     `Never use the em dash character "—"; use ":" or "-" instead.`,
   ];
