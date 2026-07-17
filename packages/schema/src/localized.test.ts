@@ -1,5 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import { Localized, LocalizedInput, LANGS, Tag, TargetRole } from "./index";
+import type { LocalizeDeep } from "./index";
 
 describe("Localized", () => {
   it("accepts all three languages", () => {
@@ -16,6 +17,29 @@ describe("Localized", () => {
 describe("LocalizedInput", () => {
   it("allows de to be omitted", () => {
     expect(LocalizedInput.parse({ en: "a", fr: "b" })).toEqual({ en: "a", fr: "b" });
+  });
+});
+
+describe("LocalizeDeep (type-level, verified by assignment)", () => {
+  it("collapses a Localized leaf to string, recurses through objects and arrays, leaves plain fields untouched", () => {
+    type Sample = {
+      title: { en: string; fr: string; de: string };
+      mobility?: { en: string; fr: string; de: string };
+      highlights: { en: string; fr: string; de: string }[];
+      links: { linkedin?: string };
+      level: number;
+    };
+    // If LocalizeDeep were wrong, this assignment would fail bun run typecheck.
+    const value: LocalizeDeep<Sample> = {
+      title: "Architect",
+      mobility: "Worldwide",
+      highlights: ["Shipped X", "Shipped Y"],
+      links: { linkedin: "https://linkedin.com/in/x" },
+      level: 5,
+    };
+    expect(value.title).toBe("Architect");
+    expect(value.highlights).toEqual(["Shipped X", "Shipped Y"]);
+    expect(value.level).toBe(5);
   });
 });
 

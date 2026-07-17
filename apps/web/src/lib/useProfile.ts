@@ -13,7 +13,7 @@ const FALLBACK = fallbackJson as unknown as Resume;
 const edenClient: ProfileClient = async (role, lang) => {
   const { data, error } = await api.v1.profile.build.get({ query: { target_role: role, lang } });
   if (error || !data) throw new Error("api error");
-  return data as unknown as Profile;
+  return data;
 };
 
 export function useProfile(

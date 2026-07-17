@@ -18,3 +18,12 @@ export const LocalizedInput = z.object({
   de: z.string().optional(),
 }).strict();
 export type LocalizedInput = z.infer<typeof LocalizedInput>;
+
+/** Recursively replaces every `Localized` leaf in T with `string`, mirroring what `localize()` does at runtime. */
+export type LocalizeDeep<T> = T extends Record<Lang, string>
+  ? string
+  : T extends Array<infer U>
+  ? LocalizeDeep<U>[]
+  : T extends object
+  ? { [K in keyof T]: LocalizeDeep<T[K]> }
+  : T;

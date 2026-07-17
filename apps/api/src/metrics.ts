@@ -25,6 +25,7 @@ export async function fetchCommitCount(fetchImpl: typeof fetch = fetch): Promise
     const headers: Record<string, string> = { "User-Agent": "profile-engine" };
     if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
     const res = await fetchImpl(`https://api.github.com/repos/${repo}/commits?per_page=1`, { headers });
+    if (!res.ok) return 0;
     const link = res.headers.get("Link") ?? "";
     const m = link.match(/[?&]page=(\d+)>;\s*rel="last"/);
     const count = m ? parseInt(m[1]!, 10) : (Array.isArray(await res.clone().json()) ? 1 : 0);

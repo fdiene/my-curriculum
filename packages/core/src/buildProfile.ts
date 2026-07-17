@@ -1,17 +1,17 @@
-import type { Lang, Resume, TargetRole } from "@profile/schema";
+import type { Lang, LocalizeDeep, Resume, TargetRole } from "@profile/schema";
 import { localize } from "./localize";
 import { orderByRole } from "./routing";
 import { yearsOfExperience, injectYears } from "./experience";
 
 export interface Profile {
-  person: unknown;
+  person: LocalizeDeep<Resume["person"]>;
   executiveSummary: string;
-  experiences: unknown;
-  projects: unknown;
-  skills: unknown;
-  certifications: unknown;
-  education: unknown;
-  recommendations: unknown;
+  experiences: LocalizeDeep<Resume["experiences"]>;
+  projects: LocalizeDeep<Resume["projects"]>;
+  skills: LocalizeDeep<Resume["skills"]>;
+  certifications: LocalizeDeep<Resume["certifications"]>;
+  education: LocalizeDeep<Resume["education"]>;
+  recommendations: LocalizeDeep<Resume["recommendations"]>;
 }
 
 export function buildProfile(role: TargetRole, lang: Lang, data: Resume, now: Date = new Date()): Profile {

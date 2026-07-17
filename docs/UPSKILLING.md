@@ -15,9 +15,9 @@
   - Spec de contraintes dures (review externe JobsLead/Claudia Baker, 14 juil. 2026, sur le CV PDF actuel 2 pages/88 Ko) : cible 1 page strict, police unique (actuellement plusieurs), 2 couleurs de police max, pas de mise en page en colonnes (parsing ATS), ville+CP sans adresse complète, email+téléphone obligatoires tous les deux, dates mois+année obligatoires sur chaque poste (aucune exception), compétences filtrées 8-15 par offre ciblée (pas un dump statique de `master_data`).
   - Formulation : reporter en priorité la formulation Profile Engine (plus forte) vers le PDF plutôt que réinventer : ex. bullets DB SQL composites (`master_data.fr.json:118`) et cutover Enovia VPM V4 (`master_data.fr.json:91`).
   - Gap métriques (confirmé 2026-07-15, aucun chiffre fabriqué) : ni le bullet DB SQL composites ni le bullet cutover Enovia n'ont de métrique chiffrée fiable disponible (owner confirmé aucun chiffre exact connu) : rester qualitatif sur ces deux bullets tant qu'aucune métrique réelle n'est retrouvée.
-- [ ] `LocalizeDeep<T>` : type mappé récursif dans @profile/schema, typer `localize()` et `Profile`, supprimer les `as any` et `ref<any>` (ticket final review). Compétence : type-level programming TS.
+- [x] `LocalizeDeep<T>` : type mappé récursif dans @profile/schema, typer `localize()` et `Profile`, supprimer les `as any` et `ref<any>` (ticket final review). Compétence : type-level programming TS. (fait 2026-07-17 : `LocalizeDeep<T>` ajouté, `localize()`/`Profile` typés, `as any` retirés de `Terminal.vue` + cast Eden côté `useProfile.ts` devenu inutile)
 - [ ] Error-state Terminal.vue (gate de lancement) + état vide. Compétence : UX defensive.
-- [ ] Tests metrics manquants : `res.ok`, TTL-hit, header auth, agrégation getMetrics. Compétence : test design HTTP.
+- [x] Tests metrics manquants : `res.ok`, TTL-hit, header auth, agrégation getMetrics. Compétence : test design HTTP. (fait 2026-07-17 : bug réel trouvé au passage, `res.ok` n'était pas vérifié avant parsing du Link header, corrigé + 6 nouveaux tests)
 - [ ] CI : pin Bun 1.3.14 + job `astro build` + badge tests dans README. Compétence : CI hygiene.
 - [ ] Dockerfile `USER bun`, `<html lang>` dynamique. Compétence : hardening.
 - [ ] Push GitHub public + achat domaine + déploiement CDN/VPS. Compétence : mise en production réelle de bout en bout.
