@@ -4,7 +4,7 @@ export function buildAdvisorPrompt(resume: ResumeInput, upskilling?: string, tar
   const skills = resume.skills.map((s) => s.label).join(", ");
   const projects = resume.projects.map((p) => `${p.name}: ${p.tagline.en}`).join("; ");
   const experiences = resume.experiences
-    .map((e) => `${e.role.en} at ${e.org}: ${e.highlights.map((h) => h.en).join(" | ")}`)
+    .map((e) => `${e.role.en} at ${e.org} (${e.period.start} to ${e.period.end ?? "present"}): ${e.highlights.map((h) => h.en).join(" | ")}`)
     .join("\n");
 
   const parts = [

@@ -15,6 +15,12 @@ describe("buildAdvisorPrompt", () => {
     const p = buildAdvisorPrompt(src as any);
     expect(p).toContain("Designed a new SQL database for composite materials");
   });
+
+  it("includes each experience's real start/end dates, so the model never claims dates are missing", () => {
+    const p = buildAdvisorPrompt(src as any);
+    expect(p).toContain("2017-08 to 2018-05");
+    expect(p).toContain("2023-04 to present");
+  });
 });
 
 describe("buildAdvisorPrompt traditional CV constraints", () => {
