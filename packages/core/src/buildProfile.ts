@@ -1,6 +1,7 @@
 import type { Lang, Resume, TargetRole } from "@profile/schema";
 import { localize } from "./localize";
 import { orderByRole } from "./routing";
+import { yearsOfExperience, injectYears } from "./experience";
 
 export interface Profile {
   person: unknown;
@@ -13,12 +14,13 @@ export interface Profile {
   recommendations: unknown;
 }
 
-export function buildProfile(role: TargetRole, lang: Lang, data: Resume): Profile {
+export function buildProfile(role: TargetRole, lang: Lang, data: Resume, now: Date = new Date()): Profile {
   const projects = orderByRole(data.projects, role);
   const experiences = orderByRole(data.experiences, role);
+  const years = yearsOfExperience(data.experiences, now);
   return {
     person: localize(data.person, lang),
-    executiveSummary: data.executiveSummaries[role][lang],
+    executiveSummary: injectYears(data.executiveSummaries[role][lang], years),
     experiences: localize(experiences, lang),
     projects: localize(projects, lang),
     skills: localize(data.skills, lang),

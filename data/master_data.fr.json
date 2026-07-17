@@ -16,8 +16,8 @@
   },
   "executiveSummaries": {
     "ai_dx": {
-      "en": "I spent 7 years securing critical infrastructure in the aerospace sector (Safran, Airbus). Today, I apply that same deterministic rigor to Developer Experience: I build the tooling (Bun CLIs, TS monorepos) and AI pipelines (LLM-as-a-judge Evals, MCP) that empower engineers to iterate and experiment faster, because velocity must never come at the expense of safety.",
-      "fr": "J'ai passé 7 ans à fiabiliser des infrastructures critiques dans l'aérospatial (Safran, Airbus). Aujourd'hui, j'applique cette rigueur déterministe à la Developer Experience : je construis les outils (CLI Bun, monorepos TS) et les pipelines IA (Evals, MCP) qui permettent aux ingénieurs d'itérer et d'expérimenter plus vite, car la vélocité ne doit jamais se faire au détriment de la sécurité."
+      "en": "I spent {{YEARS}} years securing critical infrastructure in the aerospace sector (Safran, Airbus). Today, I apply that same deterministic rigor to Developer Experience: I build the tooling (Bun CLIs, TS monorepos) and AI pipelines (LLM-as-a-judge Evals, MCP) that empower engineers to iterate and experiment faster, because velocity must never come at the expense of safety.",
+      "fr": "J'ai passé {{YEARS}} ans à fiabiliser des infrastructures critiques dans l'aérospatial (Safran, Airbus). Aujourd'hui, j'applique cette rigueur déterministe à la Developer Experience : je construis les outils (CLI Bun, monorepos TS) et les pipelines IA (Evals, MCP) qui permettent aux ingénieurs d'itérer et d'expérimenter plus vite, car la vélocité ne doit jamais se faire au détriment de la sécurité."
     },
     "iot": {
       "en": "In aerospace, no actuator fires without a validated command chain. I bring that discipline to connected systems: edge devices (ESP32/MQTT) where every physical action passes a deterministic AI-judge validation loop before execution, and where system state is observable in plain language from Claude Desktop via MCP.",
@@ -28,8 +28,8 @@
       "fr": "J'ai architecturé des déploiements PLM hybrides cloud/on-premise pour quatre avionneurs (Safran, Airbus, Dassault, Bombardier) : identité unifiée (IAM/SSO) alignée sur les standards groupe, flux middleware à haute disponibilité, cartographies ArchiMate garantissant la traçabilité du besoin métier jusqu'à l'exploitation. Mon métier : rendre les systèmes industriels critiques fiables, sécurisés et auditables."
     },
     "default": {
-      "en": "Information systems architect forged by 7 years in aerospace (Bombardier, Dassault Falcon Jet, Airbus, Safran). My conviction: critical-systems rigor and modern development velocity are not opposites, they reinforce each other. Today I build the developer tooling and AI systems that prove it.",
-      "fr": "Architecte de systèmes d'information forgé par 7 ans d'aéronautique (Bombardier, Dassault Falcon Jet, Airbus, Safran). Ma conviction : la rigueur des systèmes critiques et la vélocité du développement moderne ne s'opposent pas, elles se renforcent. Je construis aujourd'hui le tooling développeur et les systèmes IA qui le prouvent."
+      "en": "Information systems architect forged by {{YEARS}} years in aerospace (Bombardier, Dassault Falcon Jet, Airbus, Safran). My conviction: critical-systems rigor and modern development velocity are not opposites, they reinforce each other. Today I build the developer tooling and AI systems that prove it.",
+      "fr": "Architecte de systèmes d'information forgé par {{YEARS}} ans d'aéronautique (Bombardier, Dassault Falcon Jet, Airbus, Safran). Ma conviction : la rigueur des systèmes critiques et la vélocité du développement moderne ne s'opposent pas, elles se renforcent. Je construis aujourd'hui le tooling développeur et les systèmes IA qui le prouvent."
     }
   },
   "experiences": [
