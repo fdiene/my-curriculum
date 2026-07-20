@@ -20,7 +20,10 @@
 - [x] Tests metrics manquants : `res.ok`, TTL-hit, header auth, agrégation getMetrics. Compétence : test design HTTP. (fait 2026-07-17 : bug réel trouvé au passage, `res.ok` n'était pas vérifié avant parsing du Link header, corrigé + 6 nouveaux tests)
 - [ ] CI : pin Bun 1.3.14 + job `astro build` + badge tests dans README. Compétence : CI hygiene.
 - [ ] Dockerfile `USER bun`, `<html lang>` dynamique. Compétence : hardening.
-- [ ] Push GitHub public + achat domaine + déploiement CDN/VPS. Compétence : mise en production réelle de bout en bout.
+- [x] Push GitHub public + achat domaine + déploiement CDN/VPS. Compétence : mise en production réelle de bout en bout. (fait 2026-07-13/15 : PR #1 mergée sur master public, fdiene.com acheté, API sur VPS + web sur Vercel, tous deux en HTTPS)
+- [ ] `/resume.json` : endpoint JSON Resume schema (format standard machine-readable) exposé par l'API, en complément du rendu HTML/terminal. Compétence : interop standards CV, API design. (suggéré par career-advisor le 2026-07-20)
+- [ ] Cache CDN des réponses API (edge) pour un first paint instantané : aucun cache HTTP aujourd'hui entre Vercel et api.fdiene.com. Compétence : performance web, edge caching. (suggéré par career-advisor le 2026-07-20)
+- [ ] Export CV imprimable multi-format international (France, Suisse, USA, etc.) x multilingue (EN/FR/DE) : le CSS print actuel (`@media print`) ne produit qu'une seule mise en page fixe ; permettre de choisir un gabarit adapté aux conventions locales (photo ou non, adresse, longueur, ordre des sections) croisé avec la langue, puis imprimer/télécharger en PDF. Compétence : mise en page conditionnelle, génération PDF. (demande owner 2026-07-20)
 
 ## ops-tools : statut `building` (objectif : open-source npm)
 
@@ -82,7 +85,7 @@
 
 ## Fil conducteur (ordre suggéré)
 
-1. **Profile Engine → public + déployé** (c'est la vitrine, tout le reste pointe dessus).
+1. **Profile Engine → public + déployé** (c'est la vitrine, tout le reste pointe dessus). (fait 2026-07-15, reste : CI pin/build, Dockerfile hardening, html lang dynamique, error-state Terminal.vue, puis les 3 nouveaux items ci-dessus)
 2. **SEOMNIX eval_node** (gap Evals, le plus différenciant pour Anthropic).
 3. **ops-tools → npm** (gap CLI, artefact public rapide).
 4. **Harness tests + calibration** (profondeur MCP).
