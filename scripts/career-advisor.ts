@@ -40,9 +40,16 @@ if (import.meta.main) {
   }
 
   const textBlock = msg.content.find((b) => b.type === "text");
-  const parseResult = textBlock ? AdvisorReportSchema.safeParse(JSON.parse(textBlock.text)) : null;
-  if (!parseResult?.success) {
-    console.error("Structured output parsing failed; no files were written.", parseResult?.error);
+  let rawJson: unknown;
+  try {
+    rawJson = textBlock ? JSON.parse(textBlock.text) : undefined;
+  } catch (error) {
+    console.error("Structured output was not valid JSON; no files were written.", error);
+    process.exit(1);
+  }
+  const parseResult = AdvisorReportSchema.safeParse(rawJson);
+  if (!parseResult.success) {
+    console.error("Structured output parsing failed; no files were written.", parseResult.error);
     process.exit(1);
   }
   const parsed = parseResult.data;
