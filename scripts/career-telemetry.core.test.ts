@@ -85,6 +85,16 @@ describe("readLastTelemetryLine", () => {
     expect(result?.timestamp).toBe("2026-07-17T00:00:00.000Z");
     expect(result?.market.top_skill_gap).toBe("b");
   });
+
+  it("returns null instead of throwing when the last line is malformed or truncated", () => {
+    const line1 = JSON.stringify({
+      timestamp: "2026-07-01T00:00:00.000Z",
+      upskilling: [],
+      market: { top_lanes: [], top_skill_gap: "a", market_shift_summary: "a" },
+    });
+    const truncated = '{"timestamp":"2026-07-17T00:00:00.000Z","upskilling":[],"market":{"top_lan';
+    expect(readLastTelemetryLine(`${line1}\n${truncated}`)).toBeNull();
+  });
 });
 
 describe("buildTelemetryLine", () => {

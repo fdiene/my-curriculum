@@ -37,7 +37,11 @@ export function diffUpskilling(previous: UpskillingDelta | null, upskillingMarkd
 export function readLastTelemetryLine(jsonlText: string): TelemetryLine | null {
   const lines = jsonlText.split("\n").map((l) => l.trim()).filter(Boolean);
   if (lines.length === 0) return null;
-  return JSON.parse(lines[lines.length - 1]!) as TelemetryLine;
+  try {
+    return JSON.parse(lines[lines.length - 1]!) as TelemetryLine;
+  } catch {
+    return null;
+  }
 }
 
 export function buildTelemetryLine(upskilling: UpskillingDelta, market: MarketTelemetry, now: Date = new Date()): string {
