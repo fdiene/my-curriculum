@@ -1,4 +1,25 @@
 import type { ResumeInput } from "@profile/schema";
+import { z } from "zod";
+
+export const AdvisorReportSchema = z.object({
+  report_markdown: z.string().describe(
+    "The full markdown report: all 7 sections below, each with a \"## \" heading, exactly as instructed."
+  ),
+  telemetry: z.object({
+    top_lanes: z
+      .array(z.string())
+      .max(3)
+      .describe("Up to 3 short labels for the highest-conversion job/market lanes identified in section 1."),
+    top_skill_gap: z.string().describe("A short label for the single highest-priority skill gap identified in section 2."),
+    market_shift_summary: z
+      .string()
+      .describe(
+        "1-2 sentences: what is different about the market or positioning compared to a typical prior analysis of this profile."
+      ),
+  }),
+});
+
+export type AdvisorReport = z.infer<typeof AdvisorReportSchema>;
 
 export function buildAdvisorPrompt(resume: ResumeInput, upskilling?: string, targetJobOffer?: string): string {
   const skills = resume.skills.map((s) => s.label).join(", ");
@@ -36,6 +57,7 @@ export function buildAdvisorPrompt(resume: ResumeInput, upskilling?: string, tar
       : `7. Generic pitch guidance: no target job offer was provided, so give general positioning advice instead of fabricating one.`,
     `Be specific and actionable. Return Markdown with a "## " heading per section.`,
     `Never use the em dash character "—"; use ":" or "-" instead.`,
+    `Your response must be the structured object described by the response schema: the markdown above goes in report_markdown, and you must also populate telemetry (top_lanes, top_skill_gap, market_shift_summary) as a compact, separate synthesis of the same analysis.`,
   ];
   if (upskilling) {
     parts.push(

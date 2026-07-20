@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { buildAdvisorPrompt, renderInsights } from "./advisor.core";
+import { buildAdvisorPrompt, renderInsights, AdvisorReportSchema } from "./advisor.core";
 import src from "../data/master_data.fr.json";
 
 describe("buildAdvisorPrompt", () => {
@@ -20,6 +20,37 @@ describe("buildAdvisorPrompt", () => {
     const p = buildAdvisorPrompt(src as any);
     expect(p).toContain("2017-08 to 2018-05");
     expect(p).toContain("2023-04 to present");
+  });
+});
+
+describe("AdvisorReportSchema", () => {
+  it("parses a valid report_markdown + telemetry payload", () => {
+    const value = AdvisorReportSchema.parse({
+      report_markdown: "## 1. Matching current job openings\n...",
+      telemetry: {
+        top_lanes: ["PLM Solution Architect", "Applied AI Engineer"],
+        top_skill_gap: "Evals",
+        market_shift_summary: "AI-augmented PLM roles are new since the last run.",
+      },
+    });
+    expect(value.telemetry.top_lanes).toHaveLength(2);
+  });
+
+  it("rejects more than 3 top_lanes", () => {
+    expect(() =>
+      AdvisorReportSchema.parse({
+        report_markdown: "x",
+        telemetry: { top_lanes: ["a", "b", "c", "d"], top_skill_gap: "x", market_shift_summary: "x" },
+      })
+    ).toThrow();
+  });
+});
+
+describe("buildAdvisorPrompt structured output instruction", () => {
+  it("tells the model to populate the telemetry object alongside the markdown report", () => {
+    const p = buildAdvisorPrompt(src as any);
+    expect(p.toLowerCase()).toContain("top_lanes");
+    expect(p.toLowerCase()).toContain("telemetry");
   });
 });
 
