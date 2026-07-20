@@ -4,6 +4,7 @@ dist
 .env
 _archives/
 docs/career_insights.md
+docs/career_telemetry.jsonl
 docs/admin_dashboard.md
 apps/web/.astro
 .superpowers/

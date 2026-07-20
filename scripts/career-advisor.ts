@@ -1,6 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
+import { appendFileSync } from "node:fs";
 import type { ResumeInput } from "@profile/schema";
-import { buildAdvisorPrompt, renderInsights } from "./advisor.core";
+import { AdvisorReportSchema, buildAdvisorPrompt, renderInsights } from "./advisor.core";
+import { buildTelemetryLine, diffUpskilling, readLastTelemetryLine } from "./career-telemetry.core";
 
 if (import.meta.main) {
   const key = process.env.ANTHROPIC_API_KEY;
@@ -13,15 +16,42 @@ if (import.meta.main) {
     ? (await Bun.file(jobOfferArg).exists()) ? await Bun.file(jobOfferArg).text() : jobOfferArg
     : undefined;
 
+  const telemetryPath = "docs/career_telemetry.jsonl";
+  const previousJsonl = await Bun.file(telemetryPath).exists() ? await Bun.file(telemetryPath).text() : "";
+  const previousLine = readLastTelemetryLine(previousJsonl);
+  const upskillingDelta = diffUpskilling(previousLine?.upskilling ?? null, upskilling ?? "");
+
   const client = new Anthropic({ apiKey: key });
-  const msg = await client.messages.create({
+  console.log("Calling Anthropic (structured output + web_search, streaming - can take several minutes)...");
+  const startedAt = Date.now();
+  const stream = client.messages.stream({
     model: "claude-opus-4-8",
-    max_tokens: 8192,
-    tools: [{ type: "web_search_20250305", name: "web_search" } as any],
+    max_tokens: 32000,
+    tools: [{ type: "web_search_20260209", name: "web_search" }],
+    output_config: { format: zodOutputFormat(AdvisorReportSchema) },
     messages: [{ role: "user", content: buildAdvisorPrompt(resume, upskilling, targetJobOffer) }],
   });
-  const text = msg.content.filter((b) => b.type === "text").map((b: any) => b.text).join("\n");
-  const md = renderInsights([{ title: "Advisor Report", body: text }]);
+  const msg = await stream.finalMessage();
+  console.log(`API call returned after ${Math.round((Date.now() - startedAt) / 1000)}s (stop_reason=${msg.stop_reason})`);
+
+  if (msg.stop_reason === "max_tokens") {
+    console.error("Response hit the max_tokens ceiling before completing; no files were written.");
+    process.exit(1);
+  }
+
+  const textBlock = msg.content.find((b) => b.type === "text");
+  const parseResult = textBlock ? AdvisorReportSchema.safeParse(JSON.parse(textBlock.text)) : null;
+  if (!parseResult?.success) {
+    console.error("Structured output parsing failed; no files were written.", parseResult?.error);
+    process.exit(1);
+  }
+  const parsed = parseResult.data;
+
+  const md = renderInsights([{ title: "Advisor Report", body: parsed.report_markdown }]);
   await Bun.write("docs/career_insights.md", md);
-  console.log("Wrote docs/career_insights.md (git-ignored)");
+
+  const telemetryLine = buildTelemetryLine(upskillingDelta, parsed.telemetry);
+  appendFileSync(telemetryPath, `${telemetryLine}\n`, "utf8");
+
+  console.log("Wrote docs/career_insights.md and appended docs/career_telemetry.jsonl (both git-ignored)");
 }

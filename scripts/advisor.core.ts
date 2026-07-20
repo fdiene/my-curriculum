@@ -1,5 +1,5 @@
 import type { ResumeInput } from "@profile/schema";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 export const AdvisorReportSchema = z.object({
   report_markdown: z.string().describe(
@@ -8,8 +8,10 @@ export const AdvisorReportSchema = z.object({
   telemetry: z.object({
     top_lanes: z
       .array(z.string())
-      .max(3)
-      .describe("Up to 3 short labels for the highest-conversion job/market lanes identified in section 1."),
+      .describe(
+        "Up to 3 short labels for the highest-conversion job/market lanes identified in section 1. " +
+          "Note: this count is a guideline for you, the model - it is not enforced by the response schema."
+      ),
     top_skill_gap: z.string().describe("A short label for the single highest-priority skill gap identified in section 2."),
     market_shift_summary: z
       .string()

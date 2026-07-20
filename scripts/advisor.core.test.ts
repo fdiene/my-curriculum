@@ -36,13 +36,16 @@ describe("AdvisorReportSchema", () => {
     expect(value.telemetry.top_lanes).toHaveLength(2);
   });
 
-  it("rejects more than 3 top_lanes", () => {
-    expect(() =>
-      AdvisorReportSchema.parse({
-        report_markdown: "x",
-        telemetry: { top_lanes: ["a", "b", "c", "d"], top_skill_gap: "x", market_shift_summary: "x" },
-      })
-    ).toThrow();
+  it("accepts more than 3 top_lanes (the count is a prompt guideline, not a schema constraint)", () => {
+    // Structured Outputs does not enforce JSON Schema array-length constraints (maxItems),
+    // per the SDK's own documented limitations - a real live run confirmed the model can
+    // exceed the "up to 3" guidance. Using .max(3) here would make client.messages.parse()
+    // throw instead of gracefully returning null, so the count stays unenforced locally too.
+    const value = AdvisorReportSchema.parse({
+      report_markdown: "x",
+      telemetry: { top_lanes: ["a", "b", "c", "d"], top_skill_gap: "x", market_shift_summary: "x" },
+    });
+    expect(value.telemetry.top_lanes).toHaveLength(4);
   });
 });
 
