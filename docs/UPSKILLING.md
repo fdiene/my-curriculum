@@ -81,6 +81,14 @@
 - [ ] Intégration Context7 dans le pipeline de délégation. Compétence : injection de docs fraîches.
 - [ ] Étudier l'extraction open-source d'un sous-ensemble (le superviseur anti-bloat est le candidat le plus original). Compétence : packaging OSS.
 
+### Synergie Écosystème / Intégration Pipeline
+
+**Vision architecturale validée (2026-07-21) : faire de `career-advisor.ts` un client du noyau Harness plutôt qu'un script autonome.**
+
+- [ ] **Routage & Télémétrie Financière (Token Economics) :** Remplacer l'appel direct au SDK Anthropic dans `career-advisor.ts` par un appel au routeur interne de `Harness`. Objectif : centraliser les logs d'audit financiers pour calculer le coût exact de l'agent de carrière par mois.
+- [ ] **Exposition MCP (Model Context Protocol) :** Créer un "Tool" dans le serveur MCP de Harness (ex: `read_career_telemetry`) pointant vers `career_telemetry.jsonl`. Objectif : permettre à Claude Desktop de lire directement notre progression technique sans lancer la CLI.
+- [ ] **Guardrails Déclaratifs (Safety) :** Implémenter la policy `@harness/guardrails` dans le pipeline. Objectif : le jour où l'agent gagne la capacité d'écrire (ex: publier sur LinkedIn), toute action de type mutation devra être interceptée par une règle `confirm` nécessitant l'approbation humaine.
+
 ---
 
 ## Fil conducteur (ordre suggéré)
