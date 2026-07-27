@@ -6,6 +6,7 @@ import fallbackJson from "../../../../data/master_data.i18n.json";
 
 export type ProfileStatus = "loading" | "ready" | "error" | "degraded";
 export type ProfileClient = (role: TargetRole, lang: Lang) => Promise<Profile>;
+export type FallbackBuilder = (role: TargetRole, lang: Lang) => Profile;
 
 const FETCH_TIMEOUT_MS = 4000;
 const FALLBACK = fallbackJson as unknown as Resume;
@@ -16,11 +17,14 @@ const edenClient: ProfileClient = async (role, lang) => {
   return data;
 };
 
+const defaultFallbackBuilder: FallbackBuilder = (role, lang) => buildProfile(role, lang, FALLBACK);
+
 export function useProfile(
   initial: { role: TargetRole; lang: Lang },
-  opts: { client?: ProfileClient; timeoutMs?: number } = {},
+  opts: { client?: ProfileClient; timeoutMs?: number; fallbackBuilder?: FallbackBuilder } = {},
 ) {
   const client = opts.client ?? edenClient;
+  const fallbackBuilder = opts.fallbackBuilder ?? defaultFallbackBuilder;
   const timeoutMs = opts.timeoutMs ?? FETCH_TIMEOUT_MS;
   const role = ref<TargetRole>(initial.role);
   const lang = ref<Lang>(initial.lang);
@@ -44,8 +48,12 @@ export function useProfile(
       status.value = "ready";
     } catch {
       if (gen !== generation) return;
-      profile.value = buildProfile(role.value, lang.value, FALLBACK);
-      status.value = "degraded";
+      try {
+        profile.value = fallbackBuilder(role.value, lang.value);
+        status.value = "degraded";
+      } catch {
+        status.value = "error";
+      }
     } finally {
       clearTimeout(timer);
     }

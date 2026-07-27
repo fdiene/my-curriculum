@@ -85,6 +85,13 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
         <div class="skeleton" aria-hidden="true"><div class="sk sk-title" /><div class="sk sk-line" /><div class="sk sk-line" /></div>
       </template>
 
+      <template v-else-if="p.status.value === 'error'">
+        <div class="error-state" role="alert">
+          <p>Unable to load the profile right now, and no static fallback was available either.</p>
+          <button class="retry mono" @click="p.retry()">Retry</button>
+        </div>
+      </template>
+
       <template v-else-if="prof">
         <div class="identity">
           <img v-if="prof.person.avatarUrl" class="avatar" :src="prof.person.avatarUrl" alt="" width="56" height="56" />
@@ -106,13 +113,15 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
         <p class="summary" :key="p.role.value + p.lang.value">{{ prof.executiveSummary }}</p>
 
         <SectionBlock title="Projects" :curlPath="`/v1/projects?role=${p.role.value}&lang=${p.lang.value}`" @copycurl="onCopyCurl">
-          <div ref="cardsEl" class="cards">
+          <p v-if="prof.projects.length === 0" class="empty mono">No projects for this view.</p>
+          <div v-else ref="cardsEl" class="cards">
             <ProjectCard v-for="pr in prof.projects" :key="pr.id" :project="pr" :role="p.role.value" :lang="p.lang.value" @copycurl="onCopyCurl" @open="openDetails" />
           </div>
         </SectionBlock>
 
         <SectionBlock title="Experience" :curlPath="`/v1/profile/build?target_role=${p.role.value}&lang=${p.lang.value}`" @copycurl="onCopyCurl">
-          <ul class="xp">
+          <p v-if="prof.experiences.length === 0" class="empty mono">No experience entries for this view.</p>
+          <ul v-else class="xp">
             <li v-for="e in prof.experiences" :key="e.id">
               <strong>{{ e.role }}</strong><span class="org">, {{ e.org }}</span>
               <p class="xps">{{ e.summary }}</p>
@@ -124,7 +133,8 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
         </SectionBlock>
 
         <SectionBlock title="Skills" :curlPath="`/v1/skills?lang=${p.lang.value}`" @copycurl="onCopyCurl">
-          <ul class="stack mono skills">
+          <p v-if="prof.skills.length === 0" class="empty mono">No skills for this view.</p>
+          <ul v-else class="stack mono skills">
             <li v-for="s in prof.skills" :key="s.id">{{ s.label }}</li>
           </ul>
         </SectionBlock>
@@ -159,6 +169,9 @@ h1 { font-size: 2.2rem; margin: 0; }
 .skills { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; list-style: none; }
 .skills li { font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; padding: 0.15rem 0.5rem; }
 .toast { position: fixed; bottom: 4rem; right: 1.5rem; background: var(--surface); border: 1px solid var(--accent-live); color: var(--accent-live); padding: 0.4rem 0.8rem; border-radius: 6px; }
+.error-state { padding: 2rem 0; }
+.error-state .retry { margin-top: 0.75rem; background: none; border: 1px dashed var(--border); color: var(--text-muted); border-radius: 4px; font-size: 0.8rem; padding: 0.3rem 0.7rem; cursor: pointer; }
+.empty { color: var(--text-muted); font-size: 0.85rem; }
 .skeleton .sk { background: var(--surface); border-radius: 6px; margin: 0.6rem 0; animation: pulse 1.2s infinite; }
 .sk-title { height: 2.2rem; width: 40%; } .sk-line { height: 1rem; width: 80%; }
 @keyframes pulse { 50% { opacity: 0.5; } }

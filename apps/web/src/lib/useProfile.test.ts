@@ -27,6 +27,25 @@ describe("useProfile", () => {
     expect(p.status.value).toBe("degraded");
   });
 
+  it("reaches error when both the API and the static fallback fail", async () => {
+    const brokenFallback = () => { throw new Error("fallback bundle corrupt"); };
+    const p = useProfile({ role: "default", lang: "en" }, { client: boom, fallbackBuilder: brokenFallback });
+    await p.fetchProfile();
+    expect(p.status.value).toBe("error");
+    expect(p.profile.value).toBeNull();
+  });
+
+  it("recovers from error to ready once the API comes back", async () => {
+    const brokenFallback = () => { throw new Error("fallback bundle corrupt"); };
+    let calls = 0;
+    const flaky = async () => { calls++; if (calls === 1) throw new Error("down"); return ok(); };
+    const p = useProfile({ role: "default", lang: "en" }, { client: flaky, fallbackBuilder: brokenFallback });
+    await p.fetchProfile();
+    expect(p.status.value).toBe("error");
+    await p.retry();
+    expect(p.status.value).toBe("ready");
+  });
+
   it("retry returns to ready when the API recovers", async () => {
     let calls = 0;
     const flaky = async (r: any, l: any) => { calls++; if (calls === 1) throw new Error("down"); return ok(); };
