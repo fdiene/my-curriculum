@@ -14,4 +14,5 @@ COPY data/master_data.i18n.json data/master_data.i18n.json
 ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
+USER bun
 CMD ["bun", "apps/api/src/index.ts"]
