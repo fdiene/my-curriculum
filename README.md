@@ -1,5 +1,7 @@
 # Fadel Diène — API-First Profile Engine
 
+[![CI](https://github.com/fdiene/my-curriculum/actions/workflows/ci.yml/badge.svg)](https://github.com/fdiene/my-curriculum/actions/workflows/ci.yml)
+
 Bun + Elysia monorepo serving an i18n (EN/FR/DE), role-aware résumé.
 `fdiene.com` (Astro/Vue) consumes `api.fdiene.com` (Elysia) with end-to-end
 types via Eden.
