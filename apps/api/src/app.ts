@@ -13,11 +13,23 @@ const roleOf = (v?: string) =>
 
 const ALLOWED_ORIGIN = process.env.WEB_ORIGIN ?? "https://fdiene.com";
 
+// Toggle the "www." prefix so both the bare and www hosts of the same site are allowed,
+// since browsers treat them as distinct origins for CORS purposes.
+function wwwVariant(origin: string): string {
+  const match = origin.match(/^https:\/\/(www\.)?(.*)$/);
+  if (!match) return origin;
+  const [, hasWww, rest] = match;
+  return hasWww ? `https://${rest}` : `https://www.${rest}`;
+}
+
 // Localhost is only useful for local dev/testing; never allow it as a CORS origin in production.
-const CORS_ORIGINS: (string | RegExp)[] =
-  process.env.NODE_ENV !== "production"
-    ? [ALLOWED_ORIGIN, /^http:\/\/localhost:\d+$/]
-    : [ALLOWED_ORIGIN];
+export function resolveCorsOrigins(webOrigin: string, nodeEnv: string | undefined): (string | RegExp)[] {
+  return nodeEnv !== "production"
+    ? [webOrigin, /^http:\/\/localhost:\d+$/]
+    : [webOrigin, wwwVariant(webOrigin)];
+}
+
+const CORS_ORIGINS = resolveCorsOrigins(ALLOWED_ORIGIN, process.env.NODE_ENV);
 
 export const app = new Elysia()
   .use(cors({ origin: CORS_ORIGINS, methods: ["GET"], credentials: false }))

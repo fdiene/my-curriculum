@@ -1,11 +1,34 @@
 import { describe, expect, it } from "bun:test";
-import { app } from "./app";
+import { app, resolveCorsOrigins } from "./app";
 import { latencySummary } from "./metrics";
 
 async function get(path: string, headers?: Record<string, string>) {
   const res = await app.handle(new Request(`http://localhost${path}`, { headers }));
   return { status: res.status, body: await res.json() };
 }
+
+describe("resolveCorsOrigins", () => {
+  it("allows both the bare and www hosts in production, given a bare configured origin", () => {
+    expect(resolveCorsOrigins("https://fdiene.com", "production")).toEqual([
+      "https://fdiene.com",
+      "https://www.fdiene.com",
+    ]);
+  });
+
+  it("allows both the bare and www hosts in production, given a www configured origin", () => {
+    expect(resolveCorsOrigins("https://www.fdiene.com", "production")).toEqual([
+      "https://www.fdiene.com",
+      "https://fdiene.com",
+    ]);
+  });
+
+  it("allows localhost instead of the www variant outside production", () => {
+    const origins = resolveCorsOrigins("https://fdiene.com", "development");
+    expect(origins[0]).toBe("https://fdiene.com");
+    expect(origins[1]).toBeInstanceOf(RegExp);
+    expect((origins[1] as RegExp).test("http://localhost:4321")).toBe(true);
+  });
+});
 
 describe("routes", () => {
   it("GET / returns a welcome index with docs link and endpoint list", async () => {
