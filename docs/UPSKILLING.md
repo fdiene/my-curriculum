@@ -25,7 +25,7 @@
 - [ ] Cache CDN des réponses API (edge) pour un first paint instantané : aucun cache HTTP aujourd'hui entre Vercel et api.fdiene.com. Compétence : performance web, edge caching. (suggéré par career-advisor le 2026-07-20)
 - [ ] Export CV imprimable multi-format international (France, Suisse, USA, etc.) x multilingue (EN/FR/DE) : le CSS print actuel (`@media print`) ne produit qu'une seule mise en page fixe ; permettre de choisir un gabarit adapté aux conventions locales (photo ou non, adresse, longueur, ordre des sections) croisé avec la langue, puis imprimer/télécharger en PDF. Compétence : mise en page conditionnelle, génération PDF. (demande owner 2026-07-20)
 
-## ops-tools : statut `building` (objectif : open-source npm)
+## ops-tools : statut `live` (publié sur npm, `@fdiene/ops-tools@0.1.0`)
 
 **Compétences visées : CLI design, publication npm, hygiène supply-chain.**
 
@@ -34,7 +34,7 @@
 - [ ] Télémétrie locale : tracer la durée de chaque commande (fichier JSONL local). Compétence : observabilité DX.
 - [ ] Suite Vitest + CI GitHub Actions verte. Compétence : testing infra.
 - [ ] `package.json` bin + publication `@fdiene/ops-tools` sur npm (provenance, README avec GIFs vhs/asciinema). Compétence : release npm publique.
-- [ ] Une fois public : renseigner `links.repo` dans master_data et passer le badge à `live`.
+- [x] Une fois public : renseigner `links.repo` dans master_data et passer le badge à `live`. (fait 2026-08-02, action côté my-curriculum : `links.repo` = `https://github.com/Omnis-Ltd/ops-tools`, status `live`, description/stack corrigées en même temps - le texte précédent décrivait un CLI aspirationnel jamais construit tel quel : `commander.js`/`Vitest`/télémétrie locale n'existent pas dans le package publié, qui utilise en réalité `bun test` + `zod`, gitleaks tourne en CI et non en pre-commit ; traduction DE écrite manuellement par le contrôleur, review owner en attente comme pour tout contenu DE hors pipeline)
 
 ## SEOMNIX Empire : statut `live` (pipeline) ; Evals à implémenter
 

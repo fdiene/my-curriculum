@@ -203,13 +203,13 @@
         "fr": "Le CLI qui onboarde, opère et sécurise tout mon écosystème de dépôts."
       },
       "description": {
-        "en": "Internal TypeScript CLI (ops maintenance, brief generation, repo scanning) designed for developer adoption: integrated help, local telemetry tracing every command's duration, and shift-left security with gitleaks pre-commit hooks that block any key leak before it reaches git. Currently being hardened (cleanup, Vitest suite) for an open-source npm release as @fdiene/ops-tools.",
-        "fr": "CLI TypeScript interne (maintenance ops, génération de briefs, scan de dépôts) conçu pour l'adoption développeur : aide intégrée, télémétrie locale traçant la durée de chaque commande, et sécurité shift-left avec des hooks pre-commit gitleaks qui bloquent toute fuite de clé avant d'atteindre git. En cours de durcissement (nettoyage, suite Vitest) pour une publication open-source sur npm en @fdiene/ops-tools."
+        "en": "Published npm CLI (@fdiene/ops-tools) that runs config-driven preflight health checks across my personal infrastructure: Docker containers on a VPS, an MCP server, .env completeness, and backlog progress, all defined in a single manifest. Dual-distributed as a zero-dependency compiled binary and an npm package, tested with Bun's native test runner, with gitleaks scanning every push in CI. A pre-publish security spike caught a real leak risk before it shipped: without an explicit files allowlist, npm pack was bundling 76 internal files (roadmap, backlog, VPS topology) through the .gitignore fallback.",
+        "fr": "CLI publié sur npm (@fdiene/ops-tools) qui exécute des vérifications de santé préflight pilotées par configuration sur mon infrastructure personnelle : conteneurs Docker sur un VPS, serveur MCP, complétude des fichiers .env et avancement des backlogs, le tout défini dans un seul manifeste. Double distribution : binaire compilé zéro dépendance et package npm, testé avec le test runner natif de Bun, avec un scan gitleaks à chaque push en CI. Un spike de sécurité avant publication a évité une fuite réelle : sans allowlist `files` explicite, npm pack embarquait 76 fichiers internes (roadmap, backlog, topologie VPS) via le fallback sur .gitignore."
       },
-      "stack": ["Bun", "TypeScript", "commander.js", "Vitest", "gitleaks"],
+      "stack": ["Bun", "TypeScript", "Zod", "gitleaks"],
       "tags": ["dx_tooling", "devsecops"],
-      "links": {},
-      "status": "building",
+      "links": { "repo": "https://github.com/Omnis-Ltd/ops-tools" },
+      "status": "live",
       "featured_for": ["ai_dx"]
     },
     {
