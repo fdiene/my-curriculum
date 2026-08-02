@@ -7,6 +7,7 @@ import { resolveLocale } from "./locale";
 import { localize, orderByRole } from "@profile/core";
 import { buildProfile } from "./profile";
 import { getMetrics, recordLatency } from "./metrics";
+import { toJsonResume } from "./resume";
 
 const roleOf = (v?: string) =>
   (TargetRole.options as readonly string[]).includes(v ?? "") ? (v as any) : "default";
@@ -47,12 +48,18 @@ export const app = new Elysia()
       "/v1/projects",
       "/v1/projects/:id",
       "/v1/metrics",
+      "/resume.json",
     ],
   }))
   .get("/health", () => ({ status: "ok" }))
   .get("/v1/profile/build", ({ query, headers }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
     return buildProfile(roleOf(query.target_role), lang);
+  }, { query: t.Object({ target_role: t.Optional(t.String()), lang: t.Optional(t.String()) }) })
+  .get("/resume.json", ({ query, headers }) => {
+    const lang = resolveLocale(query.lang, headers["accept-language"]);
+    const profile = buildProfile(roleOf(query.target_role), lang);
+    return toJsonResume(profile);
   }, { query: t.Object({ target_role: t.Optional(t.String()), lang: t.Optional(t.String()) }) })
   .get("/v1/skills", ({ query, headers }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
