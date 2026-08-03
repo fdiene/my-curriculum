@@ -4,7 +4,7 @@ import { latencySummary } from "./metrics";
 
 async function get(path: string, headers?: Record<string, string>) {
   const res = await app.handle(new Request(`http://localhost${path}`, { headers }));
-  return { status: res.status, body: await res.json() };
+  return { status: res.status, body: await res.json(), headers: res.headers };
 }
 
 describe("resolveCorsOrigins", () => {
@@ -83,5 +83,34 @@ describe("routes", () => {
     const { status, body } = await get("/v1/projects/nope");
     expect(status).toBe(404);
     expect(body.error).toBe("project_not_found");
+  });
+});
+
+describe("cache headers", () => {
+  const CACHEABLE_PATHS = [
+    "/v1/profile/build",
+    "/resume.json",
+    "/v1/skills",
+    "/v1/projects",
+    "/v1/projects/profile-engine",
+  ];
+
+  for (const path of CACHEABLE_PATHS) {
+    it(`GET ${path} is publicly cacheable with stale-while-revalidate`, async () => {
+      const { headers } = await get(path);
+      const cacheControl = headers.get("cache-control");
+      expect(cacheControl).toContain("public");
+      expect(cacheControl).toContain("stale-while-revalidate");
+    });
+  }
+
+  it("GET /v1/projects/:id 404 is not cached", async () => {
+    const { headers } = await get("/v1/projects/nope");
+    expect(headers.get("cache-control")).toBeNull();
+  });
+
+  it("GET /health and /v1/metrics are not cached (real-time data)", async () => {
+    expect((await get("/health")).headers.get("cache-control")).toBeNull();
+    expect((await get("/v1/metrics")).headers.get("cache-control")).toBeNull();
   });
 });

@@ -32,6 +32,11 @@ export function resolveCorsOrigins(webOrigin: string, nodeEnv: string | undefine
 
 const CORS_ORIGINS = resolveCorsOrigins(ALLOWED_ORIGIN, process.env.NODE_ENV);
 
+// These responses are pure functions of (role, lang) over data that only changes on
+// redeploy, so they are safe to cache publicly: fast on repeat visits, and revalidated
+// in the background rather than blocking once stale.
+const RESUME_DATA_CACHE_CONTROL = "public, max-age=60, stale-while-revalidate=3600";
+
 export const app = new Elysia()
   .use(cors({ origin: CORS_ORIGINS, methods: ["GET"], credentials: false }))
   .use(swagger({ path: "/swagger", documentation: { info: { title: "Profile Engine API", version: "1.0.0" } } }))
@@ -52,28 +57,33 @@ export const app = new Elysia()
     ],
   }))
   .get("/health", () => ({ status: "ok" }))
-  .get("/v1/profile/build", ({ query, headers }) => {
+  .get("/v1/profile/build", ({ query, headers, set }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
+    set.headers["cache-control"] = RESUME_DATA_CACHE_CONTROL;
     return buildProfile(roleOf(query.target_role), lang);
   }, { query: t.Object({ target_role: t.Optional(t.String()), lang: t.Optional(t.String()) }) })
-  .get("/resume.json", ({ query, headers }) => {
+  .get("/resume.json", ({ query, headers, set }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
     const profile = buildProfile(roleOf(query.target_role), lang);
+    set.headers["cache-control"] = RESUME_DATA_CACHE_CONTROL;
     return toJsonResume(profile);
   }, { query: t.Object({ target_role: t.Optional(t.String()), lang: t.Optional(t.String()) }) })
-  .get("/v1/skills", ({ query, headers }) => {
+  .get("/v1/skills", ({ query, headers, set }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
     const filtered = query.tag ? resume.skills.filter((s) => s.tags.includes(query.tag as Tag)) : resume.skills;
+    set.headers["cache-control"] = RESUME_DATA_CACHE_CONTROL;
     return localize(filtered, lang);
   }, { query: t.Object({ lang: t.Optional(t.String()), tag: t.Optional(t.String()) }) })
-  .get("/v1/projects", ({ query, headers }) => {
+  .get("/v1/projects", ({ query, headers, set }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
+    set.headers["cache-control"] = RESUME_DATA_CACHE_CONTROL;
     return localize(orderByRole(resume.projects, roleOf(query.role)), lang);
   }, { query: t.Object({ lang: t.Optional(t.String()), role: t.Optional(t.String()) }) })
   .get("/v1/projects/:id", ({ params, query, headers, set }) => {
     const lang = resolveLocale(query.lang, headers["accept-language"]);
     const project = resume.projects.find((p) => p.id === params.id);
     if (!project) { set.status = 404; return { error: "project_not_found" }; }
+    set.headers["cache-control"] = RESUME_DATA_CACHE_CONTROL;
     return localize(project, lang);
   }, { query: t.Object({ lang: t.Optional(t.String()) }) })
   .get("/v1/metrics", () => getMetrics());
