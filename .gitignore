@@ -6,6 +6,7 @@ _archives/
 docs/career_insights.md
 docs/career_telemetry.jsonl
 docs/admin_dashboard.md
+docs/applications/
 apps/web/.astro
 .superpowers/
 .vercel
