@@ -17,6 +17,7 @@
 - Every new pure function/config lives in a `.ts`/`.core.ts`-equivalent file with a co-located `bun:test` file, matching `buildProfile.ts`/`buildProfile.test.ts`. Vue components (`TemplateSwitcher.vue`, `CvDocument.vue`) and the Astro route (`cv.astro`) do not get dedicated test files, matching the existing convention (`LangSwitcher.vue`, `RoleSwitcher.vue`, `SectionBlock.vue` have none) - verified instead via `bun run build` and a live dev-server smoke check in the final task.
 - Exact template values (do not deviate): France `{photo: false, maxExperiences: 4, maxHighlightsPerExperience: 3, documentLabel: "Curriculum Vitae"}`; Switzerland `{photo: true, maxExperiences: 5, maxHighlightsPerExperience: 4, documentLabel: "Curriculum Vitae"}`; USA `{photo: false, maxExperiences: 3, maxHighlightsPerExperience: 2, documentLabel: "Resume"}`.
 - Default template when `?template=` is absent or invalid: infer from `lang` - `fr -> fr`, `de -> ch`, `en -> us`. An explicit, valid `?template=` value always wins over this inference.
+- The CV includes an "Independent Projects" section, capped at 3, compact (title, stack, one-line tagline). It reuses `profile.projects` as already ordered by `buildProfile`'s existing internal `orderByRole` call - no new sorting logic.
 
 ---
 
@@ -29,7 +30,7 @@
 
 **Interfaces:**
 - Consumes: `buildProfile(role, lang, data, now?)` and `Profile` from `./buildProfile`; `orderByRole` from `./routing`; `localize` from `./localize`; `Lang`, `Resume`, `TargetRole` from `@profile/schema`.
-- Produces: `CvTemplateId` (`"fr" | "ch" | "us"`), `CvTemplateConfig` interface, `CV_TEMPLATES` constant, `CvView` interface, `buildCvView(template, role, lang, data)` function - all re-exported from `@profile/core` for Task 2 and Task 4 to import.
+- Produces: `CvTemplateId` (`"fr" | "ch" | "us"`), `CvTemplateConfig` interface, `CV_TEMPLATES` constant, `CvView` interface, `buildCvView(template, role, lang, data)` function - all re-exported from `@profile/core` for Task 2 and Task 4 to import. `CvView.projects` is capped at 3, already role-ordered.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -37,7 +38,7 @@ Create `packages/core/src/buildCv.test.ts`:
 
 ```ts
 import { describe, expect, it } from "bun:test";
-import type { Resume, Tag } from "@profile/schema";
+import type { Resume, Tag, TargetRole } from "@profile/schema";
 import { buildCvView, CV_TEMPLATES } from "./buildCv";
 
 const L = { en: "x", fr: "x", de: "x" };
@@ -58,6 +59,20 @@ function makeExperience(id: string, highlightCount: number): Resume["experiences
 
 function makeSkill(id: string, level: number, tags: Tag[] = []): Resume["skills"][number] {
   return { id, label: `Skill ${id}`, category: "cat", level, tags };
+}
+
+function makeProject(id: string, tags: Tag[] = [], featuredFor: TargetRole[] = []): Resume["projects"][number] {
+  return {
+    id,
+    name: `Project ${id}`,
+    tagline: L,
+    description: L,
+    stack: ["TypeScript"],
+    tags,
+    links: {},
+    status: "live",
+    featured_for: featuredFor,
+  };
 }
 
 function makeResume(overrides: Partial<Resume> = {}): Resume {
@@ -123,6 +138,19 @@ describe("buildCvView", () => {
     expect(view.skills.length).toBe(15);
     expect(view.skills[0]?.id).toBe("s19");
   });
+
+  it("caps projects at 3 and keeps buildProfile's existing role ordering", () => {
+    const projects = [
+      makeProject("p0"),
+      makeProject("p1"),
+      makeProject("p2", ["plm"]),
+      makeProject("p3"),
+      makeProject("p4", [], ["plm_architect"]),
+    ];
+    const view = buildCvView("us", "plm_architect", "en", makeResume({ projects }));
+    expect(view.projects.length).toBe(3);
+    expect(view.projects[0]?.id).toBe("p4");
+  });
 });
 ```
 
@@ -157,6 +185,7 @@ export const CV_TEMPLATES: Record<CvTemplateId, CvTemplateConfig> = {
 };
 
 const MAX_SKILLS = 15;
+const MAX_PROJECTS = 3;
 
 export interface CvView extends Profile {
   documentLabel: string;
@@ -174,6 +203,7 @@ export function buildCvView(template: CvTemplateId, role: TargetRole, lang: Lang
     ...profile,
     person: { ...profile.person, avatarUrl: config.photo ? profile.person.avatarUrl : undefined },
     experiences,
+    projects: profile.projects.slice(0, MAX_PROJECTS),
     skills,
     documentLabel: config.documentLabel,
   };
@@ -191,7 +221,7 @@ export * from "./buildCv";
 - [ ] **Step 5: Run tests to verify they pass**
 
 Run: `cd "c:/Users/delfa/git/Workspaces/my-curriculum" && bun test packages/core/src/buildCv.test.ts`
-Expected: PASS, 6/6.
+Expected: PASS, 7/7.
 
 - [ ] **Step 6: Typecheck**
 
@@ -430,6 +460,14 @@ function printCv() { window.print(); }
         </div>
       </section>
 
+      <section v-if="view.projects.length">
+        <h2>Independent Projects</h2>
+        <div v-for="pr in view.projects" :key="pr.id" class="entry">
+          <div class="entry-head"><strong>{{ pr.name }}</strong> <span class="dates">{{ pr.stack.join(", ") }}</span></div>
+          <p class="project-line">{{ pr.tagline }}</p>
+        </div>
+      </section>
+
       <section v-if="view.education.length">
         <h2>Education</h2>
         <div v-for="ed in view.education" :key="ed.id" class="entry">
@@ -473,6 +511,7 @@ h2 { font-size: 1.1rem; border-bottom: 1px solid #ccc; padding-bottom: 0.2rem; m
 .entry { margin-bottom: 0.7rem; break-inside: avoid; }
 .entry-head { font-size: 0.92rem; }
 .dates { color: #555; font-size: 0.82rem; }
+.project-line { margin: 0.2rem 0 0; font-size: 0.85rem; color: #333; }
 ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
 li { font-size: 0.85rem; margin-bottom: 0.2rem; }
 .skills { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -492,7 +531,7 @@ Expected: 0 errors. (No dedicated test file - verified live in Task 5.)
 
 ```bash
 git add apps/web/src/components/CvDocument.vue
-git commit -m "feat(web): add CvDocument component with print button and 3-section layout"
+git commit -m "feat(web): add CvDocument component with print button and section layout"
 ```
 
 ---
@@ -570,7 +609,8 @@ With the dev server running, manually verify in a browser:
 - Switching `LangSwitcher` to `fr` with no explicit `?template=` in the URL flips the default template to `fr` (Curriculum Vitae label, no photo).
 - Switching `LangSwitcher` to `de` flips the default template to `ch` (Curriculum Vitae label, photo visible).
 - Manually clicking `TemplateSwitcher` to `CH` while `lang=en` works (explicit selection overrides the language default), and the resulting URL is `?role=...&lang=en&template=ch`.
-- Clicking "Print / Save as PDF" opens the browser's native print dialog, and the print preview shows: no switchers/button/nav (all `no-print`), single-column ATS-safe layout, correct sections (Experience/Education/Certifications/Skills), plain black-on-white regardless of the site's dark/light theme setting.
+- The "Independent Projects" section shows at most 3 projects (title, stack, one-line tagline), ordered by role relevance (e.g. `plm_architect` shows OMNIS-flagged projects first, matching the existing `orderByRole` behavior already visible on the terminal page).
+- Clicking "Print / Save as PDF" opens the browser's native print dialog, and the print preview shows: no switchers/button/nav (all `no-print`), single-column ATS-safe layout, correct sections (Experience/Independent Projects/Education/Certifications/Skills), plain black-on-white regardless of the site's dark/light theme setting.
 - Stop the dev server afterward.
 
 - [ ] **Step 6: Commit**
