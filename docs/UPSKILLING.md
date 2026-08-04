@@ -30,11 +30,11 @@
 
 **Compétences visées : CLI design, publication npm, hygiène supply-chain.**
 
-- [ ] Passe gitleaks + audit manuel : purger tout secret/donnée sensible de l'historique (BFG si nécessaire). Compétence : nettoyage d'historique git.
-- [ ] Restructurer en commander.js : `ops run | repo | setup | doctor | dev`, aide intégrée. Compétence : architecture CLI.
+- [x] Passe gitleaks + audit manuel : purger tout secret/donnée sensible de l'historique (BFG si nécessaire). Compétence : nettoyage d'historique git. (fait 2026-07-19 : gitleaks 8.30.1 installé, historique complet scanné, 0 leak trouvé - BFG non nécessaire. Un gap réel corrigé au passage : `infra/vps-prod.env` était tracké malgré le `.gitignore`, pattern étendu (`*.env` + allowlist explicite). Job CI `gitleaks.yml` ajouté, scanne chaque push/PR depuis.)
+- [ ] Restructurer en commander.js : `ops run | repo | setup | doctor | dev`, aide intégrée. Compétence : architecture CLI. (V2 `doctor.ts` livrée comme script autonome, décision explicite de ne pas construire ce squelette dans ce chantier - candidat naturel comme première commande si ce chantier démarre un jour)
 - [ ] Télémétrie locale : tracer la durée de chaque commande (fichier JSONL local). Compétence : observabilité DX.
-- [ ] Suite Vitest + CI GitHub Actions verte. Compétence : testing infra.
-- [ ] `package.json` bin + publication `@fdiene/ops-tools` sur npm (provenance, README avec GIFs vhs/asciinema). Compétence : release npm publique.
+- [ ] Suite `bun test` + CI GitHub Actions verte sur les tests. Compétence : testing infra. (14 tests unitaires sur les fonctions pures livrés et verts en local, `Vitest` jamais utilisé - stack Bun-native assumée. Écart réel restant : aucun job CI ne lance encore `bun test`, seul `gitleaks.yml` tourne aujourd'hui sur push/PR.)
+- [x] `package.json` bin + publication `@fdiene/ops-tools` sur npm (provenance, README avec GIFs vhs/asciinema). Compétence : release npm publique. (fait 2026-08-02 : publié sur npm, `bin` pointe vers `scripts/ops/doctor.ts`. Non fait dans le périmètre : provenance npm (nécessiterait une publication depuis CI, faite manuellement ici) et GIFs vhs/asciinema - le README documente la double distribution et le processus de release en texte, pas de démo animée.)
 - [x] Une fois public : renseigner `links.repo` dans master_data et passer le badge à `live`. (fait 2026-08-02, action côté my-curriculum : `links.repo` = `https://github.com/Omnis-Ltd/ops-tools`, status `live`, description/stack corrigées en même temps - le texte précédent décrivait un CLI aspirationnel jamais construit tel quel : `commander.js`/`Vitest`/télémétrie locale n'existent pas dans le package publié, qui utilise en réalité `bun test` + `zod`, gitleaks tourne en CI et non en pre-commit ; traduction DE écrite manuellement par le contrôleur, review owner en attente comme pour tout contenu DE hors pipeline)
 
 ## SEOMNIX Empire : statut `live` (pipeline) ; Evals à implémenter
