@@ -10,7 +10,7 @@ function pick(t: CvTemplateId) {
 </script>
 
 <template>
-  <div class="templates no-print">
+  <div class="templates no-print" role="group" aria-label="Template selection">
     <button v-for="t in templates" :key="t" class="mono" :class="{ active: t === modelValue }"
       :aria-pressed="t === modelValue" @click="pick(t)">{{ t.toUpperCase() }}</button>
   </div>

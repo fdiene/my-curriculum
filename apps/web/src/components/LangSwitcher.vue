@@ -15,7 +15,7 @@ function pick(l: Lang) {
 </script>
 
 <template>
-  <div class="langs no-print">
+  <div class="langs no-print" role="group" aria-label="Language selection">
     <button v-for="l in LANGS" :key="l" class="mono" :class="{ active: l === modelValue }"
       :aria-pressed="l === modelValue" @click="pick(l)">{{ l.toUpperCase() }}</button>
     <span v-if="showBadge" class="pipe mono">translated via build-pipeline</span>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { buildCvView, type CvTemplateId } from "@profile/core";
+import { buildCvView, formatMonthYear, type CvTemplateId } from "@profile/core";
 import type { Lang, Resume, TargetRole } from "@profile/schema";
 import fallbackJson from "../../../../data/master_data.i18n.json";
 import { parseCvParams } from "../lib/params";
@@ -61,7 +61,7 @@ function printCv() { window.print(); }
         <div v-for="e in view.experiences" :key="e.id" class="entry">
           <div class="entry-head">
             <strong>{{ e.role }}</strong>, {{ e.org }}
-            <span class="dates">{{ e.period.start }} - {{ e.period.end ?? view.labels.present }}</span>
+            <span class="dates">{{ formatMonthYear(e.period.start, lang) }} - {{ e.period.end ? formatMonthYear(e.period.end, lang) : view.labels.present }}</span>
           </div>
           <ul>
             <li v-for="(h, i) in e.highlights" :key="i">{{ h }}</li>
@@ -82,7 +82,7 @@ function printCv() { window.print(); }
         <div v-for="ed in view.education" :key="ed.id" class="entry">
           <div class="entry-head">
             <strong>{{ ed.title }}</strong>, {{ ed.org }}
-            <span class="dates">{{ ed.period.start }} - {{ ed.period.end ?? view.labels.present }}</span>
+            <span class="dates">{{ formatMonthYear(ed.period.start, lang) }} - {{ ed.period.end ? formatMonthYear(ed.period.end, lang) : view.labels.present }}</span>
           </div>
         </div>
       </section>
@@ -90,7 +90,7 @@ function printCv() { window.print(); }
       <section v-if="view.certifications.length">
         <h2>{{ view.labels.certifications }}</h2>
         <div v-for="c in view.certifications" :key="c.id" class="entry">
-          <strong>{{ c.title }}</strong>, {{ c.org }} <span class="dates">{{ c.period.start }}</span>
+          <strong>{{ c.title }}</strong>, {{ c.org }} <span class="dates">{{ formatMonthYear(c.period.start, lang) }}</span>
         </div>
       </section>
 
