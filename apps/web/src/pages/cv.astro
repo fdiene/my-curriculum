@@ -1,0 +1,21 @@
+---
+import CvDocument from "../components/CvDocument.vue";
+import "../styles/global.css";
+import resume from "../../../../data/master_data.i18n.json";
+
+const person = resume.person;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
+    <script is:inline>
+      const saved = localStorage.getItem("theme");
+      const preferred = saved ?? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.dataset.theme = preferred;
+    </script>
+    <title>{person.name} : CV</title>
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://fdiene.com/cv" />
+  </head>
+  <body><CvDocument client:only="vue" /></body>
+</html>
