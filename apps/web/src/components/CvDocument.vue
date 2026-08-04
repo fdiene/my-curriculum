@@ -46,6 +46,7 @@ function printCv() { window.print(); }
             {{ view.person.location }}
             <span v-if="view.person.links?.email"> - {{ view.person.links.email }}</span>
             <span v-if="view.person.links?.linkedin"> - {{ view.person.links.linkedin }}</span>
+            <span v-if="view.person.links?.github"> - {{ view.person.links.github }}</span>
           </p>
         </div>
       </header>
@@ -56,11 +57,11 @@ function printCv() { window.print(); }
       </section>
 
       <section>
-        <h2>Experience</h2>
+        <h2>{{ view.labels.experience }}</h2>
         <div v-for="e in view.experiences" :key="e.id" class="entry">
           <div class="entry-head">
             <strong>{{ e.role }}</strong>, {{ e.org }}
-            <span class="dates">{{ e.period.start }} - {{ e.period.end ?? "Present" }}</span>
+            <span class="dates">{{ e.period.start }} - {{ e.period.end ?? view.labels.present }}</span>
           </div>
           <ul>
             <li v-for="(h, i) in e.highlights" :key="i">{{ h }}</li>
@@ -69,7 +70,7 @@ function printCv() { window.print(); }
       </section>
 
       <section v-if="view.projects.length">
-        <h2>Independent Projects</h2>
+        <h2>{{ view.labels.projects }}</h2>
         <div v-for="pr in view.projects" :key="pr.id" class="entry">
           <div class="entry-head"><strong>{{ pr.name }}</strong> <span class="dates">{{ pr.stack.join(", ") }}</span></div>
           <p class="project-line">{{ pr.tagline }}</p>
@@ -77,24 +78,24 @@ function printCv() { window.print(); }
       </section>
 
       <section v-if="view.education.length">
-        <h2>Education</h2>
+        <h2>{{ view.labels.education }}</h2>
         <div v-for="ed in view.education" :key="ed.id" class="entry">
           <div class="entry-head">
             <strong>{{ ed.title }}</strong>, {{ ed.org }}
-            <span class="dates">{{ ed.period.start }} - {{ ed.period.end ?? "Present" }}</span>
+            <span class="dates">{{ ed.period.start }} - {{ ed.period.end ?? view.labels.present }}</span>
           </div>
         </div>
       </section>
 
       <section v-if="view.certifications.length">
-        <h2>Certifications</h2>
+        <h2>{{ view.labels.certifications }}</h2>
         <div v-for="c in view.certifications" :key="c.id" class="entry">
           <strong>{{ c.title }}</strong>, {{ c.org }} <span class="dates">{{ c.period.start }}</span>
         </div>
       </section>
 
       <section>
-        <h2>Skills</h2>
+        <h2>{{ view.labels.skills }}</h2>
         <ul class="skills mono">
           <li v-for="s in view.skills" :key="s.id">{{ s.label }}</li>
         </ul>
@@ -126,5 +127,6 @@ li { font-size: 0.85rem; margin-bottom: 0.2rem; }
 .skills li { border: 1px solid #ccc; border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.75rem; }
 @media print {
   .cv-page { padding: 0; }
+  h2 { break-after: avoid; }
 }
 </style>

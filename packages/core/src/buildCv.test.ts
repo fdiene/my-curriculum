@@ -68,6 +68,9 @@ describe("buildCvView", () => {
   it("trims to the Switzerland template's limits (input exceeds even the larger cap)", () => {
     const view = buildCvView("ch", "default", "en", makeResume());
     expect(view.experiences.length).toBe(CV_TEMPLATES.ch.maxExperiences);
+    for (const e of view.experiences) {
+      expect(e.highlights.length).toBeLessThanOrEqual(CV_TEMPLATES.ch.maxHighlightsPerExperience);
+    }
   });
 
   it("trims to the USA template's limits", () => {
@@ -111,5 +114,25 @@ describe("buildCvView", () => {
     const view = buildCvView("us", "plm_architect", "en", makeResume({ projects }));
     expect(view.projects.length).toBe(3);
     expect(view.projects[0]?.id).toBe("p4");
+  });
+
+  it("prints experiences newest-first regardless of input order or role-relevance order", () => {
+    const experiences: Resume["experiences"] = [
+      { id: "e0", role: L, org: "Org e0", location: "L", period: { start: "2015-03", end: "2018-06" }, summary: L, highlights: [], tags: [], domain: "d" },
+      { id: "e1", role: L, org: "Org e1", location: "L", period: { start: "2023-01", end: null }, summary: L, highlights: [], tags: [], domain: "d" },
+      { id: "e2", role: L, org: "Org e2", location: "L", period: { start: "2019-07", end: "2022-12" }, summary: L, highlights: [], tags: [], domain: "d" },
+      { id: "e3", role: L, org: "Org e3", location: "L", period: { start: "2010-01", end: "2014-12" }, summary: L, highlights: [], tags: [], domain: "d" },
+    ];
+    const view = buildCvView("ch", "default", "en", makeResume({ experiences }));
+    const starts = view.experiences.map((e) => e.period.start);
+    const sortedDesc = [...starts].sort((a, b) => b.localeCompare(a));
+    expect(starts).toEqual(sortedDesc);
+    expect(view.experiences[0]?.id).toBe("e1");
+  });
+
+  it("provides language-appropriate section labels", () => {
+    expect(buildCvView("fr", "default", "fr", makeResume()).labels.experience).toBe("Expérience");
+    expect(buildCvView("ch", "default", "de", makeResume()).labels.present).toBe("Heute");
+    expect(buildCvView("us", "default", "en", makeResume()).labels.skills).toBe("Skills");
   });
 });

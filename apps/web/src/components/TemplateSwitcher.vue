@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { CV_TEMPLATES, type CvTemplateId } from "@profile/core";
-defineProps<{ modelValue: CvTemplateId }>();
+const props = defineProps<{ modelValue: CvTemplateId }>();
 const emit = defineEmits<{ "update:modelValue": [CvTemplateId] }>();
 const templates = Object.keys(CV_TEMPLATES) as CvTemplateId[];
+function pick(t: CvTemplateId) {
+  if (t === props.modelValue) return;
+  emit("update:modelValue", t);
+}
 </script>
 
 <template>
   <div class="templates no-print">
     <button v-for="t in templates" :key="t" class="mono" :class="{ active: t === modelValue }"
-      :aria-pressed="t === modelValue" @click="emit('update:modelValue', t)">{{ t.toUpperCase() }}</button>
+      :aria-pressed="t === modelValue" @click="pick(t)">{{ t.toUpperCase() }}</button>
   </div>
 </template>
 

@@ -19,6 +19,6 @@ const LANG_TO_DEFAULT_TEMPLATE: Record<Lang, CvTemplateId> = { fr: "fr", de: "ch
 export function parseCvParams(search: string): { role: Role; lang: Lang; template: CvTemplateId } {
   const { role, lang } = parseViewParams(search);
   const rawTemplate = (new URLSearchParams(search).get("template") ?? "").toLowerCase();
-  const template = rawTemplate in CV_TEMPLATES ? (rawTemplate as CvTemplateId) : LANG_TO_DEFAULT_TEMPLATE[lang];
+  const template = Object.hasOwn(CV_TEMPLATES, rawTemplate) ? (rawTemplate as CvTemplateId) : LANG_TO_DEFAULT_TEMPLATE[lang];
   return { role, lang, template };
 }

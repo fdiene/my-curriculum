@@ -33,4 +33,8 @@ describe("parseCvParams", () => {
   it("still parses role and lang the same way as parseViewParams", () => {
     expect(parseCvParams("?role=iot&lang=de")).toEqual({ role: "iot", lang: "de", template: "ch" });
   });
+
+  it("does not resolve a template value from the prototype chain", () => {
+    expect(parseCvParams("?lang=en&template=constructor").template).toBe("us");
+  });
 });
