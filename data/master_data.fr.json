@@ -28,8 +28,8 @@
       "fr": "J'ai architecturé des déploiements PLM hybrides cloud/on-premise pour quatre avionneurs (Safran, Airbus, Dassault, Bombardier) : identité unifiée (IAM/SSO) alignée sur les standards groupe, flux middleware à haute disponibilité, cartographies ArchiMate garantissant la traçabilité du besoin métier jusqu'à l'exploitation. Mon métier : rendre les systèmes industriels critiques fiables, sécurisés et auditables."
     },
     "default": {
-      "en": "Information systems architect forged by {{YEARS}} years in aerospace (Bombardier, Dassault Falcon Jet, Airbus, Safran). My conviction: critical-systems rigor and modern development velocity are not opposites, they reinforce each other. Today I build the developer tooling and AI systems that prove it.",
-      "fr": "Architecte de systèmes d'information forgé par {{YEARS}} ans d'aéronautique (Bombardier, Dassault Falcon Jet, Airbus, Safran). Ma conviction : la rigueur des systèmes critiques et la vélocité du développement moderne ne s'opposent pas, elles se renforcent. Je construis aujourd'hui le tooling développeur et les systèmes IA qui le prouvent."
+      "en": "Information systems architect forged by {{YEARS}} years modernizing and securing mission-critical platforms across four aerospace OEMs (Bombardier, Dassault Falcon Jet, Airbus, Safran). My conviction: critical-systems rigor and modern development velocity are not opposites, they reinforce each other. Today I build the developer tooling and AI systems that prove it.",
+      "fr": "Architecte de systèmes d'information forgé par {{YEARS}} ans à moderniser et sécuriser des plateformes critiques chez quatre avionneurs (Bombardier, Dassault Falcon Jet, Airbus, Safran). Ma conviction : la rigueur des systèmes critiques et la vélocité du développement moderne ne s'opposent pas, elles se renforcent. Je construis aujourd'hui le tooling développeur et les systèmes IA qui le prouvent."
     }
   },
   "experiences": [
