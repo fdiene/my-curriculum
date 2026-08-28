@@ -50,7 +50,7 @@ const ASK_DECLINE_MESSAGE = "I can only answer questions about Fadel's professio
 void warmEmbeddingModel();
 
 export const app = new Elysia()
-  .use(cors({ origin: CORS_ORIGINS, methods: ["GET"], credentials: false }))
+  .use(cors({ origin: CORS_ORIGINS, methods: ["GET", "POST"], credentials: false }))
   .use(swagger({ path: "/swagger", documentation: { info: { title: "Profile Engine API", version: "1.0.0" } } }))
   .trace(async ({ onHandle }) => {
     onHandle(({ begin, onStop }) => onStop(({ end }) => recordLatency(end - begin)));
