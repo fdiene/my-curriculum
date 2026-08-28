@@ -12,6 +12,7 @@ import ProjectCard from "./ProjectCard.vue";
 import ProjectDrawer from "./ProjectDrawer.vue";
 import SectionBlock from "./SectionBlock.vue";
 import ConsolePane from "./ConsolePane.vue";
+import AskPanel from "./AskPanel.vue";
 
 const params = parseViewParams(typeof window === "undefined" ? "" : window.location.search);
 const isMobile = typeof window !== "undefined" && matchMedia("(max-width: 767px)").matches;
@@ -139,6 +140,8 @@ onMounted(async () => { await p.fetchProfile(); logProfileRequest(); });
             <li v-for="s in prof.skills" :key="s.id">{{ s.label }}</li>
           </ul>
         </SectionBlock>
+
+        <AskPanel />
       </template>
 
       <div v-if="toast" class="toast mono" role="status">{{ toast }}</div>
