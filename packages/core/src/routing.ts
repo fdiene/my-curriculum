@@ -4,6 +4,7 @@ export const ROLE_WEIGHTS: Record<TargetRole, Partial<Record<Tag, number>>> = {
   ai_dx: { ai_safety: 10, dx_tooling: 9, mcp: 7, devsecops: 6, api_design: 5 },
   iot: { iot: 10, edge: 9, mcp: 6, ai_safety: 5, devsecops: 4 },
   plm_architect: { plm: 10, cloud: 7, security: 6, aerospace: 5 },
+  enterprise_architect: { security: 10, cloud: 8, api_design: 8, plm: 6, devsecops: 6, mcp: 5, ai_safety: 4 },
   default: {},
 };
 

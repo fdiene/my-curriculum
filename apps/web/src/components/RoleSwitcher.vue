@@ -7,6 +7,7 @@ const roles: { value: TargetRole; label: string }[] = [
   { value: "ai_dx", label: "AI Tooling & DX Engineer" },
   { value: "iot", label: "IoT Architect" },
   { value: "plm_architect", label: "PLM Architect" },
+  { value: "enterprise_architect", label: "Enterprise Architect" },
 ];
 </script>
 

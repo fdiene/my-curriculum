@@ -27,6 +27,10 @@
       "en": "I architected hybrid cloud/on-premise PLM deployments for four aerospace manufacturers (Safran, Airbus, Dassault, Bombardier): unified identity (IAM/SSO) aligned with group standards, high-availability middleware flows, and ArchiMate maps guaranteeing traceability from business need to operations. My job: making critical industrial systems reliable, secure and auditable.",
       "fr": "J'ai architecturé des déploiements PLM hybrides cloud/on-premise pour quatre avionneurs (Safran, Airbus, Dassault, Bombardier) : identité unifiée (IAM/SSO) alignée sur les standards groupe, flux middleware à haute disponibilité, cartographies ArchiMate garantissant la traçabilité du besoin métier jusqu'à l'exploitation. Mon métier : rendre les systèmes industriels critiques fiables, sécurisés et auditables."
     },
+    "enterprise_architect": {
+      "en": "I spent {{YEARS}} years turning regulated, multi-site aerospace programs (Safran, Airbus, Dassault, Bombardier) into governed, traceable systems: ArchiMate/TOGAF maps that speed up architecture-board decisions instead of gating them, and integration architecture (SSO, REST/SOAP/GraphQL, Mulesoft, RabbitMQ) hardened for high availability. Today I extend that discipline to enterprise architecture itself - governance built to accelerate decisions, not slow them, security-by-design at the center of every choice, and I build the agentic AI tooling I would govern rather than only recommend it from a slide.",
+      "fr": "J'ai passé {{YEARS}} ans à transformer des programmes aérospatiaux régulés et multi-sites (Safran, Airbus, Dassault, Bombardier) en systèmes gouvernés et traçables : cartographies ArchiMate/TOGAF qui accélèrent les décisions du comité d'architecture plutôt que de les freiner, et architecture d'intégration (SSO, REST/SOAP/GraphQL, Mulesoft, RabbitMQ) durcie pour la haute disponibilité. Aujourd'hui, j'étends cette discipline à l'architecture d'entreprise elle-même : une gouvernance conçue pour accélérer les décisions, pas pour les ralentir, la sécurité dès la conception au cœur de chaque choix, et je construis moi-même les outils d'IA agentique que je gouvernerais, plutôt que de me contenter de les recommander depuis une slide."
+    },
     "default": {
       "en": "Information systems architect forged by {{YEARS}} years modernizing and securing mission-critical platforms across four aerospace OEMs (Bombardier, Dassault Falcon Jet, Airbus, Safran). My conviction: critical-systems rigor and modern development velocity are not opposites, they reinforce each other. Today I build the developer tooling and AI systems that prove it.",
       "fr": "Architecte de systèmes d'information forgé par {{YEARS}} ans à moderniser et sécuriser des plateformes critiques chez quatre avionneurs (Bombardier, Dassault Falcon Jet, Airbus, Safran). Ma conviction : la rigueur des systèmes critiques et la vélocité du développement moderne ne s'opposent pas, elles se renforcent. Je construis aujourd'hui le tooling développeur et les systèmes IA qui le prouvent."
@@ -159,7 +163,7 @@
       "tags": ["plm", "cloud", "security", "aerospace"],
       "links": {},
       "status": "building",
-      "featured_for": ["plm_architect"]
+      "featured_for": ["plm_architect", "enterprise_architect"]
     },
     {
       "id": "harness",
@@ -176,7 +180,7 @@
       "tags": ["mcp", "ai_safety", "dx_tooling"],
       "links": {},
       "status": "live",
-      "featured_for": ["ai_dx"]
+      "featured_for": ["ai_dx", "enterprise_architect"]
     },
     {
       "id": "seomnix",

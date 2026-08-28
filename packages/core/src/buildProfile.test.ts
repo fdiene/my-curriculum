@@ -11,6 +11,7 @@ function makeResume(overrides: Partial<Resume> = {}): Resume {
       ai_dx: { en: "I spent {{YEARS}} years in aerospace.", fr: "x", de: "x" },
       iot: L,
       plm_architect: L,
+      enterprise_architect: L,
       default: { en: "Forged by {{YEARS}} years in aerospace.", fr: "x", de: "x" },
     },
     experiences: [{ id: "e1", role: L, org: "O", location: "L", period: { start: "2017-08", end: null }, summary: L, highlights: [], tags: [], domain: "d" }],

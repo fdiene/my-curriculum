@@ -45,7 +45,7 @@ function makeResume(overrides: Partial<Resume> = {}): Resume {
       links: { linkedin: "https://linkedin.com/in/test", github: "https://github.com/test" },
       avatarUrl: "/avatar.jpg",
     },
-    executiveSummaries: { ai_dx: L, iot: L, plm_architect: L, default: L },
+    executiveSummaries: { ai_dx: L, iot: L, plm_architect: L, enterprise_architect: L, default: L },
     experiences: Array.from({ length: 6 }, (_, i) => makeExperience(`e${i}`, 5)),
     projects: [],
     skills: Array.from({ length: 6 }, (_, i) => makeSkill(`s${i}`, 3)),

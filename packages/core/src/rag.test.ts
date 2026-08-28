@@ -7,7 +7,7 @@ const L = { en: "x", fr: "x", de: "x" };
 function makeResume(overrides: Partial<Resume> = {}): Resume {
   return {
     person: { name: "Test", title: L, location: "Toulouse", links: {} },
-    executiveSummaries: { ai_dx: L, iot: L, plm_architect: L, default: L },
+    executiveSummaries: { ai_dx: L, iot: L, plm_architect: L, enterprise_architect: L, default: L },
     experiences: [
       {
         id: "e1", role: { en: "Architect", fr: "x", de: "x" }, org: "Acme",

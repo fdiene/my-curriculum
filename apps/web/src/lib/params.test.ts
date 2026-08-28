@@ -12,6 +12,10 @@ describe("parseViewParams", () => {
   it("maps the ai alias to ai_dx", () => {
     expect(parseViewParams("?role=ai")).toEqual({ role: "ai_dx", lang: "en" });
   });
+  it("maps the ea alias and the full slug to enterprise_architect", () => {
+    expect(parseViewParams("?role=ea")).toEqual({ role: "enterprise_architect", lang: "en" });
+    expect(parseViewParams("?role=enterprise_architect")).toEqual({ role: "enterprise_architect", lang: "en" });
+  });
 });
 
 describe("parseCvParams", () => {

@@ -4,6 +4,7 @@ import { CV_TEMPLATES, type CvTemplateId } from "@profile/core";
 const ROLE_ALIASES: Record<string, Role> = {
   anthropic: "ai_dx", ai: "ai_dx", ai_dx: "ai_dx",
   iot: "iot", plm: "plm_architect", plm_architect: "plm_architect", default: "default",
+  ea: "enterprise_architect", enterprise_architect: "enterprise_architect",
 };
 
 export function parseViewParams(search: string): { role: Role; lang: Lang } {

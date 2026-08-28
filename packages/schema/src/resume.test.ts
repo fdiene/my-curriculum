@@ -8,6 +8,7 @@ const minimalFinal = {
     ai_dx: { en: "a", fr: "a", de: "a" },
     iot: { en: "b", fr: "b", de: "b" },
     plm_architect: { en: "c", fr: "c", de: "c" },
+    enterprise_architect: { en: "e", fr: "e", de: "e" },
     default: { en: "d", fr: "d", de: "d" },
   },
   experiences: [], projects: [], skills: [], certifications: [], education: [], recommendations: [],
