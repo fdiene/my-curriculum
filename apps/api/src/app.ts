@@ -4,10 +4,14 @@ import { swagger } from "@elysiajs/swagger";
 import { TargetRole, type Tag } from "@profile/schema";
 import { resume } from "./data";
 import { resolveLocale } from "./locale";
-import { localize, orderByRole } from "@profile/core";
+import { localize, orderByRole, topKRelevant, isRelevant } from "@profile/core";
 import { buildProfile } from "./profile";
 import { getMetrics, recordLatency } from "./metrics";
 import { toJsonResume } from "./resume";
+import { embedText, warmEmbeddingModel } from "./embeddings";
+import { generateRagAnswer } from "./generateRagAnswer";
+import { RAG_INDEX } from "./ragIndex";
+import { createRateLimiterState, checkAndRecordPerIp, checkGlobalDailyLimit, recordGlobalDailyUsage } from "./rateLimiter";
 
 const roleOf = (v?: string) =>
   (TargetRole.options as readonly string[]).includes(v ?? "") ? (v as any) : "default";
@@ -37,6 +41,14 @@ const CORS_ORIGINS = resolveCorsOrigins(ALLOWED_ORIGIN, process.env.NODE_ENV);
 // in the background rather than blocking once stale.
 const RESUME_DATA_CACHE_CONTROL = "public, max-age=60, stale-while-revalidate=3600";
 
+const rateLimiterState = createRateLimiterState();
+const ASK_TOP_K = 3;
+const ASK_MIN_LENGTH = 3;
+const ASK_MAX_LENGTH = 500;
+const ASK_DECLINE_MESSAGE = "I can only answer questions about Fadel's professional background, grounded in what's on this resume.";
+
+void warmEmbeddingModel();
+
 export const app = new Elysia()
   .use(cors({ origin: CORS_ORIGINS, methods: ["GET"], credentials: false }))
   .use(swagger({ path: "/swagger", documentation: { info: { title: "Profile Engine API", version: "1.0.0" } } }))
@@ -54,6 +66,7 @@ export const app = new Elysia()
       "/v1/projects/:id",
       "/v1/metrics",
       "/resume.json",
+      "/ask",
     ],
   }))
   .get("/health", () => ({ status: "ok" }))
@@ -86,6 +99,33 @@ export const app = new Elysia()
     set.headers["cache-control"] = RESUME_DATA_CACHE_CONTROL;
     return localize(project, lang);
   }, { query: t.Object({ lang: t.Optional(t.String()) }) })
-  .get("/v1/metrics", () => getMetrics());
+  .get("/v1/metrics", () => getMetrics())
+  .post("/ask", async ({ body, headers, set }) => {
+    const question = body.question.trim();
+    if (question.length < ASK_MIN_LENGTH || question.length > ASK_MAX_LENGTH) {
+      set.status = 400;
+      return { error: "invalid_question_length" };
+    }
+    if (!checkGlobalDailyLimit(rateLimiterState)) {
+      return { answer: ASK_DECLINE_MESSAGE, sources: [] };
+    }
+    const ip = (headers["x-forwarded-for"] ?? "unknown").split(",")[0]!.trim();
+    if (!checkAndRecordPerIp(rateLimiterState, ip)) {
+      return { answer: ASK_DECLINE_MESSAGE, sources: [] };
+    }
+    const queryEmbedding = await embedText(question);
+    const top = topKRelevant(queryEmbedding, RAG_INDEX, ASK_TOP_K);
+    if (top.length === 0 || !isRelevant(top[0]!.score)) {
+      return { answer: ASK_DECLINE_MESSAGE, sources: [] };
+    }
+    const apiKey = process.env.ANTHROPIC_API_KEY;
+    if (!apiKey) {
+      set.status = 500;
+      return { error: "server_misconfigured" };
+    }
+    const answer = await generateRagAnswer(question, top, apiKey);
+    recordGlobalDailyUsage(rateLimiterState);
+    return { answer, sources: top.map((c) => c.sourceId) };
+  }, { body: t.Object({ question: t.String() }) });
 
 export type App = typeof app;

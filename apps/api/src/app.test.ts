@@ -114,3 +114,44 @@ describe("cache headers", () => {
     expect((await get("/v1/metrics")).headers.get("cache-control")).toBeNull();
   });
 });
+
+const hasApiKey = Boolean(process.env.ANTHROPIC_API_KEY);
+
+describe("POST /ask", () => {
+  async function ask(question: string, headers?: Record<string, string>) {
+    const res = await app.handle(
+      new Request("http://localhost/ask", {
+        method: "POST",
+        headers: { "content-type": "application/json", ...headers },
+        body: JSON.stringify({ question }),
+      }),
+    );
+    return { status: res.status, body: await res.json() };
+  }
+
+  it("rejects a too-short question with 400", async () => {
+    const { status } = await ask("hi");
+    expect(status).toBe(400);
+  });
+
+  it("rejects a too-long question with 400", async () => {
+    const { status } = await ask("a".repeat(501));
+    expect(status).toBe(400);
+  });
+
+  it("declines an off-topic question without an error status", async () => {
+    const { status, body } = await ask("What is the capital of France?");
+    expect(status).toBe(200);
+    expect(body.sources).toEqual([]);
+    expect(typeof body.answer).toBe("string");
+  });
+
+  it.skipIf(!hasApiKey)("answers a genuinely relevant question with sources", async () => {
+    const { status, body } = await ask("What experience does Fadel have with identity and access management?");
+    expect(status).toBe(200);
+    expect(Array.isArray(body.sources)).toBe(true);
+    expect(body.sources.length).toBeGreaterThan(0);
+    expect(typeof body.answer).toBe("string");
+    expect(body.answer.length).toBeGreaterThan(0);
+  });
+});
