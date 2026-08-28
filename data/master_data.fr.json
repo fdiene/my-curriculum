@@ -40,8 +40,8 @@
     {
       "id": "safran",
       "role": {
-        "en": "Technical Architect - Strategic PLM Engineering 4.0 Program",
-        "fr": "Architecte Technique - Programme stratégique PLM Engineering 4.0"
+        "en": "Enterprise Technical Architect - Strategic PLM/MES Engineering 4.0 Program",
+        "fr": "Architecte Technique Entreprise - Programme stratégique PLM/MES Engineering 4.0"
       },
       "org": "Safran Aircraft Engines", "location": "Paris, France",
       "period": { "start": "2023-04", "end": null },
@@ -72,7 +72,7 @@
     },
     {
       "id": "airbus-helicopters",
-      "role": { "en": "Software Architect - H175, NH90, AS332 Puma Programs", "fr": "Architecte logiciel - Programmes H175, NH90, AS332 Puma" },
+      "role": { "en": "Software Solutions Architect", "fr": "Architecte Solutions Logicielles" },
       "org": "Airbus Helicopters", "location": "Marignane, France",
       "period": { "start": "2020-09", "end": "2022-03" },
       "summary": { "en": "Owned Enovia VPM V4 platform reliability and industrialized the software delivery chain.", "fr": "Responsable de la fiabilité de la plateforme Enovia VPM V4 et de l'industrialisation de la chaîne de livraison logicielle." },
@@ -87,7 +87,7 @@
     },
     {
       "id": "dassault-falcon",
-      "role": { "en": "PLM Engineer - Falcon 10X, 900LX, Multi Programs", "fr": "Ingénieur PLM - Programmes Falcon 10X, 900LX, Multi" },
+      "role": { "en": "PLM Administrator", "fr": "Administrateur PLM" },
       "org": "Dassault Falcon Jet", "location": "Little Rock, AR, USA",
       "period": { "start": "2020-06", "end": "2020-09" },
       "summary": { "en": "Migrated the PLM platform to AIX 7.2 on production-critical environments.", "fr": "Migration de la plateforme PLM vers AIX 7.2 sur des environnements de production critiques." },
@@ -100,7 +100,7 @@
     },
     {
       "id": "airbus-ds",
-      "role": { "en": "Developer - PLM Neo A32X & A35X Programs", "fr": "Développeur - Programmes PLM Neo A32X & A35X" },
+      "role": { "en": "Full Stack Developer - PLM Neo A32X & A35X Programs", "fr": "Développeur Full Stack - Programmes PLM Neo A32X & A35X" },
       "org": "Airbus Defence and Space", "location": "Toulouse, France",
       "period": { "start": "2019-09", "end": "2020-06" },
       "summary": { "en": "Extended the Dassault Systèmes 3DEXPERIENCE platform for the A32X and A35X programs.", "fr": "Extension de la plateforme 3DEXPERIENCE de Dassault Systèmes pour les programmes A32X et A35X." },

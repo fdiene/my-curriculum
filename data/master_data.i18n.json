@@ -50,9 +50,9 @@
     {
       "id": "safran",
       "role": {
-        "en": "Technical Architect - Strategic PLM Engineering 4.0 Program",
-        "fr": "Architecte Technique - Programme stratégique PLM Engineering 4.0",
-        "de": "Technischer Architekt - Strategisches PLM-Engineering-4.0-Programm"
+        "en": "Enterprise Technical Architect - Strategic PLM/MES Engineering 4.0 Program",
+        "fr": "Architecte Technique Entreprise - Programme stratégique PLM/MES Engineering 4.0",
+        "de": "Technischer Unternehmensarchitekt - Strategisches PLM/MES-Engineering-4.0-Programm"
       },
       "org": "Safran Aircraft Engines",
       "location": "Paris, France",
@@ -99,9 +99,9 @@
     {
       "id": "airbus-helicopters",
       "role": {
-        "en": "Software Architect - H175, NH90, AS332 Puma Programs",
-        "fr": "Architecte logiciel - Programmes H175, NH90, AS332 Puma",
-        "de": "Softwarearchitekt - Programme H175, NH90, AS332 Puma"
+        "en": "Software Solutions Architect",
+        "fr": "Architecte Solutions Logicielles",
+        "de": "Software-Lösungsarchitekt"
       },
       "org": "Airbus Helicopters",
       "location": "Marignane, France",
@@ -147,9 +147,9 @@
     {
       "id": "dassault-falcon",
       "role": {
-        "en": "PLM Engineer - Falcon 10X, 900LX, Multi Programs",
-        "fr": "Ingénieur PLM - Programmes Falcon 10X, 900LX, Multi",
-        "de": "PLM-Ingenieur - Falcon 10X, 900LX, Multi-Programme"
+        "en": "PLM Administrator",
+        "fr": "Administrateur PLM",
+        "de": "PLM-Administrator"
       },
       "org": "Dassault Falcon Jet",
       "location": "Little Rock, AR, USA",
@@ -184,9 +184,9 @@
     {
       "id": "airbus-ds",
       "role": {
-        "en": "Developer - PLM Neo A32X & A35X Programs",
-        "fr": "Développeur - Programmes PLM Neo A32X & A35X",
-        "de": "Entwickler - PLM Neo A32X & A35X Programme"
+        "en": "Full Stack Developer - PLM Neo A32X & A35X Programs",
+        "fr": "Développeur Full Stack - Programmes PLM Neo A32X & A35X",
+        "de": "Full-Stack-Entwickler - PLM Neo A32X & A35X Programme"
       },
       "org": "Airbus Defence and Space",
       "location": "Toulouse, France",
