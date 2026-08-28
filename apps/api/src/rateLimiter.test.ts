@@ -28,6 +28,35 @@ describe("checkAndRecordPerIp", () => {
   });
 });
 
+describe("checkAndRecordPerIp eviction sweep", () => {
+  it("evicts stale IP entries from the map once enough calls cross the sweep threshold", () => {
+    const state = createRateLimiterState();
+    const t0 = new Date("2026-01-01T12:00:00.000Z");
+
+    // 50 distinct IPs, each recorded once at t0 (simulating a spoofed/varying
+    // x-forwarded-for header - each IP is only ever seen once, so it's never
+    // re-filtered by a later lookup of that same IP).
+    for (let i = 0; i < 50; i++) {
+      checkAndRecordPerIp(state, `10.0.0.${i}`, t0);
+    }
+    expect(state.perIp.size).toBe(50);
+
+    // Advance past the 1-hour window: every one of those 50 entries is now stale.
+    const tLater = new Date(t0.getTime() + 61 * 60 * 1000);
+
+    // Trigger enough further calls (each a fresh IP, so we're not just re-filtering
+    // the same key) to cross the sweep threshold at least once.
+    for (let i = 0; i < 100; i++) {
+      checkAndRecordPerIp(state, `20.0.0.${i}`, tLater);
+    }
+
+    // If eviction never ran, the map would hold all 150 entries (50 stale + 100
+    // live). Asserting the actual size proves the map itself shrank, not just that
+    // a stale IP's individual timestamps are gone from a .get() lookup.
+    expect(state.perIp.size).toBe(100);
+  });
+});
+
 describe("checkGlobalDailyLimit and recordGlobalDailyUsage", () => {
   it("allows up to 200 calls per day, then blocks", () => {
     const state = createRateLimiterState();

@@ -8,18 +8,36 @@ const sources = ref<string[]>([]);
 const loading = ref(false);
 const error = ref(false);
 
+// Deliberately a bit longer than the server's own 20s Anthropic timeout, so the
+// server-side timeout gets a chance to fire first and return a clean decline
+// response in the normal case - this is the backstop for when it doesn't.
+const ASK_TIMEOUT_MS = 25000;
+
 async function submit() {
   if (!question.value.trim() || loading.value) return;
   loading.value = true;
   error.value = false;
-  const { data, error: err } = await api.ask.post({ question: question.value.trim() });
-  loading.value = false;
-  if (err || !data) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), ASK_TIMEOUT_MS);
+  try {
+    const { data, error: err } = await api.ask.post(
+      { question: question.value.trim() },
+      { fetch: { signal: controller.signal } },
+    );
+    if (err || !data) {
+      error.value = true;
+      return;
+    }
+    answer.value = data.answer;
+    sources.value = data.sources;
+  } catch {
+    // Covers the abort (timeout) case: the underlying fetch throws rather than
+    // resolving with an error response, so it isn't caught by the `err` check above.
     error.value = true;
-    return;
+  } finally {
+    clearTimeout(timeoutId);
+    loading.value = false;
   }
-  answer.value = data.answer;
-  sources.value = data.sources;
 }
 </script>
 

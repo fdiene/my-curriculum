@@ -41,7 +41,7 @@ ANTHROPIC_API_KEY=... bun scripts/career-advisor.ts          # → docs/career_i
 ## Environment variables
 | Var | Where | Purpose |
 |-----|-------|---------|
-| `ANTHROPIC_API_KEY` | scripts (build-time) | translation + advisor |
+| `ANTHROPIC_API_KEY` | scripts (build-time) + api (runtime) | translation + advisor + `/ask` (Claude Haiku call) |
 | `GITHUB_TOKEN` | api | metrics commit count |
 | `GITHUB_REPO` | api | `owner/repo` for metrics |
 | `WEB_ORIGIN` | api | CORS allow-origin (prod `https://fdiene.com`) |
@@ -56,3 +56,4 @@ None of these are committed to git — populate them via your shell, a local
 - **web:** `bun --cwd=apps/web run build` → publish `apps/web/dist` to the CDN (`fdiene.com`), set `PUBLIC_API_URL=https://api.fdiene.com`.
   - **Audit:** run Lighthouse against the preview build: `bun --cwd=apps/web run preview &` then `bun run lighthouse` (targets: performance ≥95, accessibility ≥95, best-practices ≥95, seo ≥95). Non-blocking in v1.
 - **api:** on the VPS, `docker compose -f infra/docker-compose.yml up -d --build` (joins the external `seo-prod-network` network; TLS via Let's Encrypt).
+  - **`/ask` prerequisites:** `ANTHROPIC_API_KEY` must be set in the VPS's actual deployed environment (not just locally) or `/ask` fails at request time; and before relying on the endpoint in production, set a spending/usage limit on the Anthropic console for that key, as the account-level cost-control backstop behind the app-level rate limiting.

@@ -11,6 +11,7 @@ COPY packages/schema packages/schema
 COPY packages/core packages/core
 COPY apps/api apps/api
 COPY data/master_data.i18n.json data/master_data.i18n.json
+COPY data/rag_index.json data/rag_index.json
 RUN bun -e "import('./apps/api/src/embeddings.ts').then((m) => m.warmEmbeddingModel())"
 ENV NODE_ENV=production
 ENV PORT=3000

@@ -47,12 +47,17 @@ const ASK_MIN_LENGTH = 3;
 const ASK_MAX_LENGTH = 500;
 const ASK_DECLINE_MESSAGE = "I can only answer questions about Fadel's professional background, grounded in what's on this resume.";
 
-void warmEmbeddingModel();
+void warmEmbeddingModel().catch((e) => console.error("embedding model warmup failed", e));
 
 export const app = new Elysia()
   .use(cors({ origin: CORS_ORIGINS, methods: ["GET", "POST"], credentials: false }))
   .use(swagger({ path: "/swagger", documentation: { info: { title: "Profile Engine API", version: "1.0.0" } } }))
-  .trace(async ({ onHandle }) => {
+  .trace(async ({ context, onHandle }) => {
+    // /ask legitimately takes seconds (local embedding + a real Claude API round trip),
+    // unlike every other route here which serves local data in sub-millisecond time.
+    // Folding it into the same rolling average would visibly drag the publicly
+    // displayed latency metric away from what it actually claims to measure.
+    if (context.path === "/ask") return;
     onHandle(({ begin, onStop }) => onStop(({ end }) => recordLatency(end - begin)));
   })
   .get("/", () => ({
@@ -113,19 +118,31 @@ export const app = new Elysia()
     if (!checkAndRecordPerIp(rateLimiterState, ip)) {
       return { answer: ASK_DECLINE_MESSAGE, sources: [] };
     }
-    const queryEmbedding = await embedText(question);
-    const top = topKRelevant(queryEmbedding, RAG_INDEX, ASK_TOP_K);
-    if (top.length === 0 || !isRelevant(top[0]!.score)) {
+    try {
+      const queryEmbedding = await embedText(question);
+      const top = topKRelevant(queryEmbedding, RAG_INDEX, ASK_TOP_K);
+      if (top.length === 0 || !isRelevant(top[0]!.score)) {
+        return { answer: ASK_DECLINE_MESSAGE, sources: [] };
+      }
+      const apiKey = process.env.ANTHROPIC_API_KEY;
+      if (!apiKey) {
+        set.status = 500;
+        return { error: "server_misconfigured" };
+      }
+      const answer = await generateRagAnswer(question, top, apiKey);
+      recordGlobalDailyUsage(rateLimiterState);
+      return { answer, sources: top.map((c) => c.sourceId) };
+    } catch (err) {
+      // embedText or generateRagAnswer threw (network error, SDK timeout, etc). Log the
+      // real error server-side, but respond with the same declined shape a client sees
+      // for an off-topic question, at 200 - this avoids leaking SDK error text publicly
+      // and avoids revealing that a request specifically reached the Claude call and
+      // then failed. recordGlobalDailyUsage above is never reached on this path, so
+      // usage stays recorded only after a genuinely successful Claude call.
+      console.error("ask: request failed", err);
+      set.status = 200;
       return { answer: ASK_DECLINE_MESSAGE, sources: [] };
     }
-    const apiKey = process.env.ANTHROPIC_API_KEY;
-    if (!apiKey) {
-      set.status = 500;
-      return { error: "server_misconfigured" };
-    }
-    const answer = await generateRagAnswer(question, top, apiKey);
-    recordGlobalDailyUsage(rateLimiterState);
-    return { answer, sources: top.map((c) => c.sourceId) };
   }, { body: t.Object({ question: t.String() }) });
 
 export type App = typeof app;
