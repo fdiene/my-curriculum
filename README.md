@@ -6,6 +6,10 @@ Bun + Elysia monorepo serving an i18n (EN/FR/DE), role-aware résumé.
 `fdiene.com` (Astro/Vue) consumes `api.fdiene.com` (Elysia) with end-to-end
 types via Eden.
 
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full system diagram
+(context, containers, sequences, deployment) - keep it updated alongside any
+change to a route, a deployment target, or the offline content pipeline.
+
 ## Quick start
 ```bash
 bun install
@@ -32,6 +36,14 @@ ANTHROPIC_API_KEY=... bun run translate   # → data/master_data.i18n.json
 
 The generation script (`scripts/generate-translations.ts`) is idempotent:
 re-running it with unchanged source data reproduces the same output.
+
+`data/rag_index.json` (embeddings for the `POST /ask` endpoint) is a separate
+generated artifact with no automated freshness check yet - regenerate it
+whenever experience or project content changes:
+
+```bash
+bun scripts/generate-rag-index.ts   # → data/rag_index.json
+```
 
 ## Private career advisor (output git-ignored)
 ```bash
