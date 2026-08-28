@@ -5,9 +5,9 @@ const SYSTEM_PROMPT = "You answer questions about Fadel Diene's professional bac
 
 // The Anthropic SDK's default client has a 10-minute timeout and 2 retries (each also
 // subject to that timeout), which could hold a request open for a long time on a
-// wedged call. Bound worst-case latency explicitly: 20s is generous for a real Haiku
-// answer but short enough to keep /ask responsive, and 1 retry (down from the SDK
-// default of 2) further bounds the worst case.
+// wedged call. Bound worst-case latency explicitly: 20s is generous for a real answer
+// but short enough to keep /ask responsive, and 1 retry (down from the SDK default of
+// 2) further bounds the worst case.
 //
 // Constructed lazily (not unconditionally at module load) and memoized, so the module
 // can still be imported safely when ANTHROPIC_API_KEY is absent (local dev without the
@@ -28,8 +28,14 @@ export async function generateRagAnswer(question: string, chunks: ScoredChunk[],
   const anthropic = getClient(apiKey);
   const context = chunks.map((c) => `[${c.id}] ${c.text}`).join("\n\n");
   const message = await anthropic.messages.create({
-    model: "claude-haiku-4-5",
+    model: "claude-sonnet-5",
     max_tokens: 400,
+    // Low effort: this is a narrow, retrieval-grounded Q&A task over ~3 pre-selected
+    // resume chunks, not open-ended reasoning - the hard part (finding the right
+    // facts) is already done by retrieval. Keeps thinking-token cost and latency down
+    // while still using a materially more capable model than Haiku for the actual
+    // generation quality.
+    output_config: { effort: "low" },
     system: SYSTEM_PROMPT,
     messages: [{ role: "user", content: `Context:\n${context}\n\nQuestion: ${question}` }],
   });
