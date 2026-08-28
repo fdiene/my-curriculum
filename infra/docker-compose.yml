@@ -11,6 +11,7 @@ services:
       - GITHUB_REPO=${GITHUB_REPO}
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - UPTIME_PCT=${UPTIME_PCT:-99.9}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
     networks:
       - seo-prod-network
     labels:

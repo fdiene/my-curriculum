@@ -13,11 +13,14 @@
       "name": "@profile/api",
       "version": "0.1.0",
       "dependencies": {
+        "@anthropic-ai/sdk": "^0.112.3",
         "@elysiajs/cors": "^1.1.0",
         "@elysiajs/swagger": "^1.1.0",
+        "@huggingface/transformers": "^4.2.0",
         "@profile/core": "workspace:*",
         "@profile/schema": "workspace:*",
         "elysia": "^1.1.0",
+        "onnxruntime-node": "^1.29.0",
       },
       "devDependencies": {
         "bun-types": "^1.1.0",
